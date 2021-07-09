@@ -18850,12 +18850,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/progress */ "./node_modules/@inertiajs/progress/dist/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./bootstrap */ "./resources/lib/bootstrap.js");
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_4__);
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
-
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bootstrap */ "./resources/lib/bootstrap.js");
 
 
 
@@ -18873,10 +18868,7 @@ __webpack_require__.r(__webpack_exports__);
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(app, props);
       }
-    }).use(plugin);
-    vue.config.globalProperties.$axios = axios__WEBPACK_IMPORTED_MODULE_3___default().create({
-      baseURL: process.env.APP_URL
-    }); // before mount vue app, we resolve laravel named routes.
+    }).use(plugin); // before mount vue app, we resolve laravel named routes.
 
     vue.config.globalProperties.$route = function () {
       return route.apply(void 0, arguments);
@@ -18894,8 +18886,12 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
 /*!************************************!*\
   !*** ./resources/lib/bootstrap.js ***!
   \************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -18903,7 +18899,10 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+window.axios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
+  baseURL: proccess.env.APP_URL
+});
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -42008,19 +42007,19 @@ function compileToFunction(template, options) {
 /***/ }),
 
 /***/ "./resources/lib/views lazy recursive ^\\.\\/.*$":
-/*!*************************************************************!*\
-  !*** ./resources/lib/views/ lazy ^\.\/.*$ namespace object ***!
-  \*************************************************************/
+/*!**********************************************************************************!*\
+  !*** ./resources/lib/views/ lazy ^\.\/.*$ chunkName: [request] namespace object ***!
+  \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
 	"./welcome": [
 		"./resources/lib/views/welcome.vue",
-		"resources_lib_views_welcome_vue"
+		"welcome"
 	],
 	"./welcome.vue": [
 		"./resources/lib/views/welcome.vue",
-		"resources_lib_views_welcome_vue"
+		"welcome"
 	]
 };
 function webpackAsyncContext(req) {
@@ -42159,7 +42158,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_lib_views_welcome_vue") return "js/" + chunkId + ".js";
+/******/ 			if (chunkId === "welcome") return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

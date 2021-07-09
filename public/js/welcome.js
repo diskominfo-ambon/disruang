@@ -1,4 +1,4 @@
-(self["webpackChunkdisruang"] = self["webpackChunkdisruang"] || []).push([["resources_lib_views_welcome_vue"],{
+(self["webpackChunkdisruang"] = self["webpackChunkdisruang"] || []).push([["welcome"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/views/welcome.vue?vue&type=template&id=5bcb9aaf&lang=pug":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
