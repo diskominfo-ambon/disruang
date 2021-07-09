@@ -10,7 +10,7 @@ window._ = require('lodash');
 import axios from 'axios';
 
 window.axios = axios.create({
-  baseURL: proccess.env.APP_URL
+  baseURL: process.env.APP_URL
 });
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

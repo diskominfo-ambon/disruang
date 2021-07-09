@@ -18892,6 +18892,7 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -18901,7 +18902,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 
 window.axios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: proccess.env.APP_URL
+  baseURL: process.env.APP_URL
 });
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
@@ -42007,19 +42008,19 @@ function compileToFunction(template, options) {
 /***/ }),
 
 /***/ "./resources/lib/views lazy recursive ^\\.\\/.*$":
-/*!**********************************************************************************!*\
-  !*** ./resources/lib/views/ lazy ^\.\/.*$ chunkName: [request] namespace object ***!
-  \**********************************************************************************/
+/*!**************************************************************************************!*\
+  !*** ./resources/lib/views/ lazy ^\.\/.*$ chunkName: lib/[request] namespace object ***!
+  \**************************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
 	"./welcome": [
 		"./resources/lib/views/welcome.vue",
-		"welcome"
+		"lib/welcome"
 	],
 	"./welcome.vue": [
 		"./resources/lib/views/welcome.vue",
-		"welcome"
+		"lib/welcome"
 	]
 };
 function webpackAsyncContext(req) {
@@ -42158,7 +42159,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "welcome") return "js/" + chunkId + ".js";
+/******/ 			if (chunkId === "lib/welcome") return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

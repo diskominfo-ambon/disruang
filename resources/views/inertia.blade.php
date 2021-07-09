@@ -3,8 +3,7 @@
 @section('title', 'Welcome')
 
 @section('head')
-<link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
-<script src="{{ asset('/js/app.js') }}" defer></script>
+<script src="{{ mix('/js/app.js') }}" defer></script>
 @routes
 @endsection
 
