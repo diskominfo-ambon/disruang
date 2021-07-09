@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
+use Carbon\Carbon;
 use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot()
   {
+    Blade::stringable(fn (Carbon $carbon) => $carbon->isoFormat('LLL'));
   }
 }
