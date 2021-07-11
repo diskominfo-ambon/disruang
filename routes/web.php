@@ -2,6 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-  return inertia('welcome');
-})->name('welcome');
+Route::get('/', fn () => inertia('welcome'))->name('welcome');
