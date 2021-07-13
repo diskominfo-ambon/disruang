@@ -1,26 +1,20 @@
 <template lang="pug">
-.form-group
+form-group
   label(v-if="hasLabelText") {{ labelText }}
-
+  p room dropdown input
 </template>
 <script>
+import FormGroup from "~/components/atoms/form-group";
+import DropdownInput from "~/components/atoms/dropdown-input";
 
 export default {
-   props: {
+  props: {
     labelText: String,
-    default: ''
+    default: "",
   },
-  computed: {
-    hasLabelText() {
-      return this.labelText.trim().length > 0;
-    }
-  }
-}
+  components: {
+    FormGroup,
+    DropdownInput,
+  },
+};
 </script>
-<style lang="scss" scoped>
-label {
-  margin-bottom: .5rem;
-  font-size: .9rem;
-  color: #3E3E3E;
-}
-</style>

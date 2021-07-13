@@ -3,20 +3,19 @@ div
   alert.text-center.alert-radiusless.alert-sm.alert-b.alert-b-blue Semua yang perlu kamu ketahui tentang status dan kebijakan kegiatan selama wabah virus&nbsp;
     a.is-link(href="") Corona.
   navbar
-  jumbotron-form
-
+  headline-heroes
 </template>
 
 <script>
 import Alert from "~/components/atoms/alert";
-import Navbar from '~/components/molecules/navbar';
-import JumbotronForm from '~/components/organisms/jumbotron-form';
+import Navbar from "~/components/molecules/navbar";
+import HeadlineHeroes from "~/components/templates/welcome/headline-heroes";
 
 export default {
   components: {
     Alert,
     Navbar,
-    JumbotronForm,
+    HeadlineHeroes,
   },
 };
 </script>

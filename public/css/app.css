@@ -11,7 +11,7 @@
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
-  --bs-orange: #fd7e14;
+  --bs-orange: #F28C3D;
   --bs-yellow: #ffc107;
   --bs-green: #198754;
   --bs-teal: #20c997;
@@ -10872,6 +10872,18 @@ textarea.form-control-lg {
   background-color: #F6F6F6;
 }
 
+.btn {
+  font-size: 0.93rem;
+}
+.btn-orange {
+  color: white !important;
+  background-color: #F28C3D;
+  border-color: #cf844b;
+}
+.btn-orange:hover {
+  background-color: #cf844b;
+}
+
 .is-link {
   color: #1BA0E2;
   text-decoration: none;
@@ -10880,7 +10892,20 @@ textarea.form-control-lg {
   text-decoration: underline;
 }
 
-button, p, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+button,
+p,
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   color: #3E3E3E !important;
 }
 

@@ -24,14 +24,31 @@
 .form-group {
   margin-bottom: .6rem;
 }
+
 .bg {
   &-white {
     background-color: white;
   }
+
   &-gray {
     background-color: $gray;
   }
 }
+
+.btn {
+  font-size: .93rem;
+
+  &-orange {
+    color: white !important;
+    background-color: $orange;
+    border-color: $orange-dark;
+
+    &:hover {
+      background-color: $orange-dark;
+    }
+  }
+}
+
 .is-link {
   color: $blue;
   text-decoration: none;
@@ -42,9 +59,17 @@
 }
 
 
-button, p, h1, h2, h3, h4, h5, h6  {
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: $dark !important;
 }
+
 .text {
   &-dark {
     color: $dark !important;
@@ -69,6 +94,7 @@ button, p, h1, h2, h3, h4, h5, h6  {
 
 .alert {
   margin: 0;
+
   &-b {
     border-width: 0;
     border-bottom-width: 2px;

@@ -1,27 +1,25 @@
 <template lang="pug">
-.form-group
+form-group(:labelText="labelText", :errors="errors")
   label(v-if="hasLabelText") {{ labelText }}
   input.form-control
 </template>
 
 <script>
+import FormGroup from "~/components/atoms/form-group";
+
 export default {
   props: {
     labelText: String,
-    default: ''
+    default: "",
+    required: false,
   },
-  computed: {
-    hasLabelText() {
-      return this.labelText.trim().length > 0;
-    }
-  }
-}
+  errors: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  components: {
+    FormGroup,
+  },
+};
 </script>
-
-<style lang="scss" scoped>
-label {
-  margin-bottom: .5rem;
-  font-size: .9rem;
-  color: #3E3E3E;
-}
-</style>
