@@ -2,16 +2,15 @@
 heroes
   .row
     .col-12.col-md-5.offset-md-1.pt-2.pb-3
-      .headline
-        h1.fs-3.text-white Tiada kesan tanpa kehadiranmu
-        .subtitle
-          p.text-white Ikut bersama membangun Kota Ambon Maluku
-          span.text-dark Menjadi lebih baik
-        .supporter-info
-          p Supported by
-          div
-            img.brand(src="/images/logo-kominfo.png", alt="logo kominfo")
-            img.brand(src="/images/logo-pemkot.png", alt="logo pemkot")
+      h1.headline Tiada kesan tanpa kehadiranmu
+      .subtitle
+        p Ikut bersama membangun Kota Ambon Maluku
+        span.text-dark Menjadi lebih baik
+      .supported
+        p Supported by
+        div
+          img.brand(src="/images/logo-kominfo.png", alt="logo kominfo")
+          img.brand(src="/images/logo-pemkot.png", alt="logo pemkot")
     .col-12.col-md-6.py-2
       div
         ul.nav.nav-pills.bg-gray.rounded-2.mb-2.shadow-sm
@@ -33,53 +32,8 @@ heroes
           .card-body
             component(:is="selectedTab")
 </template>
-<script>
-import { ref, computed } from "vue";
+<script src="./scripts/headline-heroes.js"></script>
 
-import ParticipantRegistrationForm from "~/components/organisms/participant-registration-form";
-import RoomGuestRegistrationForm from "~/components/organisms/room-guest-registration-form";
-import TextInput from "~/components/atoms/text-input";
-import AcceptInput from "~/components/atoms/accept-input";
-import RoomDropdownInput from "~/components/molecules/room-dropdown-input";
-import Heroes from "~/components/atoms/heroes/";
-
-export default {
-  setup() {
-    const registerTabComponents = {
-      participant: "participant-registration-form",
-      roomGuest: "room-guest-registration-form",
-    };
-    const selectedTab = ref(registerTabComponents.participant);
-
-    const hasTabSelected = computed(() => {
-      const { participant, roomGuest } = registerTabComponents;
-
-      return {
-        participant: _.isEqual(selectedTab.value, participant),
-        roomGuest: _.isEqual(selectedTab.value, roomGuest),
-      };
-    });
-
-    const handleOnSelectTab = (key) => {
-      selectedTab.value = registerTabComponents[key];
-    };
-
-    return {
-      hasTabSelected,
-      selectedTab,
-      handleOnSelectTab,
-    };
-  },
-  components: {
-    Heroes,
-    TextInput,
-    AcceptInput,
-    RoomDropdownInput,
-    ParticipantRegistrationForm,
-    RoomGuestRegistrationForm,
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .headline {
@@ -90,6 +44,9 @@ export default {
   .subtitle {
     display: flex;
     align-items: center;
+    p {
+      color: white;
+    }
     span {
       background-color: white;
       border-radius: 2px;
@@ -100,15 +57,12 @@ export default {
       left: 0.5rem;
     }
   }
-  .supporter-info {
-    display: flex;
-    align-items: center;
+  .supported {
     p {
       color: #ddd !important;
     }
     div {
       margin: 0.5rem 0;
-      margin-left: 0.7rem;
       img:last-child {
         margin-right: 0.5rem;
         width: 35px;
