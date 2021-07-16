@@ -28,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
   public function boot()
   {
     Blade::stringable(fn (Carbon $carbon) => $carbon->isoFormat('LLL'));
+
+    $this->loadViewsFrom(__DIR__.'/../resources/views/web', 'web');
+    $this->loadViewsFrom(__DIR__.'/../resources/views/exports', 'exports');
   }
 }

@@ -16,14 +16,14 @@ heroes
         ul.nav.nav-pills.bg-gray.rounded-2.mb-2.shadow-sm
           li.nav-item(@click="handleOnSelectTab('participant')")
             a.nav-link(
-              :class="hasTabSelected.participant ? 'active' : ''",
+              :class="hasTabSelected.participant && 'active'",
               href="#"
             )
               i.fas.fa-ticket-alt
               span.d-inline-block.ms-2 Pesan ruangan
           li.nav-item(@click="handleOnSelectTab('roomGuest')")
             a.nav-link(
-              :class="hasTabSelected.roomGuest ? 'active' : ''",
+              :class="hasTabSelected.roomGuest && 'active'",
               href="#"
             )
               i.fas.fa-users
@@ -37,45 +37,43 @@ heroes
 
 <style lang="scss" scoped>
 .headline {
-  display: flex;
   margin-top: 1.5rem;
-  justify-content: center;
-  flex-direction: column;
-  .subtitle {
-    display: flex;
-    align-items: center;
-    p {
-      color: white;
-    }
-    span {
-      background-color: white;
-      border-radius: 2px;
-      display: block;
-      padding: 0.1rem 0.3rem;
-      position: relative;
-      top: -0.4rem;
-      left: 0.5rem;
-    }
+}
+.subtitle {
+  display: flex;
+  align-items: center;
+  p {
+    color: white;
   }
-  .supported {
-    p {
-      color: #ddd !important;
+  span {
+    background-color: white;
+    border-radius: 2px;
+    display: block;
+    padding: 0.1rem 0.3rem;
+    position: relative;
+    top: -0.4rem;
+    left: 0.5rem;
+  }
+}
+.supported {
+  p {
+    color: #ddd !important;
+  }
+  div {
+    margin: 0.5rem 0;
+    img:last-child {
+      margin-right: 0.5rem;
+      width: 35px;
     }
-    div {
-      margin: 0.5rem 0;
-      img:last-child {
-        margin-right: 0.5rem;
-        width: 35px;
-      }
-      img {
-        width: 40px;
-        margin-top: -0.7rem;
-        margin-right: 0.5rem;
-        filter: saturate(10%);
-      }
+    img {
+      width: 40px;
+      margin-top: -0.7rem;
+      margin-right: 0.5rem;
+      filter: saturate(10%);
     }
   }
 }
+
 .nav {
   padding: 0.3rem;
   width: max-content;
