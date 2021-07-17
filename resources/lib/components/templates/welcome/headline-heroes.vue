@@ -12,20 +12,20 @@ heroes
           img.brand(src="/images/logo-pemkot.png", alt="logo pemkot")
     .col-12.col-md-5.py-2
       .popup-relative
-        ul.nav.nav-pills.bg-gray.rounded-2.mb-2.shadow-sm
+        ul.nav.nav-pills.bg-white.rounded-2.mb-2.shadow-sm
           li.nav-item(@click="handleOnSelectTab('participant')")
             a.nav-link(
               :class="hasTabSelected.participant && 'active'",
               href="#"
             )
-              i.fas.fa-ticket-alt
-              span.d-inline-block.ms-2 Pesan ruangan
+              img(src="/images/ilustrations/to-do.png")
+              span.d-inline-block.ms-2 Booking ruangan
           li.nav-item(@click="handleOnSelectTab('roomGuest')")
             a.nav-link(
               :class="hasTabSelected.roomGuest && 'active'",
               href="#"
             )
-              i.fas.fa-users
+              img(src="/images/ilustrations/ticket.png")
               span.d-inline-block.ms-2 Gabung kegiatan
         .card.shadow-sm.border-none
           .card-body
@@ -90,6 +90,31 @@ heroes
   &-item {
     font-size: 0.9rem !important;
     cursor: pointer;
+
+    a {
+      display: flex;
+      align-items: center;
+      transition: 300ms all ease-in-out;
+      border: .125rem solid white;
+      color: #8a93a7 !important;
+      &.active {
+        background-color: white !important;
+        border-color:#0064D2;
+        color: #333333 !important;
+      }
+
+      img {
+        width: 60px;
+      }
+
+      span {
+        display: block;
+        position: relative;
+        left: -.4rem;
+        font-size: .8rem;
+      }
+    }
+
   }
 }
 </style>

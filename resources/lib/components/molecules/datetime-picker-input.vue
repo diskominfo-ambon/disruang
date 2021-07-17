@@ -76,6 +76,8 @@ export default {
     .date-picker__field {
       position: relative;
       padding: .8rem 1rem;
+
+
       display: flex;
       align-items: center;
       flex: 1;
@@ -84,7 +86,11 @@ export default {
         margin-right: .5rem;
         width: 11px;
       }
+      &:first-child {
+        padding-right: .5rem;
+      }
       &:last-child {
+        padding-left: 1.5rem;
         span {
           position: absolute;
           left: -.93rem;

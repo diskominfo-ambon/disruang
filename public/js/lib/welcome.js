@@ -3157,7 +3157,7 @@ __webpack_require__.r(__webpack_exports__);
       end: null
     });
 
-    function dateTimeIntlId(date) {
+    function dateTimeFormatterIntlId(date) {
       var dateIntl = new Intl.DateTimeFormat('id-ID', {
         dateStyle: 'long',
         timeStyle: 'short'
@@ -3166,8 +3166,8 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     var dateIntlId = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
-      var start = dateTimeIntlId(range.value.start);
-      var end = dateTimeIntlId(range.value.end);
+      var start = dateTimeFormatterIntlId(range.value.start);
+      var end = dateTimeFormatterIntlId(range.value.end);
       return {
         start: start,
         end: end
@@ -3202,6 +3202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['placeholderText'],
   setup: function setup() {
     var isToggle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
 
@@ -3552,9 +3553,9 @@ var _hoisted_1 = {
   "for": "checkbox-dropdown"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-door-closed"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Pilih ruangan")], -1
+}, null, -1
 /* HOISTED */
 );
 
@@ -3583,7 +3584,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         onMousedown: _cache[2] || (_cache[2] = function ($event) {
           return $setup.isToggle = false;
         })
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.placeholderText), 1
+      /* TEXT */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
         "class": ["dropdown-icon", $setup.isToggle && 'rotate-180']
       }, [_hoisted_3], 2
       /* CLASS */
@@ -3749,7 +3752,8 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
     labelText: "Nama instansi"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dropdown_input, {
-    labelText: "Ruangan yang tersedia"
+    labelText: "Ruangan yang tersedia",
+    placeholderText: "Pilih ruangan"
   }, {
     "default": _withId(function () {
       return [_hoisted_2];
@@ -3843,23 +3847,23 @@ var _hoisted_4 = {
   "class": "popup-relative"
 };
 var _hoisted_5 = {
-  "class": "nav nav-pills bg-gray rounded-2 mb-2 shadow-sm"
+  "class": "nav nav-pills bg-white rounded-2 mb-2 shadow-sm"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-ticket-alt"
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+  src: "/images/ilustrations/to-do.png"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "d-inline-block ms-2"
-}, "Pesan ruangan", -1
+}, "Booking ruangan", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-users"
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+  src: "/images/ilustrations/ticket.png"
 }, null, -1
 /* HOISTED */
 );
@@ -4132,7 +4136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".date-picker__container[data-v-4547f784] {\n  display: flex;\n  align-items: center;\n  border: 1px solid #ced4da;\n  border-radius: 3px;\n}\n.date-picker__container .date-picker__field[data-v-4547f784] {\n  position: relative;\n  padding: 0.8rem 1rem;\n  display: flex;\n  align-items: center;\n  flex: 1;\n}\n.date-picker__container .date-picker__field svg[data-v-4547f784] {\n  color: #2283B5;\n  margin-right: 0.5rem;\n  width: 11px;\n}\n.date-picker__container .date-picker__field[data-v-4547f784]:last-child {\n  border-left: 1px dashed #ced4da;\n}\n.date-picker__container .date-picker__field:last-child span[data-v-4547f784] {\n  position: absolute;\n  left: -0.93rem;\n  background-color: white;\n  border: 1px solid #ced4da;\n  height: 1.56rem;\n  width: 1.56rem;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #0064d2 !important;\n}\n.date-picker__container .date-picker__field:last-child span svg[data-v-4547f784] {\n  width: 0.81rem;\n  height: 0.81rem;\n  position: relative;\n  left: 0.25rem;\n}\n.date-picker__container .date-picker__field p[data-v-4547f784] {\n  margin: 0;\n  margin-top: 0.0625rem;\n  font-size: 0.9rem;\n  color: #8a93a7 !important;\n}\n.date-picker__container .date-picker__field p.is-filled[data-v-4547f784] {\n  color: #35405a !important;\n  font-size: 0.85rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".date-picker__container[data-v-4547f784] {\n  display: flex;\n  align-items: center;\n  border: 1px solid #ced4da;\n  border-radius: 3px;\n}\n.date-picker__container .date-picker__field[data-v-4547f784] {\n  position: relative;\n  padding: 0.8rem 1rem;\n  display: flex;\n  align-items: center;\n  flex: 1;\n}\n.date-picker__container .date-picker__field svg[data-v-4547f784] {\n  color: #2283B5;\n  margin-right: 0.5rem;\n  width: 11px;\n}\n.date-picker__container .date-picker__field[data-v-4547f784]:first-child {\n  padding-right: 0.5rem;\n}\n.date-picker__container .date-picker__field[data-v-4547f784]:last-child {\n  padding-left: 1.5rem;\n  border-left: 1px dashed #ced4da;\n}\n.date-picker__container .date-picker__field:last-child span[data-v-4547f784] {\n  position: absolute;\n  left: -0.93rem;\n  background-color: white;\n  border: 1px solid #ced4da;\n  height: 1.56rem;\n  width: 1.56rem;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #0064d2 !important;\n}\n.date-picker__container .date-picker__field:last-child span svg[data-v-4547f784] {\n  width: 0.81rem;\n  height: 0.81rem;\n  position: relative;\n  left: 0.25rem;\n}\n.date-picker__container .date-picker__field p[data-v-4547f784] {\n  margin: 0;\n  margin-top: 0.0625rem;\n  font-size: 0.9rem;\n  color: #8a93a7 !important;\n}\n.date-picker__container .date-picker__field p.is-filled[data-v-4547f784] {\n  color: #35405a !important;\n  font-size: 0.85rem;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4228,7 +4232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".headline[data-v-643b8387] {\n  margin-top: 1.2rem;\n  color: white !important;\n  font-size: 1.7rem;\n}\n.form-overlay[data-v-643b8387] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(15, 23, 37, 0.911);\n  z-index: 2;\n  transition: all 300ms ease;\n}\n.subtitle[data-v-643b8387] {\n  color: white !important;\n  font-size: 1rem;\n}\n.popup-relative[data-v-643b8387] {\n  position: relative;\n  z-index: 3;\n}\n.supported p[data-v-643b8387] {\n  color: white !important;\n  font-size: 0.9rem;\n}\n.supported div[data-v-643b8387] {\n  margin: 0.5rem 0;\n}\n.supported div img[data-v-643b8387]:last-child {\n  margin-right: 0;\n  width: 35px;\n}\n.supported div img[data-v-643b8387] {\n  width: 40px;\n  margin-top: -0.2rem;\n  margin-right: 1rem;\n  filter: saturate(10%);\n}\n.nav[data-v-643b8387] {\n  padding: 0.3rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n}\n@media (max-width: 767.98px) {\n.nav[data-v-643b8387] {\n    width: 100%;\n}\n}\n.nav-item[data-v-643b8387] {\n  font-size: 0.9rem !important;\n  cursor: pointer;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".headline[data-v-643b8387] {\n  margin-top: 1.2rem;\n  color: white !important;\n  font-size: 1.7rem;\n}\n.form-overlay[data-v-643b8387] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(15, 23, 37, 0.911);\n  z-index: 2;\n  transition: all 300ms ease;\n}\n.subtitle[data-v-643b8387] {\n  color: white !important;\n  font-size: 1rem;\n}\n.popup-relative[data-v-643b8387] {\n  position: relative;\n  z-index: 3;\n}\n.supported p[data-v-643b8387] {\n  color: white !important;\n  font-size: 0.9rem;\n}\n.supported div[data-v-643b8387] {\n  margin: 0.5rem 0;\n}\n.supported div img[data-v-643b8387]:last-child {\n  margin-right: 0;\n  width: 35px;\n}\n.supported div img[data-v-643b8387] {\n  width: 40px;\n  margin-top: -0.2rem;\n  margin-right: 1rem;\n  filter: saturate(10%);\n}\n.nav[data-v-643b8387] {\n  padding: 0.3rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n}\n@media (max-width: 767.98px) {\n.nav[data-v-643b8387] {\n    width: 100%;\n}\n}\n.nav-item[data-v-643b8387] {\n  font-size: 0.9rem !important;\n  cursor: pointer;\n}\n.nav-item a[data-v-643b8387] {\n  display: flex;\n  align-items: center;\n  transition: 300ms all ease-in-out;\n  border: 0.125rem solid white;\n  color: #8a93a7 !important;\n}\n.nav-item a.active[data-v-643b8387] {\n  background-color: white !important;\n  border-color: #0064D2;\n  color: #333333 !important;\n}\n.nav-item a img[data-v-643b8387] {\n  width: 60px;\n}\n.nav-item a span[data-v-643b8387] {\n  display: block;\n  position: relative;\n  left: -0.4rem;\n  font-size: 0.8rem;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
