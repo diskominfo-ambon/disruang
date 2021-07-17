@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 
 use Carbon\Carbon;
 use Inertia\Inertia;
@@ -29,7 +30,10 @@ class AppServiceProvider extends ServiceProvider
   {
     Blade::stringable(fn (Carbon $carbon) => $carbon->isoFormat('LLL'));
 
-    $this->loadViewsFrom(__DIR__.'/../resources/views/web', 'web');
-    $this->loadViewsFrom(__DIR__.'/../resources/views/exports', 'exports');
+
+    $this->loadViewsFrom([
+      resource_path('views/web'),
+      resource_path('views/web/sections')
+    ], 'web');
   }
 }

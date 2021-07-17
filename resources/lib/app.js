@@ -5,7 +5,7 @@ import { InertiaProgress } from '@inertiajs/progress';
 import './bootstrap';
 
 createInertiaApp({
-  resolve: name => import(/* webpackChunkName: "lib/[request]" */ `./views/${name}`),
+  resolve: name => import(/* webpackChunkName: "lib/[request]" */ `./pages/${name}`),
   setup({ el, app, props, plugin }) {
     const vue = createApp({ render: () => h(app, props) })
       .use(plugin);

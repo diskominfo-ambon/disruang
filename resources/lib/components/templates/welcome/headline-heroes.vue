@@ -1,18 +1,17 @@
 <template lang="pug">
 heroes
+  //- .form-overlay
   .row
     .col-12.col-md-5.offset-md-1.pt-2.pb-3
       h1.headline Tiada kesan tanpa kehadiranmu
-      .subtitle
-        p Ikut bersama membangun Kota Ambon Maluku
-        span.text-dark Menjadi lebih baik
+      p.subtitle Ikut bersama-sama membangun Kota Ambon Maluku ✨
       .supported
-        p Supported by
+        p Didukung oleh
         div
           img.brand(src="/images/logo-kominfo.png", alt="logo kominfo")
           img.brand(src="/images/logo-pemkot.png", alt="logo pemkot")
-    .col-12.col-md-6.py-2
-      div
+    .col-12.col-md-5.py-2
+      .popup-relative
         ul.nav.nav-pills.bg-gray.rounded-2.mb-2.shadow-sm
           li.nav-item(@click="handleOnSelectTab('participant')")
             a.nav-link(
@@ -28,7 +27,7 @@ heroes
             )
               i.fas.fa-users
               span.d-inline-block.ms-2 Gabung kegiatan
-        .card.shadow.border-none
+        .card.shadow-sm.border-none
           .card-body
             component(:is="selectedTab")
 </template>
@@ -37,38 +36,44 @@ heroes
 
 <style lang="scss" scoped>
 .headline {
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
+  color: white !important;
+  font-size: 1.7rem;
+}
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 37, 0.911);
+  z-index: 2;
+  transition: all 300ms ease;
 }
 .subtitle {
-  display: flex;
-  align-items: center;
-  p {
-    color: white;
-  }
-  span {
-    background-color: white;
-    border-radius: 2px;
-    display: block;
-    padding: 0.1rem 0.3rem;
-    position: relative;
-    top: -0.4rem;
-    left: 0.5rem;
-  }
+  color: white !important;
+  font-size: 1rem;
+}
+
+.popup-relative {
+  position: relative;
+  z-index: 3;
 }
 .supported {
   p {
-    color: #ddd !important;
+    color: white !important;
+    font-size: .9rem;
   }
   div {
     margin: 0.5rem 0;
     img:last-child {
-      margin-right: 0.5rem;
+      margin-right: 0;
       width: 35px;
     }
     img {
       width: 40px;
-      margin-top: -0.7rem;
-      margin-right: 0.5rem;
+      margin-top: -0.2rem;
+      margin-right: 1rem;
       filter: saturate(10%);
     }
   }

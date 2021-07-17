@@ -18899,7 +18899,7 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.createInertiaApp)({
   resolve: function resolve(name) {
-    return __webpack_require__("./resources/lib/views lazy recursive ^\\.\\/.*$")("./".concat(name));
+    return __webpack_require__("./resources/lib/pages lazy recursive ^\\.\\/.*$")("./".concat(name));
   },
   setup: function setup(_ref) {
     var el = _ref.el,
@@ -42058,19 +42058,19 @@ function compileToFunction(template, options) {
 
 /***/ }),
 
-/***/ "./resources/lib/views lazy recursive ^\\.\\/.*$":
+/***/ "./resources/lib/pages lazy recursive ^\\.\\/.*$":
 /*!**************************************************************************************!*\
-  !*** ./resources/lib/views/ lazy ^\.\/.*$ chunkName: lib/[request] namespace object ***!
+  !*** ./resources/lib/pages/ lazy ^\.\/.*$ chunkName: lib/[request] namespace object ***!
   \**************************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
 	"./welcome": [
-		"./resources/lib/views/welcome.vue",
+		"./resources/lib/pages/welcome.vue",
 		"lib/welcome"
 	],
 	"./welcome.vue": [
-		"./resources/lib/views/welcome.vue",
+		"./resources/lib/pages/welcome.vue",
 		"lib/welcome"
 	]
 };
@@ -42089,7 +42089,7 @@ function webpackAsyncContext(req) {
 	});
 }
 webpackAsyncContext.keys = () => (Object.keys(map));
-webpackAsyncContext.id = "./resources/lib/views lazy recursive ^\\.\\/.*$";
+webpackAsyncContext.id = "./resources/lib/pages lazy recursive ^\\.\\/.*$";
 module.exports = webpackAsyncContext;
 
 /***/ }),

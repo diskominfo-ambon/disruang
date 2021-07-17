@@ -1,6 +1,6 @@
 <template lang="pug">
-form-group.form-switch
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+form-group
+  input.form-check-input(type="checkbox")
 </template>
 <script>
 import FormGroup from "~/components/atoms/form-group";

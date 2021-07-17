@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  alert.text-center.alert-radiusless.alert-sm.alert-b.alert-b-blue Semua yang perlu kamu ketahui tentang status dan kebijakan kegiatan selama wabah virus&nbsp;
+  alert.text-center.alert-radiusless.alert-sm.alert-b.alert-b-blue(variant="secondary") Semua yang perlu kamu ketahui tentang status dan kebijakan kegiatan selama wabah virus&nbsp;
     a.is-link(href="") Corona.
   navbar
   headline-heroes

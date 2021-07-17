@@ -14,7 +14,7 @@ class HandleInertiaRequests extends Middleware
    * @see https://inertiajs.com/server-side-setup#root-template
    * @var string
    */
-  protected $rootView = 'inertia';
+  protected $rootView = 'web::layouts.inertia';
 
   /**
    * Defines the props that are shared by default.

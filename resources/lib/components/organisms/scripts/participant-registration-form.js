@@ -1,11 +1,13 @@
-import TextInput from "~/components/atoms/text-input";
-import AcceptInput from "~/components/atoms/accept-input";
+import TextInput from "~/components/molecules/text-input";
+import CheckboxInput from "~/components/molecules/checkbox-input";
 import DropdownInput from "~/components/molecules/dropdown-input";
+import DatetimePickerInput from '~/components/molecules/datetime-picker-input';
 
 export default {
   components: {
     TextInput,
-    AcceptInput,
+    CheckboxInput,
     DropdownInput,
+    DatetimePickerInput
   },
 };

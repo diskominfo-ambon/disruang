@@ -1,6 +1,6 @@
 <template lang="pug">
 .form-group
-  label(v-if="hasLabelText") {{ labelText }}
+  label(v-if="hasLabelText",for="nameId") {{ labelText }}
   slot
   .errors(v-if="hasErrors")
     ul
@@ -11,6 +11,11 @@
 export default {
   props: {
     labelText: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    nameId: {
       type: String,
       required: false,
       default: "",
@@ -37,7 +42,7 @@ export default {
 label {
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: #3e3e3e;
+  color: #8a93a7;
 }
 .errors {
   margin: 0.5rem 0;

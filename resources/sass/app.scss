@@ -113,6 +113,10 @@ h6 {
     background-color: $warning;
     color: $dark !important;
   }
+  &-secondary {
+    background-color: $secondary;
+    color: white !important;
+  }
 
   &-sm {
     padding: .5rem;
@@ -122,4 +126,26 @@ h6 {
   &-radiusless {
     border-radius: 0;
   }
+}
+
+.vc-container {
+  .vc-pane-container {
+    width: 620px !important;
+
+    .vc-arrows-container ~ div {
+      display: flex !important;
+      width: 100% !important;
+
+
+      .vc-time-picker {
+        &:first-child {
+          border-right: 1px solid $light !important;
+        }
+        flex: 1;
+        width: 100% !important;
+      }
+    }
+  }
+
+
 }

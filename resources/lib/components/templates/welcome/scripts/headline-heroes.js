@@ -2,9 +2,6 @@ import { ref, computed } from "vue";
 
 import ParticipantRegistrationForm from "~/components/organisms/participant-registration-form";
 import RoomGuestRegistrationForm from "~/components/organisms/room-guest-registration-form";
-import TextInput from "~/components/atoms/text-input";
-import AcceptInput from "~/components/atoms/accept-input";
-import RoomDropdownInput from "~/components/molecules/room-dropdown-input";
 import Heroes from "~/components/atoms/heroes/";
 
 export default {
@@ -36,9 +33,6 @@ export default {
   },
   components: {
     Heroes,
-    TextInput,
-    AcceptInput,
-    RoomDropdownInput,
     ParticipantRegistrationForm,
     RoomGuestRegistrationForm,
   },
