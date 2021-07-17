@@ -22,7 +22,7 @@ form(method="post")
       datetime-picker-input(labelText="Tanggal pemesanan")
       checkbox-input.align-self-end.ms-3.mb-3(labelText="Saya ASN?")
   .d-flex.align-items-center.justify-content-end.mt-1
-    button.btn.btn-orange Mulai pesan
+    button.btn.btn-orange Mulai booking
 </template>
 <script src="./scripts/participant-registration-form.js"></script>
 <style lang="scss" scoped>

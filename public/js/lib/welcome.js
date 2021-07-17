@@ -3243,6 +3243,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _components_molecules_text_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/components/molecules/text-input */ "./resources/lib/components/molecules/text-input.vue");
+/* harmony import */ var _components_molecules_checkbox_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/components/molecules/checkbox-input */ "./resources/lib/components/molecules/checkbox-input.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    TextInput: _components_molecules_text_input__WEBPACK_IMPORTED_MODULE_0__.default,
+    CheckboxInput: _components_molecules_checkbox_input__WEBPACK_IMPORTED_MODULE_1__.default
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/pages/welcome.vue?vue&type=script&lang=js":
 /*!*********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/pages/welcome.vue?vue&type=script&lang=js ***!
@@ -3734,7 +3758,7 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   "class": "d-flex align-items-center justify-content-end mt-1"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   "class": "btn btn-orange"
-}, "Mulai pesan")], -1
+}, "Mulai booking")], -1
 /* HOISTED */
 );
 
@@ -3771,10 +3795,10 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3784,17 +3808,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
+var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("data-v-60442ba6");
+
+(0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-60442ba6");
+
 var _hoisted_1 = {
   method: "post"
 };
+var _hoisted_2 = {
+  "class": "d-flex align-items-center"
+};
+var _hoisted_3 = {
+  "class": "d-flex align-items-start mt-2"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "room guest registation form", -1
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "signature-meta"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "fas fa-signature"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  "class": "signature-label"
+}, "Lihat tanda tangan")], -1
 /* HOISTED */
 );
 
-function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", _hoisted_1, [_hoisted_2]);
-}
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "d-flex align-items-center justify-content-end"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  "class": "btn btn-orange"
+}, "Mulai gabung")], -1
+/* HOISTED */
+);
+
+(0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
+
+var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_text_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("text-input");
+
+  var _component_checkbox_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("checkbox-input");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
+    labelText: "Nama lengkap"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
+    "class": "flex-1 me-2",
+    labelText: "Jenis kelamin"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
+    "class": "flex-1",
+    labelText: "Nomor telepon"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox_input, {
+    "class": "me-4",
+    labelText: "Tanda tangan"
+  }), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox_input, {
+    labelText: "Saya ASN?"
+  })]), _hoisted_5]);
+});
 
 /***/ }),
 
@@ -3821,7 +3889,7 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "col-12 col-md-5 offset-md-1 pt-2 pb-3"
+  "class": "col-sm-12 col-md-6 col-lg-5 offset-lg-1 pt-2 pb-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "headline"
 }, "Tiada kesan tanpa kehadiranmu"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
@@ -3841,17 +3909,17 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_3 = {
-  "class": "col-12 col-md-5 py-2"
+  "class": "col-sm-12 col-md-6 col-lg-5 py-2"
 };
 var _hoisted_4 = {
   "class": "popup-relative"
 };
 var _hoisted_5 = {
-  "class": "nav nav-pills bg-white rounded-2 mb-2 shadow-sm"
+  "class": "nav nav-pills rounded-2 mb-2 shadow-sm"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-  src: "/images/ilustrations/to-do.png"
+  src: "/images/ilustrations/reschedule.png"
 }, null, -1
 /* HOISTED */
 );
@@ -3863,7 +3931,7 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-  src: "/images/ilustrations/ticket.png"
+  src: "/images/ilustrations/easy-ticket.png"
 }, null, -1
 /* HOISTED */
 );
@@ -4215,6 +4283,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".dropdown-suggestion[data-v-e48356ce] 
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".signature-label[data-v-60442ba6] {\n  display: block;\n  text-decoration: underline;\n  color: #2283B5 !important;\n  font-size: 0.8rem;\n  cursor: pointer;\n}\n.signature-meta[data-v-60442ba6] {\n  display: flex;\n  align-items: center;\n  position: relative;\n  top: -0.5rem;\n}\n.signature-meta svg[data-v-60442ba6] {\n  margin-right: 0.6rem;\n  color: #2283B5 !important;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/templates/welcome/headline-heroes.vue?vue&type=style&index=0&id=643b8387&lang=scss&scoped=true":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/templates/welcome/headline-heroes.vue?vue&type=style&index=0&id=643b8387&lang=scss&scoped=true ***!
@@ -4232,7 +4324,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".headline[data-v-643b8387] {\n  margin-top: 1.2rem;\n  color: white !important;\n  font-size: 1.7rem;\n}\n.form-overlay[data-v-643b8387] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(15, 23, 37, 0.911);\n  z-index: 2;\n  transition: all 300ms ease;\n}\n.subtitle[data-v-643b8387] {\n  color: white !important;\n  font-size: 1rem;\n}\n.popup-relative[data-v-643b8387] {\n  position: relative;\n  z-index: 3;\n}\n.supported p[data-v-643b8387] {\n  color: white !important;\n  font-size: 0.9rem;\n}\n.supported div[data-v-643b8387] {\n  margin: 0.5rem 0;\n}\n.supported div img[data-v-643b8387]:last-child {\n  margin-right: 0;\n  width: 35px;\n}\n.supported div img[data-v-643b8387] {\n  width: 40px;\n  margin-top: -0.2rem;\n  margin-right: 1rem;\n  filter: saturate(10%);\n}\n.nav[data-v-643b8387] {\n  padding: 0.3rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n}\n@media (max-width: 767.98px) {\n.nav[data-v-643b8387] {\n    width: 100%;\n}\n}\n.nav-item[data-v-643b8387] {\n  font-size: 0.9rem !important;\n  cursor: pointer;\n}\n.nav-item a[data-v-643b8387] {\n  display: flex;\n  align-items: center;\n  transition: 300ms all ease-in-out;\n  border: 0.125rem solid white;\n  color: #8a93a7 !important;\n}\n.nav-item a.active[data-v-643b8387] {\n  background-color: white !important;\n  border-color: #0064D2;\n  color: #333333 !important;\n}\n.nav-item a img[data-v-643b8387] {\n  width: 60px;\n}\n.nav-item a span[data-v-643b8387] {\n  display: block;\n  position: relative;\n  left: -0.4rem;\n  font-size: 0.8rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".headline[data-v-643b8387] {\n  margin-top: 1.2rem;\n  color: white !important;\n  font-size: 1.7rem;\n}\n.form-overlay[data-v-643b8387] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(15, 23, 37, 0.911);\n  z-index: 2;\n  transition: all 300ms ease;\n}\n.subtitle[data-v-643b8387] {\n  color: white !important;\n  font-size: 1rem;\n}\n.popup-relative[data-v-643b8387] {\n  position: relative;\n  z-index: 3;\n}\n.supported p[data-v-643b8387] {\n  color: white !important;\n  font-size: 0.9rem;\n}\n.supported div[data-v-643b8387] {\n  margin: 0.5rem 0;\n}\n.supported div img[data-v-643b8387]:last-child {\n  margin-right: 0;\n  width: 35px;\n}\n.supported div img[data-v-643b8387] {\n  width: 40px;\n  margin-top: -0.2rem;\n  margin-right: 1rem;\n  filter: saturate(10%);\n}\n.nav[data-v-643b8387] {\n  padding: 0.3rem 0.5rem;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  background-color: #f6f9ff;\n}\n@media (max-width: 767.98px) {\n.nav[data-v-643b8387] {\n    width: 100%;\n}\n}\n.nav-item[data-v-643b8387] {\n  font-size: 0.9rem !important;\n  cursor: pointer;\n}\n.nav-item:first-child a[data-v-643b8387] {\n  margin-right: 0.625rem;\n}\n.nav-item a[data-v-643b8387] {\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  padding: 0.6rem;\n  border: 1px solid #c7d6f5;\n  color: #8a93a7 !important;\n}\n.nav-item a.active[data-v-643b8387] {\n  background-color: white !important;\n  border-color: #0064D2;\n  border-width: 0.125rem;\n  color: #333333 !important;\n}\n.nav-item a img[data-v-643b8387] {\n  width: 50px;\n}\n.nav-item a span[data-v-643b8387] {\n  display: block;\n  position: relative;\n  left: -0.4rem;\n  top: 0.3rem;\n  font-size: 0.7rem;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4522,6 +4614,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_participant_registration_form_vue_vue_type_style_index_0_id_e48356ce_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_style_index_0_id_60442ba6_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_style_index_0_id_60442ba6_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_style_index_0_id_60442ba6_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -18940,16 +19062,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _room_guest_registration_form_vue_vue_type_template_id_60442ba6_lang_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug */ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug");
+/* harmony import */ var _room_guest_registration_form_vue_vue_type_template_id_60442ba6_scoped_true_lang_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug */ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug");
+/* harmony import */ var _room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./room-guest-registration-form.vue?vue&type=script&lang=js */ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=script&lang=js");
+/* harmony import */ var _room_guest_registration_form_vue_vue_type_style_index_0_id_60442ba6_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true */ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true");
 
-const script = {}
-script.render = _room_guest_registration_form_vue_vue_type_template_id_60442ba6_lang_pug__WEBPACK_IMPORTED_MODULE_0__.render
+
+
+
+;
+_room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _room_guest_registration_form_vue_vue_type_template_id_60442ba6_scoped_true_lang_pug__WEBPACK_IMPORTED_MODULE_0__.render
+_room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__scopeId = "data-v-60442ba6"
 /* hot reload */
 if (false) {}
 
-script.__file = "resources/lib/components/organisms/room-guest-registration-form.vue"
+_room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/lib/components/organisms/room-guest-registration-form.vue"
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (script);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
 
 /***/ }),
 
@@ -19137,6 +19265,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./room-guest-registration-form.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/lib/pages/welcome.vue?vue&type=script&lang=js":
 /*!*****************************************************************!*\
   !*** ./resources/lib/pages/welcome.vue?vue&type=script&lang=js ***!
@@ -19297,18 +19441,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug ***!
-  \********************************************************************************************************************/
+/***/ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug":
+/*!********************************************************************************************************************************!*\
+  !*** ./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug ***!
+  \********************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_template_id_60442ba6_lang_pug__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_template_id_60442ba6_scoped_true_lang_pug__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_template_id_60442ba6_lang_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/pug-plain-loader/index.js!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&lang=pug");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_template_id_60442ba6_scoped_true_lang_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/pug-plain-loader/index.js!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=template&id=60442ba6&scoped=true&lang=pug");
 
 
 /***/ }),
@@ -19432,6 +19576,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_participant_registration_form_vue_vue_type_style_index_0_id_e48356ce_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./participant-registration-form.vue?vue&type=style&index=0&id=e48356ce&lang=scss&scoped=true */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/participant-registration-form.vue?vue&type=style&index=0&id=e48356ce&lang=scss&scoped=true");
+
+
+/***/ }),
+
+/***/ "./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true":
+/*!**************************************************************************************************************************************!*\
+  !*** ./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true ***!
+  \**************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_room_guest_registration_form_vue_vue_type_style_index_0_id_60442ba6_lang_scss_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/lib/components/organisms/room-guest-registration-form.vue?vue&type=style&index=0&id=60442ba6&lang=scss&scoped=true");
 
 
 /***/ }),
