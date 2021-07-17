@@ -37,7 +37,7 @@ export default {
       end: null,
     });
 
-    function dateTimeIntlId(date) {
+    function dateTimeFormatterIntlId(date) {
       const dateIntl = new Intl.DateTimeFormat('id-ID', { dateStyle: 'long', timeStyle: 'short' })
         .format(date);
 
@@ -45,8 +45,8 @@ export default {
     }
 
     const dateIntlId = computed(() => {
-      const start = dateTimeIntlId(range.value.start);
-      const end = dateTimeIntlId(range.value.end);
+      const start = dateTimeFormatterIntlId(range.value.start);
+      const end = dateTimeFormatterIntlId(range.value.end);
 
       return {
         start,
