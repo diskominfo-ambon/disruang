@@ -1,7 +1,10 @@
 <template lang="pug">
 form(method="post")
   text-input(labelText="Nama instansi")
-  dropdown-input(labelText="Ruangan yang tersedia")
+  dropdown-input(
+    labelText="Ruangan yang tersedia",
+    placeholderText="Pilih ruangan"
+    )
     .dropdown-suggestion
       .dropdown-suggestion__content
         i.fas.fa-door-open

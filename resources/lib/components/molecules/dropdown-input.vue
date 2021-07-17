@@ -4,7 +4,7 @@ form-group
     label.dropdown-field__placeholder(for="checkbox-dropdown")
       div
         i.fas.fa-door-closed
-        p Pilih ruangan
+        p {{ placeholderText }}
       span.dropdown-icon(:class="isToggle && 'rotate-180'")
         i.fas.fa-caret-down
     transition(name="dropdown", mode="out-in")
@@ -16,6 +16,7 @@ import { ref } from 'vue';
 import FormGroup from '~/components/atoms/form-group';
 
 export default {
+  props: ['placeholderText'],
   setup() {
     const isToggle = ref(false);
 
