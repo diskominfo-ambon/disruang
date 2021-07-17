@@ -1,7 +1,7 @@
 # Disruang - Tiada kesan tanpa kehadiranmu
 ![demo](./disruang-demo.png)
 
-Dispantau adalah aplikasi web yang digunakan secara internal dalam pemerintahan kota Ambon Maluku untuk mengatur manajemen kegiatannya.
+Dispantau adalah aplikasi web yang digunakan secara internal dalam pemerintah kota Ambon Maluku untuk mengatur manajemen kegiatannya.
 
 ### Orang baik
 * Azman Abdullah
