@@ -1,5 +1,5 @@
 <template lang="pug">
-nav.navbar.navbar-expand-lg.navbar-light.bg-white.shadow-sm
+nav.navbar.navbar-expand-lg.navbar-light.bg-transparent.navbar-top
   .container
     a.navbar-brand(href="#") disruang
     button.navbar-toggler(
@@ -14,8 +14,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white.shadow-sm
 
     #navbarNavAltMarkup.collapse.navbar-collapse
       .d-flex.align-items-center.justify-content-end.flex-1
-      button.btn.btn-primary.text-white.btn-login
-        i.fas.fa-sign-in-alt.text-white
+      button.btn.btn-login
+        i.fas.fa-sign-in-alt
         span.d-inline-block.ms-2 login
 
 </template>
@@ -25,13 +25,22 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white.shadow-sm
   padding-top: .2rem;
   padding-bottom: .2rem;
 
+  &-top {
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    right: 0;
+  }
+
   .btn-login {
     font-size: .9rem;
+    color: #2F86CD !important;
+    background-color: white;
   }
 
   &-brand {
     transform: scale(1.3);
-    color: #1BA0E2 !important;
+    color: white !important;
 
     @media (max-width: 767.98px) {
       position: relative;

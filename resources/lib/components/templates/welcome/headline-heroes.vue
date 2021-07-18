@@ -1,7 +1,8 @@
 <template lang="pug">
 heroes
-  //- .form-overlay
-  .row
+  transition(name='form-overlay' mode='out-in')
+    .form-overlay(v-if="formOverlay", @mousedown="formOverlay = false")
+  .row.py-5
     .col-sm-12.col-md-6.col-lg-4.offset-lg-2.pt-2.pb-3
       h1.headline Tiada kesan tanpa kehadiranmu
       p.subtitle Ikut bersama-sama membangun Kota Ambon Maluku
@@ -27,7 +28,9 @@ heroes
             )
               img(src="/images/ilustrations/easy-ticket.png")
               span.d-inline-block.ms-2 Gabung kegiatan
-        .card.shadow.border-none
+        .card.shadow.border-none(
+          @mouseenter="formOverlay = true"
+        )
           .card-body.position-relative
             component(:is="selectedTab")
 </template>
@@ -35,6 +38,18 @@ heroes
 
 
 <style lang="scss" scoped>
+
+
+.form-overlay,
+.form-overlay-leave-active {
+  transition: all 400ms ease;
+}
+.form-overlay-enter-from,
+.form-overlay-leave-to {
+  opacity: 0;
+}
+
+
 .headline {
   margin-top: 1.2rem;
   color: white !important;

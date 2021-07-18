@@ -10,6 +10,7 @@ export default {
       participant: "participant-registration-form",
       roomGuest: "room-guest-registration-form",
     };
+    const formOverlay = ref(false);
     const selectedTab = ref(registerTabComponents.participant);
 
     const hasTabSelected = computed(() => {
@@ -29,6 +30,7 @@ export default {
       hasTabSelected,
       selectedTab,
       handleOnSelectTab,
+      formOverlay
     };
   },
   components: {
