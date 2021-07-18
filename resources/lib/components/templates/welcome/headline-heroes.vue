@@ -27,8 +27,8 @@ heroes
             )
               img(src="/images/ilustrations/easy-ticket.png")
               span.d-inline-block.ms-2 Gabung kegiatan
-        .card.shadow-sm.border-none
-          .card-body
+        .card.shadow.border-none
+          .card-body.position-relative
             component(:is="selectedTab")
 </template>
 <script src="./scripts/headline-heroes.js"></script>
