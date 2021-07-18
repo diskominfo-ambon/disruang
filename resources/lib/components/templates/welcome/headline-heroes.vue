@@ -2,9 +2,9 @@
 heroes
   //- .form-overlay
   .row
-    .col-sm-12.col-md-6.col-lg-5.offset-lg-1.pt-2.pb-3
+    .col-sm-12.col-md-6.col-lg-4.offset-lg-2.pt-2.pb-3
       h1.headline Tiada kesan tanpa kehadiranmu
-      p.subtitle Ikut bersama-sama membangun Kota Ambon Maluku ✨
+      p.subtitle Ikut bersama-sama membangun Kota Ambon Maluku
       .supported
         p Didukung oleh
         div

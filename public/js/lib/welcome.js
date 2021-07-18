@@ -4187,12 +4187,12 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "col-sm-12 col-md-6 col-lg-5 offset-lg-1 pt-2 pb-3"
+  "class": "col-sm-12 col-md-6 col-lg-4 offset-lg-2 pt-2 pb-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "headline"
 }, "Tiada kesan tanpa kehadiranmu"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "subtitle"
-}, "Ikut bersama-sama membangun Kota Ambon Maluku ✨"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+}, "Ikut bersama-sama membangun Kota Ambon Maluku"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "supported"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Didukung oleh"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
   "class": "brand",
@@ -4454,7 +4454,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".hero[data-v-4f4ceddc] {\n  height: 13rem;\n  max-height: 15.75rem;\n}\n.hero-bg-gradient[data-v-4f4ceddc] {\n  background: linear-gradient(170deg, #69a6ce, #0770cd, #0064D2) !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".hero[data-v-4f4ceddc] {\n  height: 14rem;\n  max-height: 20.75rem;\n}\n.hero-bg-gradient[data-v-4f4ceddc] {\n  background: linear-gradient(170deg, #69a6ce, #0770cd, #0064D2) !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
