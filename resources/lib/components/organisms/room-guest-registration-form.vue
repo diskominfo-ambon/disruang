@@ -30,11 +30,11 @@ form(method="post")
 
   //- form if he asn
   transition(name='form-asn' mode='out-in')
-  .form-is-asn(v-if="showAsnForm")
-    p Saya ASN
-    .d-flex.align-items-center
-      text-input.flex-1.me-2(labelText="Nama instansi ASN?", v-model="form.asn.originName")
-      text-input.flex-1(labelText="Jabatan ASN?", v-model="form.asn.jobTitle")
+    .form-is-asn(v-if="showAsnForm")
+      p Saya ASN
+      .d-flex.align-items-center
+        text-input.flex-1.me-2(labelText="Nama instansi ASN?", v-model="form.asn.originName")
+        text-input.flex-1(labelText="Jabatan ASN?", v-model="form.asn.jobTitle")
 
   .d-flex.align-items-center.justify-content-end
     button.btn.btn-orange Mulai gabung
@@ -136,14 +136,20 @@ export default {
 .signature-modal-leave-active,
 .form-asn,
 .form-asn-leave-active {
-  transition: all 300ms ease;
+  transition: all 400ms ease;
 }
 .signature-modal-enter-from,
-.signature-modal-leave-to,
+.signature-modal-leave-to {
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateY(200px);
+}
+
 .form-asn-enter-from,
 .form-asn-leave-to {
   opacity: 0;
-  transform: translateY(200px);
+  filter: blur(2px);
+  transform: translateY(-50px);
 }
 
 .form-is-asn {

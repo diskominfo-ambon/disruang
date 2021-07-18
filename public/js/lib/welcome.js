@@ -4118,25 +4118,32 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   , ["onChange"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     name: "form-asn",
     mode: "out-in"
-  }), $setup.showAsnForm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
-    "class": "flex-1 me-2",
-    labelText: "Nama instansi ASN?",
-    modelValue: $setup.form.asn.originName,
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $setup.form.asn.originName = $event;
-    })
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
-    "class": "flex-1",
-    labelText: "Jabatan ASN?",
-    modelValue: $setup.form.asn.jobTitle,
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $setup.form.asn.jobTitle = $event;
-    })
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+  }, {
+    "default": _withId(function () {
+      return [$setup.showAsnForm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
+        "class": "flex-1 me-2",
+        labelText: "Nama instansi ASN?",
+        modelValue: $setup.form.asn.originName,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $setup.form.asn.originName = $event;
+        })
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
+        "class": "flex-1",
+        labelText: "Jabatan ASN?",
+        modelValue: $setup.form.asn.jobTitle,
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+          return $setup.form.asn.jobTitle = $event;
+        })
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1
+    /* STABLE */
+
+  }), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     name: "signature-modal",
     mode: "out-in"
   }, {
@@ -4591,7 +4598,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".signature-modal[data-v-60442ba6],\n.signature-modal-leave-active[data-v-60442ba6],\n.form-asn[data-v-60442ba6],\n.form-asn-leave-active[data-v-60442ba6] {\n  transition: all 300ms ease;\n}\n.signature-modal-enter-from[data-v-60442ba6],\n.signature-modal-leave-to[data-v-60442ba6],\n.form-asn-enter-from[data-v-60442ba6],\n.form-asn-leave-to[data-v-60442ba6] {\n  opacity: 0;\n  transform: translateY(200px);\n}\n.form-is-asn[data-v-60442ba6] {\n  border: 1px solid #ced4da;\n  border-radius: 3px;\n  position: relative;\n  padding: 0.6rem;\n  margin: 1rem 0;\n}\n.form-is-asn p[data-v-60442ba6] {\n  margin: 0;\n  position: absolute;\n  top: -0.7rem;\n  color: #2283B5 !important;\n  border-radius: 2px;\n  border: 1px solid #ced4da;\n  padding: 0.1rem 0.3rem;\n  font-size: 0.9rem;\n  background-color: white;\n}\n.form-is-asn div[data-v-60442ba6] {\n  margin-top: 0.5rem;\n}\n.signature-modal[data-v-60442ba6] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: white;\n  display: flex;\n  flex-direction: column;\n  border-radius: 4px;\n}\n.signature-modal__header[data-v-60442ba6] {\n  background-color: #f6f9ff;\n  border-bottom: 1px solid #f1f5ff;\n  display: flex;\n  align-items: center;\n  border-radius: 4px 4px 0 0;\n  justify-content: flex-end;\n  padding: 0.3rem 0.5rem;\n}\n.signature-modal__header button[data-v-60442ba6] {\n  margin-right: 0.3rem;\n}\n.signature-modal__header button[data-v-60442ba6]:last-child {\n  margin-right: 0;\n}\n.signature-modal__content[data-v-60442ba6] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.signature-modal__content .placeholder[data-v-60442ba6] {\n  color: #8a93a7;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n}\n.signature-modal__content .placeholder p[data-v-60442ba6] {\n  color: #8a93a7 !important;\n  margin-top: 0.4rem;\n}\n.signature-label[data-v-60442ba6] {\n  display: block;\n  color: #2283B5;\n  font-size: 0.8rem;\n  margin-left: -0.2rem;\n  cursor: pointer;\n}\n.signature-meta[data-v-60442ba6] {\n  display: flex;\n  border: 1px solid #ced4da;\n  padding: 0.2rem 0.5rem;\n  border-radius: 4px;\n  align-items: center;\n  position: relative;\n}\n.signature-meta[data-v-60442ba6]:hover {\n  background-color: #eee;\n}\n.signature-meta svg[data-v-60442ba6] {\n  margin-right: 0.6rem;\n  color: #2283B5 !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".signature-modal[data-v-60442ba6],\n.signature-modal-leave-active[data-v-60442ba6],\n.form-asn[data-v-60442ba6],\n.form-asn-leave-active[data-v-60442ba6] {\n  transition: all 400ms ease;\n}\n.signature-modal-enter-from[data-v-60442ba6],\n.signature-modal-leave-to[data-v-60442ba6] {\n  opacity: 0;\n  filter: blur(2px);\n  transform: translateY(200px);\n}\n.form-asn-enter-from[data-v-60442ba6],\n.form-asn-leave-to[data-v-60442ba6] {\n  opacity: 0;\n  filter: blur(2px);\n  transform: translateY(-50px);\n}\n.form-is-asn[data-v-60442ba6] {\n  border: 1px solid #ced4da;\n  border-radius: 3px;\n  position: relative;\n  padding: 0.6rem;\n  margin: 1rem 0;\n}\n.form-is-asn p[data-v-60442ba6] {\n  margin: 0;\n  position: absolute;\n  top: -0.7rem;\n  color: #2283B5 !important;\n  border-radius: 2px;\n  border: 1px solid #ced4da;\n  padding: 0.1rem 0.3rem;\n  font-size: 0.9rem;\n  background-color: white;\n}\n.form-is-asn div[data-v-60442ba6] {\n  margin-top: 0.5rem;\n}\n.signature-modal[data-v-60442ba6] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: white;\n  display: flex;\n  flex-direction: column;\n  border-radius: 4px;\n}\n.signature-modal__header[data-v-60442ba6] {\n  background-color: #f6f9ff;\n  border-bottom: 1px solid #f1f5ff;\n  display: flex;\n  align-items: center;\n  border-radius: 4px 4px 0 0;\n  justify-content: flex-end;\n  padding: 0.3rem 0.5rem;\n}\n.signature-modal__header button[data-v-60442ba6] {\n  margin-right: 0.3rem;\n}\n.signature-modal__header button[data-v-60442ba6]:last-child {\n  margin-right: 0;\n}\n.signature-modal__content[data-v-60442ba6] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.signature-modal__content .placeholder[data-v-60442ba6] {\n  color: #8a93a7;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n}\n.signature-modal__content .placeholder p[data-v-60442ba6] {\n  color: #8a93a7 !important;\n  margin-top: 0.4rem;\n}\n.signature-label[data-v-60442ba6] {\n  display: block;\n  color: #2283B5;\n  font-size: 0.8rem;\n  margin-left: -0.2rem;\n  cursor: pointer;\n}\n.signature-meta[data-v-60442ba6] {\n  display: flex;\n  border: 1px solid #ced4da;\n  padding: 0.2rem 0.5rem;\n  border-radius: 4px;\n  align-items: center;\n  position: relative;\n}\n.signature-meta[data-v-60442ba6]:hover {\n  background-color: #eee;\n}\n.signature-meta svg[data-v-60442ba6] {\n  margin-right: 0.6rem;\n  color: #2283B5 !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
