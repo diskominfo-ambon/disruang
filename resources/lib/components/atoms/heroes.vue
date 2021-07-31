@@ -6,8 +6,8 @@
 
 <style lang="scss" scoped>
 .hero {
-  height: 17rem;
-  max-height: 20.75rem;
+  height: 20rem;
+  max-height: 21.75rem;
 
   &-bg-gradient {
     background: linear-gradient(170deg, #69a6ce, #0770cd, #0064D2) !important;

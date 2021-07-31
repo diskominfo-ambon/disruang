@@ -1,32 +1,28 @@
 <template lang="pug">
 form(method="post")
   text-input(labelText="Nama lengkap", v-model="form.fullName")
+  text-input(
+    type="number",
+    labelText="Nomor telepon",
+    v-model="form.phoneNumber"
+  )
 
   .d-flex.align-items-center
-    select-input.flex-1.me-2(
+    radio-group-input(
       labelText="Jenis kelamin",
-      v-model="form.gender",
+      name='gender',
       :items="GENDER"
-    )
-    text-input.flex-1(
-      type="number",
-      labelText="Nomor telepon",
-      v-model="form.phoneNumber"
+      v-model="form.gender"
     )
 
-  .d-flex.align-items-start.mt-2
-    checkbox-input.me-3(
-      labelText="Tanda tangan",
-      @change="handleOnAcceptSignature"
-    )
-    .signature-meta.me-3(
-      @click="showSignatureModal = true",
-      v-if="signature.isNotEmpty"
-    )
-      i.fas.fa-signature
-      span.signature-label Lihat tanda tangan
-
-    checkbox-input(labelText="Saya ASN?", @change="handleOnAcceptAsn")
+  .form-group
+    label.form-label Informasi pengguna
+      .d-flex.align-items-start.mt-2
+        checkbox-input.me-3(
+          labelText="Tanda tangan",
+          @change="handleOnAcceptSignature"
+        )
+        checkbox-input(labelText="Saya ASN?", @change="handleOnAcceptAsn")
 
   //- form if he asn
   transition(name='form-asn' mode='out-in')
@@ -37,13 +33,17 @@ form(method="post")
         text-input.flex-1(labelText="Jabatan ASN?", v-model="form.asn.jobTitle")
 
   .d-flex.align-items-center.justify-content-end
-    button.btn.btn-orange Mulai gabung
+    dropdown-input.flex-1.me-3(
+      labelText="Ruangan yang tersedia",
+      placeholderText="Pilih ruangan"
+    )
+    button.btn.btn-orange.btn-submit Mulai gabung
 
   //- signature modal
   transition(name="signature-modal", mode="out-in")
     .signature-modal(v-if="showSignatureModal")
       .signature-modal__header
-        button.btn.btn-sm.text-primary(
+        button.btn.btn-sm.text-success(
           type="button",
           @click="handleOnAcceptedSignature"
         )
@@ -55,14 +55,14 @@ form(method="post")
         .placeholder
           i.fas.fa-signature.fa-2x
           p Mulai tarik disini
-
-
 </template>
 <script>
 import { ref, reactive, computed } from 'vue';
 import TextInput from '~/components/molecules/text-input';
 import SelectInput from '~/components/molecules/select-input';
 import CheckboxInput from '~/components/molecules/checkbox-input';
+import RadioGroupInput from '~/components/molecules/radio-group-input';
+import DropdownInput from '~/components/molecules/dropdown-input';
 
 export default {
   setup() {
@@ -126,12 +126,15 @@ export default {
   components: {
     TextInput,
     SelectInput,
-    CheckboxInput
+    CheckboxInput,
+    RadioGroupInput,
+    DropdownInput
   }
 }
 </script>
 <style lang="scss" scoped>
 
+// vue transition
 .signature-modal,
 .signature-modal-leave-active,
 .form-asn,
@@ -151,6 +154,8 @@ export default {
   filter: blur(2px);
   transform: translateY(-50px);
 }
+
+// end
 
 .form-is-asn {
   border: 1px solid #ced4da;
@@ -245,5 +250,11 @@ export default {
     color: #2283B5 !important;
   }
 
+}
+.form-dropdown {
+  margin: 0;
+}
+.btn-submit {
+  margin-top: 1.8rem;
 }
 </style>

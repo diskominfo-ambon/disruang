@@ -10861,6 +10861,11 @@ textarea.form-control-lg {
   font-family: "museo" !important;
 }
 
+.form-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #8a93a7;
+}
 .form-group {
   margin-bottom: 0.6rem;
 }

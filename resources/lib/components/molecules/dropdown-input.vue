@@ -1,15 +1,16 @@
 <template lang="pug">
-form-group
-  .dropdown-field(@mouseenter="isToggle = true", @mousedown="isToggle = false")
+form-group.form-dropdown
+  .dropdown-field(@click="isToggle = true", @mouseleave="isToggle = false")
     label.dropdown-field__placeholder(for="checkbox-dropdown")
-      div
-        i.fas.fa-door-closed
-        p {{ placeholderText }}
+      slot
+        div
+          i.fas.fa-door-closed
+          p {{ placeholderText }}
       span.dropdown-icon(:class="isToggle && 'rotate-180'")
         i.fas.fa-caret-down
     transition(name="dropdown", mode="out-in")
       .dropdown-field__suggestions.shadow(v-show="isToggle")
-        slot
+        slot(name="suggestion")
 </template>
 <script>
 import { ref } from 'vue';

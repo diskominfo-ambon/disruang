@@ -13,26 +13,11 @@ heroes
           img.brand(src="/images/logo-pemkot.png", alt="logo pemkot")
     .col-sm-12.col-md-6.col-lg-5.py-2
       .popup-relative
-        ul.nav.nav-pills.rounded-2.mb-2.shadow-sm
-          li.nav-item(@click="handleOnSelectTab('participant')")
-            a.nav-link(
-              :class="hasTabSelected.participant && 'active'",
-              href="#"
-            )
-              img(src="/images/ilustrations/reschedule.png")
-              span.d-inline-block.ms-2 Booking ruangan
-          li.nav-item(@click="handleOnSelectTab('roomGuest')")
-            a.nav-link(
-              :class="hasTabSelected.roomGuest && 'active'",
-              href="#"
-            )
-              img(src="/images/ilustrations/easy-ticket.png")
-              span.d-inline-block.ms-2 Gabung kegiatan
         .card.shadow.border-none(
           @mouseenter="formOverlay = true"
         )
           .card-body.position-relative
-            component(:is="selectedTab")
+            participant-registration
 </template>
 <script src="./scripts/headline-heroes.js"></script>
 
@@ -48,7 +33,6 @@ heroes
 .form-overlay-leave-to {
   opacity: 0;
 }
-
 
 .headline {
   margin-top: 1.2rem;
