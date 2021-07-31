@@ -128,6 +128,9 @@ export default {
 .guideline {
   &-container {
     margin-top: 12rem;
+    @media screen and (max-width: 760px) {
+      margin-top: 25rem;
+    }
   }
 
   &-steps {
@@ -189,6 +192,10 @@ export default {
 
     .card {
       border-color: #CBD5E0;
+
+      @media screen and (max-width: 760px) {
+        margin-top: 1rem;
+      }
 
       &-header {
         background-color: #F6F9FF !important;
@@ -268,6 +275,10 @@ export default {
 
 footer {
   padding: .7rem 0;
+  @media screen and (max-width: 760px) {
+    padding: .7rem 1rem;
+  }
+
   h3 {
     margin: 0;
   }

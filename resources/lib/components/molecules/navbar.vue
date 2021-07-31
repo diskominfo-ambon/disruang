@@ -30,6 +30,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-transparent.navbar-top
     top: 2.5rem;
     left: 0;
     right: 0;
+
+    @media screen and (max-width: 760px) {
+      top: 4rem;
+    }
   }
 
   .btn-login {
