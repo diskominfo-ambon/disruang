@@ -10894,6 +10894,7 @@ textarea.form-control-lg {
   text-decoration: none;
 }
 .is-link:hover {
+  color: #1BA0E2;
   text-decoration: underline;
 }
 
@@ -10959,9 +10960,6 @@ h6,
   border-radius: 0;
 }
 
-.vc-container .vc-pane-container {
-  width: 620px !important;
-}
 .vc-container .vc-pane-container .vc-arrows-container ~ div {
   display: flex !important;
   width: 100% !important;
@@ -10972,4 +10970,7 @@ h6,
 }
 .vc-container .vc-pane-container .vc-arrows-container ~ div .vc-time-picker:first-child {
   border-right: 1px solid #ced4da !important;
+}
+.vc-container .vc-pane-container .vc-weeks {
+  margin-top: 1rem;
 }

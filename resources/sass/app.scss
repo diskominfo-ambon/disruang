@@ -62,6 +62,7 @@
   text-decoration: none;
 
   &:hover {
+    color: $blue;
     text-decoration: underline;
   }
 }
@@ -138,7 +139,7 @@ h6 {
 
 .vc-container {
   .vc-pane-container {
-    width: 620px !important;
+    // width: 620px !important;
 
     .vc-arrows-container ~ div {
       display: flex !important;
@@ -152,6 +153,10 @@ h6 {
         flex: 1;
         width: 100% !important;
       }
+    }
+
+    .vc-weeks {
+      margin-top: 1rem;
     }
   }
 

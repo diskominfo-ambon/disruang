@@ -3,7 +3,7 @@ heroes
   transition(name='form-overlay' mode='out-in')
     .form-overlay(v-if="formOverlay", @mousedown="formOverlay = false")
   .row.py-5
-    .col-sm-12.col-md-6.col-lg-4.offset-lg-2.pt-2.pb-3
+    .col-sm-12.col-md-6.col-lg-5.offset-lg-1.pt-2.pb-3
       h1.headline Tiada kesan tanpa kehadiranmu
       p.subtitle Ikut bersama-sama membangun Kota Ambon Maluku
       .supported
@@ -13,7 +13,7 @@ heroes
           img.brand(src="/images/logo-pemkot.png", alt="logo pemkot")
     .col-sm-12.col-md-6.col-lg-5.py-2
       .popup-relative
-        .card.shadow.border-none(
+        .card.shadow-sm.border-none(
           @mouseenter="formOverlay = true"
         )
           .card-body.position-relative
