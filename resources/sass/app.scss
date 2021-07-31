@@ -20,6 +20,18 @@
 * {
   font-family: "museo" !important;
 }
+.error {
+  &-text {
+    color: $red;
+    font-size: .9rem;
+    margin-top: .5rem;
+
+    &::before {
+      content: '* ';
+
+    }
+  }
+}
 
 .form {
   &-label {
@@ -30,7 +42,18 @@
   &-group {
     margin-bottom: .6rem;
   }
+  &-control-underline {
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+
+    &:focus {
+      border-bottom: 2px solid dodgerblue;
+      box-shadow: none;
+    }
+  }
 }
+
 
 
 .bg {

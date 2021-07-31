@@ -14,9 +14,15 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-transparent.navbar-top
 
     #navbarNavAltMarkup.collapse.navbar-collapse
       .d-flex.align-items-center.justify-content-end.flex-1
-      button.btn.btn-login
+      a.btn.btn-login(
+        :href="$route('auth.login')"
+      )
         i.fas.fa-sign-in-alt
         span.d-inline-block.ms-2 login
+      a.btn(
+        :href="$route('auth.register')"
+      )
+        span.d-inline-block.ms-2.text-white Daftar
 
 </template>
 
