@@ -6,10 +6,7 @@ use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Web\Auth\LogoutController;
 use App\Http\Controllers\Web\Auth\UserRegistrationController;
 
-Route::get('/', fn () => inertia('welcome'))->name('welcome');
 
-
-// Auth
 Route::view('/login', 'web::pages/auth/login')
   ->name('auth.login');
 
@@ -18,9 +15,6 @@ Route::post('/login', [LoginController::class, 'store'])
 
 Route::post('/logout', [LogoutController::class, 'store'])
   ->name('auth.logout.store');
-
-Route::view('/register', 'web::pages/auth/register')
-  ->name('auth.register');
 
 Route::view('/register', 'web::pages/auth/register')
   ->name('auth.register');
