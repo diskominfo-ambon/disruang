@@ -43,11 +43,28 @@ class RouteServiceProvider extends ServiceProvider
         ->namespace($this->namespace)
         ->group(base_path('routes/api.php'));
 
+
+
+      // initialize routes web.
       Route::middleware('web')
         ->namespace($this->namespace)
-        ->group(base_path('routes/web.php'));
+        ->group(base_path('routes/web/guest.php'));
+
+      Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/web/user.php'));
+
+      Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/web/admin.php'));
+
+      Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/web/auth.php'));
+
     });
   }
+
 
   /**
    * Configure the rate limiters for the application.
