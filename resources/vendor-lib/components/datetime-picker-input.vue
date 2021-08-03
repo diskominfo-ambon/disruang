@@ -1,40 +1,45 @@
 <template lang="pug">
-form-group.flex-1
-  date-picker(
-      v-model="range",
-      mode="dateTime"
-      :columns="2",
-      :locale="{ id: 'id', firstDayOfWeek: 3, masks: { weekdays: 'WWW', input: ['DD-MM-YY'] } }",
-      is-range,
-      is-expanded,
-      is24hr
-    )
-    template(v-slot="{ inputValue, inputEvents, isDragging }")
-      .date-picker__container(
-        v-on="inputEvents.start"
-      )
-        .date-picker__field
-          i.fas.fa-calendar-week
-          p(:class="range.start && 'is-filled'") {{ range.start ? dateIntlId.start : 'Mulai kapan?' }}
-        .date-picker__field
-          span
-            i.fas.fa-exchange-alt
+date-picker(
+    v-model="range",
+    mode="dateTime"
+    @change="console.log('change')"
+    :columns="2",
+    :locale="{ id: 'id', firstDayOfWeek: 3, masks: { weekdays: 'WWW', input: ['DD-MM-YY'] } }",
+    is-range,
+    is-expanded,
+    is24hr
+  )
 
-          i.fas.fa-calendar-day
-          p(:class="range.end && 'is-filled'") {{ range.end ? dateIntlId.end : 'Sampai kapan?' }}
+  template(v-slot="{ inputValue, inputEvents, isDragging }")
+    .date-picker__container(
+      v-on="inputEvents.start"
+    )
+      .date-picker__field
+        em.icon.ni.ni-calendar-fill
+        p(:class="range.start && 'is-filled'") {{ range.start ? dateTimeFormatter.start : 'Mulai kapan?' }}
+      .date-picker__field
+        span
+          em.icon.ni.ni-swap
+
+        em.icon.ni.ni-calendar-check-fill
+        p(:class="range.end && 'is-filled'") {{ range.end ? dateTimeFormatter.end : 'Sampai kapan?' }}
 
 </template>
 <script>
 import { DatePicker } from 'v-calendar';
 import { ref, computed } from 'vue';
-import FormGroup from '~/components/atoms/form-group';
 
 
 export default {
+  props: {
+    modelValue: {
+      type: String
+    },
+  },
   setup() {
     const range = ref({
       start: null,
-      end: null,
+      end: null
     });
 
     function dateTimeFormatterIntlId(date) {
@@ -44,7 +49,7 @@ export default {
       return dateIntl.replaceAll('.', ':');
     }
 
-    const dateIntlId = computed(() => {
+    const dateTimeFormatter = computed(() => {
       const start = dateTimeFormatterIntlId(range.value.start);
       const end = dateTimeFormatterIntlId(range.value.end);
 
@@ -56,15 +61,15 @@ export default {
 
     return {
       range,
-      dateIntlId
+      dateTimeFormatter
     };
   },
   components: {
-    DatePicker,
-    FormGroup
+    DatePicker
   }
 }
 </script>
+
 <style lang="scss" scoped>
 
   .date-picker__container {
@@ -75,16 +80,18 @@ export default {
 
     .date-picker__field {
       position: relative;
-      padding: .8rem 1rem;
+      padding: 20px;
+      height: 74px;
 
 
       display: flex;
       align-items: center;
       flex: 1;
-      svg {
+      .icon {
         color: #2283B5;
         margin-right: .5rem;
-        width: 11px;
+        width: 20px;
+        transform: scale(1.2);
       }
       &:first-child {
         padding-right: .5rem;
@@ -103,11 +110,12 @@ export default {
           align-items: center;
           justify-content: center;
           color: #0064d2 !important;
-          svg {
-            width: .81rem;
-            height: .81rem;
+          em.icon {
+            width: .91rem;
+            height: .91rem;
             position: relative;
-            left: .25rem;
+            left: .29rem;
+
           }
         }
         border-left: 1px dashed #ced4da;

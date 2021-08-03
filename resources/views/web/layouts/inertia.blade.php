@@ -4,7 +4,12 @@
 
 @section('head')
 <script src="{{ mix('/js/app.js') }}" defer></script>
-@routes
+{{-- @routes --}}
+<script>
+  function route() {
+
+  }
+</script>
 @endsection
 
 @section('content')
