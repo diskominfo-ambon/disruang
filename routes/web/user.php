@@ -21,6 +21,6 @@ Route::view('/schedules/new', 'web::pages.user.schedules.new')
 Route::post('/schedules/new', [SchedulesController::class, 'store'])
   ->name('user.schedules.store');
 
-Route::get('/schedules/{schedule:slug}', [SchedulesController::class. 'show'])
+Route::get('/schedules/read/{schedule:slug}', [SchedulesController::class, 'show'])
   ->name('user.schedules.show');
 
