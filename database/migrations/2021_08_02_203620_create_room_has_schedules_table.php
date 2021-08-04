@@ -16,6 +16,7 @@ class CreateRoomHasSchedulesTable extends Migration
         Schema::create('room_has_schedules', function (Blueprint $table) {
           $table->id();
           $table->string('title');
+          $table->string('slug')->nullable();
           $table->text('desc')->nullable();
           $table->datetime('started_at');
           $table->datetime('ended_at');

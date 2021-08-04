@@ -12,7 +12,7 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('/submissions', [SubmissionsController::class, 'index'])
   ->name('user.submissions');
 
-Route::delete('/submissions/{schedule:id}', [SubmissionsController::class, 'destory'])
+Route::delete('/submissions/{schedule}', [SubmissionsController::class, 'destory'])
   ->name('user.submissions.destroy');
 
 Route::view('/schedules/new', 'web::pages.user.schedules.new')
@@ -21,6 +21,6 @@ Route::view('/schedules/new', 'web::pages.user.schedules.new')
 Route::post('/schedules/new', [SchedulesController::class, 'store'])
   ->name('user.schedules.store');
 
-Route::get('/schedules/{schedule::slug}', [SchedulesController::class. 'show'])
+Route::get('/schedules/{schedule:slug}', [SchedulesController::class. 'show'])
   ->name('user.schedules.show');
 

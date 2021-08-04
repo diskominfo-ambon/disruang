@@ -26,6 +26,7 @@ class ScheduleSeeder extends Seeder
         [
           'title' => 'Pembangkitan UMKM bagi anak muda Maluku',
           'desc' => 'ini deskripsi 1',
+          'slug' => 'pembangkitan-ukm',
           'started_at' => now(),
           'ended_at' => now()->addHours(2),
           'status' => 'pending',
@@ -36,6 +37,7 @@ class ScheduleSeeder extends Seeder
         [
           'title' => 'Membangkitkan semangat anak muda Maluku dengan Teknologi Informasi',
           'desc' => 'ini deskripsi 2',
+          'slug' => 'membangkitkan-semangat-anak-muda',
           'started_at' => now()->addDay(1),
           'ended_at' => now()->addDay(1)->addHours(2),
           'status' => 'pending',
@@ -46,6 +48,7 @@ class ScheduleSeeder extends Seeder
         [
           'title' => 'Mendeskripsikan kemajuan sekolah indonesia',
           'desc' => 'ini deskripsi 3',
+          'slug' => 'mendeskripsikan-kemajuan-sekolah',
           'started_at' => now()->addHours(3),
           'ended_at' => now()->addHours(5),
           'status' => 'pending',
@@ -57,6 +60,7 @@ class ScheduleSeeder extends Seeder
         // confirm.
         [
           'title' => 'Ambon menuju Smart City',
+          'slug' => 'ambon-menuju-smart-city',
           'desc' => 'ini deskripsi 4',
           'started_at' => now()->addDay(1)->addHours(3),
           'ended_at' => now()->addDay(1)->addHours(5),
@@ -68,6 +72,7 @@ class ScheduleSeeder extends Seeder
         [
           'title' => 'Membahas kemajuan sekolah dengan Teknologi',
           'desc' => 'ini deskripsi 5',
+          'slug' => 'membahas-kemajuan-sekolah-dengan-teknologi',
           'started_at' => now()->addHours(8),
           'ended_at' => now()->addHours(10),
           'status' => 'confirm',

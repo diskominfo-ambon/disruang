@@ -39,6 +39,10 @@ class Schedule extends Model
       Schedule::PENDING,
       fn (Builder $builder) => $builder->active()->where('status', Schedule::PENDING)
     );
+
+    static::saving(function (Schedule $schedule) {
+      $schedule->slug = str($schedule->title)->lower()->slug();
+    });
   }
 
 
