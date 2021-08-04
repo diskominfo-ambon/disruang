@@ -7,17 +7,22 @@ use App\Http\Controllers\Web\Auth\LogoutController;
 use App\Http\Controllers\Web\Auth\UserRegistrationController;
 
 
-Route::view('/login', 'web::pages/auth/login')
-  ->name('auth.login');
+Route::group(['middleware' => 'auth'], function () {
+  Route::post('/logout', [LogoutController::class, 'store'])
+    ->name('auth.logout.store');
+});
 
-Route::post('/login', [LoginController::class, 'store'])
-  ->name('auth.login.store');
 
-Route::post('/logout', [LogoutController::class, 'store'])
-  ->name('auth.logout.store');
+Route::group(['middleware' => 'guest'], function () {
+  Route::view('/login', 'web::pages/auth/login')
+    ->name('auth.login');
 
-Route::view('/register', 'web::pages/auth/register')
-  ->name('auth.register');
+  Route::post('/login', [LoginController::class, 'store'])
+    ->name('auth.login.store');
 
-Route::post('/register', [UserRegistrationController::class, 'store'])
-  ->name('auth.register.store');
+  Route::view('/register', 'web::pages/auth/register')
+    ->name('auth.register');
+
+  Route::post('/register', [UserRegistrationController::class, 'store'])
+    ->name('auth.register.store');
+});

@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\RoomsController;
-use App\Http\Controllers\Api\SchedulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +23,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/rooms', [RoomsController::class, 'index'])
   ->name('api.rooms');
-
-
-Route::post('/schedules', [SchedulesController::class, 'store'])
-  ->name('api.schedules.store');
-
-Route::put('/schedules', [SchedulesController::class, 'update'])
-  ->name('api.schedules.update');

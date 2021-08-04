@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,24 @@ class RouteServiceProvider extends ServiceProvider
    */
   protected $namespace = 'App\\Http\\Controllers';
 
+
+
+
+  public static function redirectIfAuthenticated()
+  {
+    $user = Auth::user();
+
+    if ($user->hasRole('admin')) {
+      return 'home';
+    }
+
+    if ($user->hasRole('user')) {
+      return route('user.home');
+    }
+  }
+
+
+
   /**
    * Define your route model bindings, pattern filters, etc.
    *
@@ -46,7 +65,7 @@ class RouteServiceProvider extends ServiceProvider
 
 
       // initialize routes web.
-      Route::middleware('web')
+      Route::middleware(['web', 'auth', 'role:user'])
         ->namespace($this->namespace)
         ->prefix('u')
         ->group(base_path('routes/web/user.php'));
@@ -61,14 +80,16 @@ class RouteServiceProvider extends ServiceProvider
         ->prefix('auth')
         ->group(base_path('routes/web/auth.php'));
 
-      Route::middleware('web')
+      Route::middleware(['web', 'guest'])
         ->namespace($this->namespace)
         ->group(base_path('routes/web/guest.php'));
 
-
+      Route::middleware('web')
+        ->namespace($this->namespace)
+        ->prefix('async')
+        ->group(base_path('routes/web/async.php'));
     });
   }
-
 
   /**
    * Configure the rate limiters for the application.

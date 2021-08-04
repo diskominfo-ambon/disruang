@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Schedule;
 
@@ -17,7 +18,10 @@ class SubmissionsController extends Controller
       $order = 'pending';
     }
 
-    $schedules = Schedule::order($order)->get();
+    $schedules = Auth::user()
+      ->schedules()
+      ->order($order)
+      ->get();
 
 
     return view('web::pages.user.dashboards.submission', compact('schedules', 'order'));

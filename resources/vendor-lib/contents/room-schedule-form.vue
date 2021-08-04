@@ -1,5 +1,7 @@
 <template lang="pug">
-form.buysell-form(method="post", @submit.prevent="handleOnSubmit")
+form.buysell-form(method="post", @submit.prevent="handlingSubmit")
+  p.text-white.my-2.text-center.bg-danger.rounded-sm.py-1(v-if="form.meta.errors.isHasMessage") {{ form.meta.errors.message }}
+
   .buysell-field.form-group
     .form-label-group
       label.form-label Pilih ruangan
@@ -10,14 +12,14 @@ form.buysell-form(method="post", @submit.prevent="handleOnSubmit")
             em.icon.ni.ni-houzz
 
           .coin-info
-            span.coin-name {{ rooms.isNotEmpty ? rooms.data[form.room_id].name.toUpperCase() : 'Memuat sebentar..' }}
+            span.coin-name {{ rooms.isNotEmpty ? form.room?.name.toUpperCase() : 'Memuat sebentar..' }}
             span.coin-text {{ rooms.isNotEmpty ? 'Tersedia jaringan wifi ': 'Sedang memuat data sebentar..' }}
 
         .dropdown-menu.dropdown-menu-auto.dropdown-menu-mxh
           ul.buysell-cc-list
               li.buysell-cc-item.selected(
-                v-for="room, index in rooms.data" :key="room.id"
-                @click="form.room_id = index"
+                v-for="room in rooms.data" :key="room.id"
+                @click="form.room_id = room.id"
               )
                 a.buysell-cc-opt
                     .coin-item.coin-btc
@@ -26,6 +28,7 @@ form.buysell-form(method="post", @submit.prevent="handleOnSubmit")
                       .coin-info
                         span.coin-name {{ room.name.toUpperCase() }}
                         span.coin-text Tersedia jaringan wifi
+    span.text-danger.d-block.mt-1(v-for="error in form.meta.errors.data?.room_id", :key="error") {{ error }}
   .buysell-field.form-group
     .form-label-group
       label.form-label(for="title") Judul kegiatan
@@ -38,6 +41,7 @@ form.buysell-form(method="post", @submit.prevent="handleOnSubmit")
       )
     .form-note-group
       span.buysell-min.form-note-alt Pastikan gunakan judul yang deskriptif
+    span.text-danger.d-block.mt-1(v-for="error in form.meta.errors.data?.title", :key="error") {{ error }}
 
   .buysell-field.form-group
     .form-label-group
@@ -51,6 +55,7 @@ form.buysell-form(method="post", @submit.prevent="handleOnSubmit")
         maxlength="200",
         v-model="form.desc"
       )
+      span.text-danger.d-block.mt-1(v-for="error in form.meta.errors.data?.desc", :key="error") {{ error }}
 
   .buysell-field.form-group
     .form-label-group
@@ -72,27 +77,44 @@ form.buysell-form(method="post", @submit.prevent="handleOnSubmit")
           )
             .date-picker__field
               em.icon.ni.ni-calendar-fill
-              p(:class="form.range.start && 'is-filled'") {{ form.range.start ? rangeFormatterIntlId.start : 'Mulai kapan?' }}
+              p(:class="form.range.start && 'is-filled'") {{ form.meta.formatter.start }}
             .date-picker__field
               span
                 em.icon.ni.ni-swap
               em.icon.ni.ni-calendar-check-fill
-              p(:class="form.range.end && 'is-filled'") {{ form.range.end ? rangeFormatterIntlId.end : 'Sampai kapan?' }}
+              p(:class="form.range.end && 'is-filled'") {{ form.meta.formatter.end }}
+          span.text-danger.d-block.mt-1(v-for="error in form.meta.errors.data?.started_at", :key="error") *{{ error }}
+
+          span.text-danger.d-block.mt-1(v-for="error in form.meta.errors.data?.ended_at", :key="error") *{{ error }}
       //- end
 
   .buysell-field.form-action
     button.btn.btn-lg.btn-block.btn-primary(
-      :disabled="form.isSubmitting",
-    ) {{ form.isSubmitting ? 'Sedang mengirim..' : 'Tambahkan kegiatan' }}
+      :disabled="form.meta.isSubmitting",
+    ) {{ form.meta.isSubmitting ? 'Sedang mengirim..' : 'Tambahkan kegiatan' }}
 
   .form-note.text-base.text-center Catatan: Pembuatan kegiatan akan dilakukan proses tinjauan.
 </template>
 
 <script>
-import { computed, reactive } from 'vue';
+import { computed, reactive, onMounted, onErrorCaptured } from 'vue';
 
-import { DatePicker } from 'v-calendar';
 import axios from 'axios';
+import { DatePicker } from 'v-calendar';
+import { pick, assign } from 'lodash';
+
+import { formatter } from '~vendor/support/helpers/datetime-formatter';
+
+
+function useFetch(url) {
+  const endpoint = window.location.origin + url;
+
+  return axios.get(endpoint)
+    .then(res => res)
+    .catch(err => {
+      throw new Error(err);
+    });
+}
 
 export default {
   async setup() {
@@ -102,60 +124,106 @@ export default {
     });
 
     const form = reactive({
-      room_id: '',
+      room_id: null,
+      room: computed(() => {
+        return rooms.data.find(room => room.id === form.room_id)
+      }),
       title: '',
       desc: '',
       range: {
-        start: null,
+        start: new Date(),
         end: null,
       },
-      isSubmitting: false,
-    });
+      meta: {
+        formatter: computed(() => {
+          const format = formatter();
 
-
-    // get rooms.
-    const { data } = await axios.get('/api/rooms');
-
-    form.room_id = 0;
-    rooms.data = data.payload;
-
-
-    const rangeFormatterIntlId = computed(() => {
-      const start = datetimeFormatterIntlId(form.range.start);
-      const end = datetimeFormatterIntlId(form.range.end);
-
-      return {
-        start,
-        end
+          return {
+            start: format.full(form.range.start) ?? 'Mulai kapan?',
+            end: form.range.end ? format.full(form.range.end) : 'Sampai kapan?'
+          }
+        }),
+        isSubmitting: false,
+        errors: {
+          data: [],
+          message: '',
+          isHasMessage: computed(() => form.meta.errors.message.trim().length > 0),
+          isNotEmpty: computed(() => form.meta.errors.data.length > 0)
+        },
       }
     });
 
-    function datetimeFormatterIntlId(date) {
-      const dateIntl = new Intl.DateTimeFormat('id-ID', { dateStyle: 'long', timeStyle: 'short' })
-        .format(date);
+    // use fetch to fetching all of list rooms avaiable.
+    try {
 
-      return dateIntl.replaceAll('.', ':');
+      const res = await useFetch('/api/rooms');
+
+      if (res.data.payload.length > 0) {
+        // set initial room.
+        form.room_id = res.data.payload[0]?.id;
+        rooms.data = res.data.payload;
+      }
+
+    } catch (err) {
+      // handling error network..
     }
 
 
-    async function handleOnSubmit()
-    {
-      const uri = `${window.location.origin}/api/schedules`;
 
-      try {
+    // on mounted.
+    onMounted(() => {
+      // on mounted.
+    });
 
-        await axios.post(uri, Object.assign(form));
-        console.log('success submit');
-        window.reload();
-      } catch (err) {
-        console.log('error submit');
-        console.log({err});
-      }
+
+    function handlingSubmit() {
+      const uri = window.location.origin;
+      const endpoint = uri + `/async/schedules`;
+
+      // form fields.
+      const body = assign({
+        started_at: form.range.start,
+        ended_at: form.range.end
+      }, pick(form, ['room_id', 'title', 'desc', 'range']));
+
+      // set initliaze form is submitted..
+      form.meta.isSubmitting = true;
+      form.meta.errors.data = [];
+      form.meta.errors.message = '';
+
+      axios.post(endpoint, body)
+        .then(({data, status}) => {
+          if (data.code === status &&
+            data.payload.ajax.reload
+          ) {
+            // reload browser.
+            window.location.reload();
+          }
+
+          if (data.code === status &&
+            !data.payload.ajax.reload && data.payload.ajax.route.trim().length > 0
+          ) {
+            // redirect to route path.
+            window.location.replace(data.payload.ajax.route);
+          }
+        })
+        .catch(({response}) => {
+          // is validation error.
+          if (response.status === 422 && Object.keys(response.data.errors).length > 0) {
+            form.meta.errors.data = response.data.errors;
+          }
+
+          if (response.status === 403 && !response.data.status) {
+            form.meta.errors.message = response.data.message;
+          }
+
+        }).finally(() => {
+          form.meta.isSubmitting = false;
+        })
     }
 
     return {
-      handleOnSubmit,
-      rangeFormatterIntlId,
+      handlingSubmit,
       form,
       rooms
     }
@@ -166,10 +234,7 @@ export default {
     DatePicker
   }
 }
-
 </script>
-
-
 
 
 <style lang="scss" scoped>

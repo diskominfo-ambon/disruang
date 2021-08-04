@@ -26,12 +26,13 @@ class LoginController extends Controller
 
     $user = Auth::user();
 
-    dd($user);
-
     if ($user->hasRole('admin')) {
       // to admin page
+      dd('admin');
     }
 
     // to user page.
+    return redirect()
+      ->route('user.home');
   }
 }

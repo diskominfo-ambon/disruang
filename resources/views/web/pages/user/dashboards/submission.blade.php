@@ -35,7 +35,7 @@ $currentItr = null;
     @if (
         !is_null($currentItr) &&
         $schedule->created_at
-          ->equalTo($currentItr->created_at)
+          ->isSameDay($currentItr->created_at)
         )
         <!-- .nk-tranx-item -->
           <div class="tranx-item">

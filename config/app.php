@@ -163,14 +163,16 @@ return [
     Illuminate\View\ViewServiceProvider::class,
 
     /*
-         * Package Service Providers...
-         */
+    * Package Service Providers...
+    */
+    Spatie\Permission\PermissionServiceProvider::class,
 
     /*
-         * Application Service Providers...
-         */
+    * Application Service Providers...
+    */
     App\Providers\AppServiceProvider::class,
     App\Providers\AuthServiceProvider::class,
+    App\Providers\ResponseServiceProvider::class,
     // App\Providers\BroadcastServiceProvider::class,
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,

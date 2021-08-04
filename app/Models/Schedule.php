@@ -12,6 +12,13 @@ class Schedule extends Model
 {
   use HasFactory;
 
+
+  // schedule status.
+  const PENDING = 'pending';
+  const CONFIRM = 'confirm';
+  const REJECT = 'reject';
+
+
   protected $table = 'room_has_schedules';
 
   protected $guarded = [
@@ -26,12 +33,11 @@ class Schedule extends Model
 
 
 
-
   protected static function booted()
   {
     static::addGlobalScope(
-      'pending',
-      fn (Builder $builder) => $builder->active()->where('status', 'pending')
+      Schedule::PENDING,
+      fn (Builder $builder) => $builder->active()->where('status', Schedule::PENDING)
     );
   }
 
@@ -40,7 +46,7 @@ class Schedule extends Model
   {
     return $builder->withoutGlobalScopes()
       ->active()
-      ->where('status', 'confirm');
+      ->where('status', Schedule::CONFIRM);
   }
 
 
@@ -48,7 +54,7 @@ class Schedule extends Model
   {
     return $builder->withoutGlobalScopes()
       ->active()
-      ->where('status', 'reject');
+      ->where('status', Schedule::REJECT);
   }
 
 
@@ -58,12 +64,22 @@ class Schedule extends Model
   }
 
 
-  public function scopeOrder(Builder $builder, string $order): Builder
+  public function scopeOrder(Builder $builder, string|array $order): Builder
   {
     return $builder
       ->withoutGlobalScopes()
       ->active()
-      ->where('status', $order);
+      ->where(function (Builder $builder) use ($order) {
+        if (is_array($order)) {
+          $builder->whereIn('status', $order);
+        }
+
+        if (is_string($order)) {
+          $builder->where('status', $order);
+        }
+
+        return $builder;
+      });
   }
 
 

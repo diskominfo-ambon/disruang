@@ -17,7 +17,7 @@
         <div class="nk-sidebar nk-sidebar-fixed" data-content="sidebarMenu">
             <div class="nk-sidebar-element nk-sidebar-head">
                 <div class="nk-sidebar-brand">
-                    <a href="html/crypto/index.html" class="logo-link nk-sidebar-logo text-brand">
+                    <a href="{{ route('user.home') }}" class="logo-link nk-sidebar-logo text-brand">
                         disruang
                     </a>
                 </div>
@@ -32,8 +32,10 @@
                             <div class="user-account-info between-center">
                                 <div class="user-account-main">
                                     <h6 class="overline-title-alt">Selamat datang kembali</h6>
-                                    <div class="user-balance">Pengguna</div>
-                                    <div class="user-balance-alt">Tamu</div>
+                                    <div class="user-balance">{{ str(auth()->user()->name)->title()->limit(20) }}</div>
+                                    <div class="user-balance-alt">
+                                      {{ str(auth()->user()->getRoleNames()->first())->upper() }}
+                                    </div>
                                 </div>
                                 <a href="#" class="btn btn-white btn-icon btn-light"><em class="icon ni ni-user-fill"></em></a>
                             </div>
@@ -67,8 +69,8 @@
                                             <span>AB</span>
                                         </div>
                                         <div class="user-info">
-                                            <span class="lead-text">Abu Bin Ishtiyak</span>
-                                            <span class="sub-text">info@softnio.com</span>
+                                            <span class="lead-text">{{ str(auth()->user()->name)->title()->limit(20) }}</span>
+                                            <span class="sub-text">{{ str(auth()->user()->email)->lower()->limit(40) }}</span>
                                         </div>
                                         <div class="user-action">
                                             <em class="icon ni ni-chevron-down"></em>
@@ -77,44 +79,16 @@
                                 </div>
                             </a>
                             <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
-                                <div class="user-account-info between-center">
-                                    <div class="user-account-main">
-                                        <h6 class="overline-title-alt">Available Balance</h6>
-                                        <div class="user-balance">2.014095 <small class="currency currency-btc">BTC</small></div>
-                                        <div class="user-balance-alt">18,934.84 <span class="currency currency-btc">BTC</span></div>
-                                    </div>
-                                    <a href="#" class="btn btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
-                                </div>
-                                <ul class="user-account-data">
-                                    <li>
-                                        <div class="user-account-label">
-                                            <span class="sub-text">Profits (7d)</span>
-                                        </div>
-                                        <div class="user-account-value">
-                                            <span class="lead-text">+ 0.0526 <span class="currency currency-btc">BTC</span></span>
-                                            <span class="text-success ml-2">3.1% <em class="icon ni ni-arrow-long-up"></em></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="user-account-label">
-                                            <span class="sub-text">Deposit in orders</span>
-                                        </div>
-                                        <div class="user-account-value">
-                                            <span class="sub-text text-base">0.005400 <span class="currency currency-btc">BTC</span></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="user-account-links">
-                                    <li><a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a></li>
-                                    <li><a href="#" class="link"><span>Deposit Funds</span> <em class="icon ni ni-wallet-in"></em></a></li>
+                                <ul class="link-list">
+                                    <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>Ubah profil</span></a></li>
                                 </ul>
                                 <ul class="link-list">
-                                    <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    <li><a href="html/crypto/profile-security.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                    <li><a href="html/crypto/profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
-                                </ul>
-                                <ul class="link-list">
-                                    <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                    <li>
+                                      <form method="POST" action="{{ route('auth.logout.store') }}">
+                                        @csrf
+                                        <button class="btn w-full px-0 btn-block"><em class="icon ni ni-signout"></em><span>Keluar</span></button>
+                                      </form>
+                                    </li>
                                 </ul>
                             </div>
                         </div><!-- .nk-sidebar-widget -->
@@ -198,17 +172,12 @@
                                                   <em class="icon ni ni-user-fill"></em>
                                                 </div>
                                                 <div class="user-info">
-                                                    <span class="lead-text">Abu Bin Ishtiyak</span>
-                                                    <span class="sub-text">info@softnio.com</span>
+                                                    <span class="lead-text">{{ str(auth()->user()->name)->title()->limit(20) }}</span>
+                                                    <span class="sub-text">{{ str(auth()->user()->email)->lower()->limit(40) }}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="dropdown-inner user-account-info">
-                                            <h6 class="overline-title-alt">Nio Wallet Account</h6>
-                                            <div class="user-balance">12.395769 <small class="currency currency-btc">BTC</small></div>
-                                            <div class="user-balance-sub">Locked <span>0.344939 <span class="currency currency-btc">BTC</span></span></div>
-                                            <a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a>
-                                        </div>
+
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
                                                 <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-fill"></em><span>Ubah profil</span></a></li>
@@ -217,7 +186,12 @@
                                         </div>
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <li><a href="#"><em class="icon ni ni-signout"></em><span>Keluar</span></a></li>
+                                                <li>
+                                                  <form method="POST" action="{{ route('auth.logout.store') }}">
+                                                    @csrf
+                                                    <button class="btn w-full px-0 fw-normal btn-block"><em class="icon ni ni-signout"></em><span>Keluar</span></button>
+                                                  </form>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
