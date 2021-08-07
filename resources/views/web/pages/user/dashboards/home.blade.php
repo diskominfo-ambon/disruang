@@ -36,7 +36,7 @@
           <div class="card card-bordered">
               <div class="nk-wgw">
                   <div class="nk-wgw-inner">
-                      <a class="nk-wgw-name" href="html/crypto/wallet-bitcoin.html">
+                      <a class="nk-wgw-name" href="{{ route('user.schedules.show', $schedule) }}">
                           <div class="nk-wgw-icon bg-primary">
                             <em class="icon ni ni-users-fill"></em>
                           </div>

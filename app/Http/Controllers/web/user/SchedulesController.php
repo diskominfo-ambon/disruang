@@ -4,8 +4,12 @@ namespace App\Http\Controllers\web\user;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Schedule;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+
 use App\Http\Requests\ScheduleRequest;
+use App\Models\Schedule;
 
 class SchedulesController extends Controller
 {
@@ -24,8 +28,30 @@ class SchedulesController extends Controller
   }
 
 
-  public function show(Schedule $schedule)
+  public function show(Request $request, Schedule $schedule)
   {
-    dd($schedule);
+
+    // eager load relationship participants.
+    $schedule->load(['user']);
+
+    $participants = $schedule->participants()
+      ->paginate(12)
+      ->appends('keyword');
+    // keyword search by participant name.
+    $keyword = $request->get('keyword', '');
+
+    if (
+      Str::of($keyword)->trim()
+        ->isNotEmpty()
+    ) {
+
+      $participants = $schedule->participants()
+        ->where('name', 'like', "%{$keyword}%")
+        ->paginate(12)
+        ->appends('name');
+    }
+
+
+    return view('web::pages.user.schedules.show', compact('schedule', 'participants', 'keyword'));
   }
 }

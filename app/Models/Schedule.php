@@ -32,7 +32,12 @@ class Schedule extends Model
   ];
 
 
-
+  /**
+   * Bootied method
+   *
+   * @override
+   * @return void
+   */
   protected static function booted()
   {
     static::addGlobalScope(
@@ -43,6 +48,18 @@ class Schedule extends Model
     static::saving(function (Schedule $schedule) {
       $schedule->slug = str($schedule->title)->lower()->slug();
     });
+  }
+
+
+  /**
+   * Route bind key name
+   *
+   * @override
+   * @return void
+   */
+  public function getRouteKeyName()
+  {
+    return 'slug';
   }
 
 
