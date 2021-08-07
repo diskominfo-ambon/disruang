@@ -14,28 +14,6 @@ use App\Models\Schedule;
 class SchedulesController extends Controller
 {
 
-  public function __construct()
-  {
-    $this->middleware(function (Request $request, $next) {
-
-      if (in_array($request->getMethod(), ['POST', 'PUT'])) {
-        $request->merge([
-          'started_at' =>
-            carbon($request?->started_at)
-              ->format('Y-m-d H:i:s'),
-
-          'ended_at' =>
-            carbon($request?->ended_at)
-              ->format('Y-m-d H:i:s')
-        ]);
-      }
-
-      return $next($request);
-    });
-  }
-
-
-
   public function store(ScheduleRequest $request)
   {
     if (Gate::check('schedule.must.unique', $request)) {
@@ -50,6 +28,7 @@ class SchedulesController extends Controller
       ->create(
         $request->except('range')
       );
+
 
     return Response::success(
       message: 'Berhasil menambahkan kegiatan!',

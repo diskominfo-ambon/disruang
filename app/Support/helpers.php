@@ -16,8 +16,9 @@ if (!function_exists('str')) {
 
 
 if (!function_exists('carbon')) {
-  function carbon(string $datetime)
+  function carbon($datetime)
   {
+
     return Carbon::parse($datetime)
       ->timezone(env('APP_TIMEZONE'));
   }
