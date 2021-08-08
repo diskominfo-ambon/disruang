@@ -3451,25 +3451,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 month = _ref.month, year = _ref.year;
-                console.log('move');
                 endpoint = "/api/schedules?month=".concat(month, "&").concat(year);
-                _context.prev = 3;
-                _context.next = 6;
+                _context.prev = 2;
+                _context.next = 5;
                 return axios.get(endpoint);
 
-              case 6:
+              case 5:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
                 status = _yield$axios$get.status;
 
                 if (!(data.code !== status || !data.status)) {
-                  _context.next = 11;
+                  _context.next = 10;
                   break;
                 }
 
                 throw new Error('Error: response code not match.');
 
-              case 11:
+              case 10:
                 monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']; // set initial data schedules.
 
                 schedules.date = "".concat(monthNames[month - 1], " ").concat(year);
@@ -3501,20 +3500,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   },
                   dates: new Date()
                 });
-                _context.next = 21;
+                _context.next = 20;
                 break;
 
-              case 18:
-                _context.prev = 18;
-                _context.t0 = _context["catch"](3);
+              case 17:
+                _context.prev = 17;
+                _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
-              case 21:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 18]]);
+        }, _callee, null, [[2, 17]]);
       }));
       return _onCalendarChange.apply(this, arguments);
     }
@@ -4360,45 +4359,51 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_14 = {
+  "class": "title"
+};
+var _hoisted_15 = {
+  "class": "subtitle"
+};
+var _hoisted_16 = {
   "class": "list-group-item__meta"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-user-tag"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_18 = {
   "class": "d-flex align-items-center"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-door-open"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "•", -1
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "•", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-clock"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_20 = {
+var _hoisted_22 = {
   key: 1,
   "class": "mt-3 text-center"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Tidak tersedia kegiatan untuk bulan ini.", -1
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Tidak tersedia kegiatan untuk bulan ini.", -1
 /* HOISTED */
 );
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("footer", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("footer", {
   "class": "container"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "row"
@@ -4448,18 +4453,20 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
       "class": "list-group-item",
       key: schedule.id
-    }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.title), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.title), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.user.name), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.desc), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.room.name), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.user.name), 1
     /* TEXT */
-    )]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Pukul " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.started_at) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.ended_at), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.room.name), 1
+    /* TEXT */
+    )]), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Pukul " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.started_at) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(schedule.ended_at), 1
     /* TEXT */
     )])])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_20, [_hoisted_21]))])])])])]), _hoisted_22]);
+  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, [_hoisted_23]))])])])])]), _hoisted_24]);
 });
 
 /***/ }),
@@ -4772,7 +4779,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".guideline-container[data-v-3d601f05] {\n  margin-top: 12rem;\n}\n@media screen and (max-width: 760px) {\n.guideline-container[data-v-3d601f05] {\n    margin-top: 25rem;\n}\n}\n.guideline-steps[data-v-3d601f05] {\n  list-style: none;\n  margin: 0;\n  margin-top: 0.6rem;\n  padding: 0;\n}\n.guideline-step[data-v-3d601f05] {\n  display: flex;\n  margin-bottom: 0.9rem;\n}\n.guideline-step[data-v-3d601f05]:last-child {\n  margin-bottom: 0;\n}\n.guideline-step p[data-v-3d601f05] {\n  font-size: 0.8rem;\n  color: #8A93A7 !important;\n}\n.guideline-step div[data-v-3d601f05]:first-child {\n  margin-right: 0.7rem;\n}\n.guideline-step img[data-v-3d601f05] {\n  width: 50px;\n}\n.guideline-headline[data-v-3d601f05] {\n  display: flex;\n  margin-bottom: 0.5rem;\n}\n.guideline-headline div[data-v-3d601f05]:first-child {\n  margin-right: 0.6rem;\n}\n.guideline-headline img[data-v-3d601f05] {\n  width: 4.4rem;\n}\n.guideline-headline p[data-v-3d601f05] {\n  color: #8A93A7 !important;\n  font-size: 0.9rem;\n}\n.calendar-container[data-v-3d601f05] {\n  margin-top: 1rem !important;\n  background-image: url(/images/svg/blue-wall.svg);\n  background-position: center;\n  padding-top: 9rem;\n  padding-bottom: 1rem;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-bottom: 1px solid #eee;\n}\n.calendar-container .card[data-v-3d601f05] {\n  border-color: #CBD5E0;\n}\n@media screen and (max-width: 760px) {\n.calendar-container .card[data-v-3d601f05] {\n    margin-top: 1rem;\n}\n}\n.calendar-container .card-header[data-v-3d601f05] {\n  background-color: #F6F9FF !important;\n}\n.calendar-container .card-header p[data-v-3d601f05] {\n  margin: 0;\n}\n.calendar-container .card-header p[data-v-3d601f05]::before {\n  content: \"\";\n  height: 10px;\n  width: 10px;\n  display: inline-block;\n  margin-right: 0.5rem;\n  border-radius: 55%;\n  background-color: #066ECD;\n}\n.calendar-container .card .list-group[data-v-3d601f05] {\n  max-height: 15.2rem;\n  overflow-y: scroll;\n}\n.calendar-container .card .list-group-item p[data-v-3d601f05] {\n  margin: 0;\n  margin-left: 0.4rem;\n  margin-bottom: 0.5rem;\n  display: inline-block;\n}\n.calendar-container .card .list-group-item__meta div[data-v-3d601f05] {\n  margin-right: 0.5rem;\n  color: #8A93A7;\n}\n.calendar-container .card .list-group-item__meta div[data-v-3d601f05]:last-child {\n  margin: 0;\n}\n.calendar-container .card .list-group-item__meta svg[data-v-3d601f05] {\n  width: 0.9rem;\n  color: #8A93A7;\n}\n.calendar-container .card .list-group-item__meta span[data-v-3d601f05] {\n  font-size: 0.8rem;\n  margin-left: 0.3rem;\n  color: #8A93A7 !important;\n}\n.calendar-headline[data-v-3d601f05] {\n  display: flex;\n  margin-bottom: 0.5rem;\n}\n.calendar-headline div[data-v-3d601f05]:first-child {\n  margin-right: 0.6rem;\n}\n.calendar-headline img[data-v-3d601f05] {\n  width: 4.4rem;\n}\n.calendar-headline p[data-v-3d601f05] {\n  color: #8A93A7 !important;\n  font-size: 0.9rem;\n}\nfooter[data-v-3d601f05] {\n  padding: 0.7rem 0;\n}\n@media screen and (max-width: 760px) {\nfooter[data-v-3d601f05] {\n    padding: 0.7rem 1rem;\n}\n}\nfooter h3[data-v-3d601f05] {\n  margin: 0;\n}\nfooter span[data-v-3d601f05] {\n  color: #8A93A7 !important;\n  font-size: 0.8rem;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".guideline-container[data-v-3d601f05] {\n  margin-top: 12rem;\n}\n@media screen and (max-width: 760px) {\n.guideline-container[data-v-3d601f05] {\n    margin-top: 25rem;\n}\n}\n.guideline-steps[data-v-3d601f05] {\n  list-style: none;\n  margin: 0;\n  margin-top: 0.6rem;\n  padding: 0;\n}\n.guideline-step[data-v-3d601f05] {\n  display: flex;\n  margin-bottom: 0.9rem;\n}\n.guideline-step[data-v-3d601f05]:last-child {\n  margin-bottom: 0;\n}\n.guideline-step p[data-v-3d601f05] {\n  font-size: 0.8rem;\n  color: #8A93A7 !important;\n}\n.guideline-step div[data-v-3d601f05]:first-child {\n  margin-right: 0.7rem;\n}\n.guideline-step img[data-v-3d601f05] {\n  width: 50px;\n}\n.guideline-headline[data-v-3d601f05] {\n  display: flex;\n  margin-bottom: 0.5rem;\n}\n.guideline-headline div[data-v-3d601f05]:first-child {\n  margin-right: 0.6rem;\n}\n.guideline-headline img[data-v-3d601f05] {\n  width: 4.4rem;\n}\n.guideline-headline p[data-v-3d601f05] {\n  color: #8A93A7 !important;\n  font-size: 0.9rem;\n}\n.calendar-container[data-v-3d601f05] {\n  margin-top: 1rem !important;\n  background-image: url(/images/svg/blue-wall.svg);\n  background-position: center;\n  padding-top: 9rem;\n  padding-bottom: 1rem;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-bottom: 1px solid #eee;\n}\n.calendar-container .card[data-v-3d601f05] {\n  border-color: #CBD5E0;\n}\n@media screen and (max-width: 760px) {\n.calendar-container .card[data-v-3d601f05] {\n    margin-top: 1rem;\n}\n}\n.calendar-container .card-header[data-v-3d601f05] {\n  background-color: #F6F9FF !important;\n}\n.calendar-container .card-header p[data-v-3d601f05] {\n  margin: 0;\n}\n.calendar-container .card-header p[data-v-3d601f05]::before {\n  content: \"\";\n  height: 10px;\n  width: 10px;\n  display: inline-block;\n  margin-right: 0.5rem;\n  border-radius: 55%;\n  background-color: #066ECD;\n}\n.calendar-container .card .list-group[data-v-3d601f05] {\n  max-height: 15.2rem;\n  overflow-y: scroll;\n}\n.calendar-container .card .list-group-item .title[data-v-3d601f05] {\n  margin: 0;\n  margin-left: 0.4rem;\n  margin-bottom: 0.2rem;\n  display: inline-block;\n}\n.calendar-container .card .list-group-item .subtitle[data-v-3d601f05] {\n  font-size: 0.9rem;\n  margin-bottom: 0.3rem;\n}\n.calendar-container .card .list-group-item__meta div[data-v-3d601f05] {\n  margin-right: 0.5rem;\n  color: #8A93A7;\n}\n.calendar-container .card .list-group-item__meta div[data-v-3d601f05]:last-child {\n  margin: 0;\n}\n.calendar-container .card .list-group-item__meta svg[data-v-3d601f05] {\n  width: 0.9rem;\n  color: #8A93A7;\n}\n.calendar-container .card .list-group-item__meta span[data-v-3d601f05] {\n  font-size: 0.8rem;\n  margin-left: 0.3rem;\n  color: #8A93A7 !important;\n}\n.calendar-headline[data-v-3d601f05] {\n  display: flex;\n  margin-bottom: 0.5rem;\n}\n.calendar-headline div[data-v-3d601f05]:first-child {\n  margin-right: 0.6rem;\n}\n.calendar-headline img[data-v-3d601f05] {\n  width: 4.4rem;\n}\n.calendar-headline p[data-v-3d601f05] {\n  color: #8A93A7 !important;\n  font-size: 0.9rem;\n}\nfooter[data-v-3d601f05] {\n  padding: 0.7rem 0;\n}\n@media screen and (max-width: 760px) {\nfooter[data-v-3d601f05] {\n    padding: 0.7rem 1rem;\n}\n}\nfooter h3[data-v-3d601f05] {\n  margin: 0;\n}\nfooter span[data-v-3d601f05] {\n  color: #8A93A7 !important;\n  font-size: 0.8rem;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -72,9 +72,11 @@ div
 
             ul.list-group.list-group-flush(v-if="schedules.data.length > 0")
               li.list-group-item(v-for="schedule in schedules.data", :key="schedule.id")
-                span
-                  i.fas.fa-hashtag
-                p {{ schedule.title }}
+                div
+                  span
+                    i.fas.fa-hashtag
+                  p.title {{ schedule.title }}
+                p.subtitle {{ schedule.desc }}
                 .list-group-item__meta
                   div
                     i.fas.fa-user-tag
@@ -124,8 +126,6 @@ export default {
 
 
     async function onCalendarChange({month, year}) {
-      console.log('move');
-
       const endpoint = `/api/schedules?month=${month}&${year}`;
 
       try {
@@ -294,12 +294,18 @@ export default {
         overflow-y: scroll;
 
         &-item {
-          p {
+          .title {
             margin: 0;
             margin-left: .4rem;
-            margin-bottom: .5rem;
+            margin-bottom: .2rem;
             display: inline-block;
           }
+
+          .subtitle {
+            font-size: .9rem;
+            margin-bottom: .3rem;
+          }
+
 
           &__meta {
 
