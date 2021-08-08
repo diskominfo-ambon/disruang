@@ -178,8 +178,15 @@ h6 {
       }
     }
 
+
     .vc-weeks {
       margin-top: 1rem;
+
+      .vc-weekday {
+        &:nth-child(7 ) {
+          color: salmon;
+        }
+      }
     }
   }
 

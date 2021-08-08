@@ -56,35 +56,39 @@ div
               p Daftarkan kegiatan Anda dengan bergabung bersama kami,&nbsp;
                 a.is-link(href="#") disini.
       .row
-        .col-sm-12.col-md-6.offset-md-1
+        .col-sm-12.col-md-4.offset-md-1
           calendar(
             locale="id"
             title-position="right",
-            :attributes="attrs"
+            :attributes="attributeSchedules"
             :masks="{weekdays: 'WWWW' }"
+            @update:to-page="onCalendarChange"
             is-expanded
           )
-        .col-sm-12.col-md-4
+        .col-sm-12.col-md-6
           .card
             .card-header
-              p Jadwal kegiatan 1 Agustus 2021
-            ul.list-group.list-group-flush
-              li.list-group-item(v-for="i in 10", :key="i")
+              p Jadwal kegiatan {{ schedules.date }}
+
+            ul.list-group.list-group-flush(v-if="schedules.data.length > 0")
+              li.list-group-item(v-for="schedule in schedules.data", :key="schedule.id")
                 span
                   i.fas.fa-hashtag
-                p Menuju smart city Ambon Maluku
+                p {{ schedule.title }}
                 .list-group-item__meta
                   div
                     i.fas.fa-user-tag
-                    span PLN Kota Ambon Maluku
+                    span {{ schedule.user.name }}
                   .d-flex.align-items-center
                     div
                       i.fas.fa-door-open
-                      span Visiligen
+                      span {{ schedule.room.name }}
                     div •
                     div
                       i.fas.fa-clock
-                      span Pukul 80:02
+                      span Pukul {{ schedule.started_at }} - {{ schedule.ended_at }}
+            .mt-3.text-center(v-else)
+              p Tidak tersedia kegiatan untuk bulan ini.
 
   footer.container
     .row
@@ -96,21 +100,92 @@ div
 </template>
 
 <script>
+import { ref, reactive } from 'vue';
+
 import { Calendar } from 'v-calendar';
+
 import Alert from "~/components/atoms/alert";
 import Navbar from "~/components/molecules/navbar";
 import HeadlineHeroes from "~/components/templates/welcome/headline-heroes";
 
+import colors from '~/support/utils/colors-rand';
+import formatter from '~/support/utils/datetime-formatter';
+
+
+
 export default {
-  data() {
+  setup() {
+    const attributeSchedules = ref([]);
+    // list of schedules.
+    const schedules = reactive({
+      date: null,
+      data: []
+    });
+
+
+    async function onCalendarChange({month, year}) {
+      console.log('move');
+
+      const endpoint = `/api/schedules?month=${month}&${year}`;
+
+      try {
+        const { data, status } = await axios.get(endpoint);
+
+        if (data.code !== status || !data.status) {
+          throw new Error('Error: response code not match.');
+        }
+        const monthNames = [
+          'Januari', 'Februari', 'Maret', 'April', 'Mei',
+          'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+          'Nopember', 'Desember'
+        ];
+
+        // set initial data schedules.
+        schedules.date = `${monthNames[month - 1]} ${year}`;
+        schedules.data = data.payload.map(function (payload) {
+          const format = formatter();
+          console.log(payload.started_at);
+          console.log(payload.ended_at);
+
+          return {
+            ...payload,
+            started_at: format.full(new Date(payload.started_at)),
+            ended_at: format.full(new Date(payload.ended_at)),
+          }
+        });
+
+        attributeSchedules.value = data.payload.map((schedule) => ({
+          key: schedule.id,
+          dot: colors.alpha().random(),
+          popover: {
+            label: schedule.title
+          },
+          dates: new Date(schedule.started_at)
+        }));
+
+        // add today highlight.
+        attributeSchedules.value.push(
+          {
+            key: 'today',
+            highlight: true,
+            popover: {
+              label: 'Hari ini'
+            },
+            dates: new Date(),
+          }
+        );
+
+      }catch (err) {
+        console.log(err);
+      }
+
+    }
+
+
     return {
-       attrs: [
-        {
-          key: 'today',
-          highlight: true,
-          dates: new Date(),
-        },
-      ],
+      schedules,
+      attributeSchedules,
+      onCalendarChange,
     }
   },
   components: {

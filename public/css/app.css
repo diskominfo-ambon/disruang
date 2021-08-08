@@ -10992,3 +10992,6 @@ h6,
 .vc-container .vc-pane-container .vc-weeks {
   margin-top: 1rem;
 }
+.vc-container .vc-pane-container .vc-weeks .vc-weekday:nth-child(7) {
+  color: salmon;
+}

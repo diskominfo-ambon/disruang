@@ -44,7 +44,7 @@ class ResponseServiceProvider extends ServiceProvider
       );
     });
 
-    Response::macro('success', function (bool $reload = true, ?string $message = null, ?string $route = null) {
+    Response::macro('success', function (bool $reload = true, ?string $message = null, ?string $route = null, $code = 200) {
 
       if ($reload || str($route)->trim()->isNotEmpty()) {
         request()->session()
@@ -67,7 +67,7 @@ class ResponseServiceProvider extends ServiceProvider
             ]
           ]
         ],
-        status: 200
+        status: $code
       );
     });
   }

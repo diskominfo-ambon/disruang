@@ -48,7 +48,7 @@ class SchedulesController extends Controller
       $participants = $schedule->participants()
         ->where('name', 'like', "%{$keyword}%")
         ->paginate(12)
-        ->appends('name');
+        ->appends('keyword');
     }
 
 
