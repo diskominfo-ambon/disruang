@@ -27,3 +27,6 @@ Route::get('/schedules', [SchedulesController::class, 'index'])
 
 Route::get('/rooms', [RoomsController::class, 'index'])
   ->name('api.rooms');
+
+  Route::get('/rooms/{room:id}', [RoomsController::class, 'show'])
+  ->name('api.rooms.show');

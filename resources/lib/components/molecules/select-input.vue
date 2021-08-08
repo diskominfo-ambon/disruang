@@ -1,7 +1,8 @@
 <template lang="pug">
 form-group
   select.form-select(v-model="value")
-    option(v-for="key in Object.keys(items)", :value="key", :key="key") {{ items[key] }}
+    slot
+      option(v-for="key in Object.keys(items)", :value="key", :key="key") {{ items[key] }}
 
 </template>
 

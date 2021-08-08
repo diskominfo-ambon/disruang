@@ -2,6 +2,12 @@
 div
   alert.text-center.alert-radiusless.alert-sm.alert-b.alert-b-blue(variant="secondary") Semua yang perlu kamu ketahui tentang status dan kebijakan kegiatan selama wabah virus&nbsp;
     a.is-link(href="") Corona.
+
+  alert.text-center.alert-radiusless.alert-sm(
+      variant="success",
+      v-if="$page.props.value.flash.message !== null"
+    ) {{ $page.props.value.flash.message }}
+
   navbar
   headline-heroes
 
@@ -105,6 +111,7 @@ div
 import { ref, reactive } from 'vue';
 
 import { Calendar } from 'v-calendar';
+import { usePage } from '@inertiajs/inertia-vue3';
 
 import Alert from "~/components/atoms/alert";
 import Navbar from "~/components/molecules/navbar";
@@ -124,6 +131,7 @@ export default {
       data: []
     });
 
+    const $page = usePage();
 
     async function onCalendarChange({month, year}) {
       const endpoint = `/api/schedules?month=${month}&${year}`;
@@ -144,8 +152,6 @@ export default {
         schedules.date = `${monthNames[month - 1]} ${year}`;
         schedules.data = data.payload.map(function (payload) {
           const format = formatter();
-          console.log(payload.started_at);
-          console.log(payload.ended_at);
 
           return {
             ...payload,
@@ -184,6 +190,7 @@ export default {
 
     return {
       schedules,
+      $page,
       attributeSchedules,
       onCalendarChange,
     }

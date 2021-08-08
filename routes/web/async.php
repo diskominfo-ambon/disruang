@@ -15,5 +15,5 @@ Route::group(['middleware' =>  'auth'], function () {
     ->name('async.schedules.update');
 });
 
-Route::get('participants/new', [CreationParticipantController::class, 'store'])
+Route::post('participants/new', [CreationParticipantController::class, 'store'])
   ->name('async.participants.new');

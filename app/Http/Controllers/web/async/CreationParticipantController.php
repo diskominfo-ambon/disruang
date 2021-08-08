@@ -12,13 +12,23 @@ class CreationParticipantController extends Controller
 {
   public function store(ParticipantRequest $request)
   {
+
+    $signature = $request->file('signatureFile')->store('signature', 'public');
+
+    $request->merge([
+      'signature' => $signature,
+    ]);
+
     $participant = Participant::create(
-      $request->all()
+      $request->except(['asn', 'signatureFile', 'phoneNumber'])
     );
+
+    dump($participant);
 
     return Response::success(
       message: "Selamat {$participant->name}, Berhasil mendaftar pada kegiatan",
-      code: 201
+      code: 201,
+      reload: true
     );
   }
 }

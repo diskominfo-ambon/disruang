@@ -46,12 +46,12 @@ class ResponseServiceProvider extends ServiceProvider
 
     Response::macro('success', function (bool $reload = true, ?string $message = null, ?string $route = null, $code = 200) {
 
-      if ($reload || str($route)->trim()->isNotEmpty()) {
+      if ($reload || !empty($route)) {
         request()->session()
           ->flash('message', $message);
       }
 
-      if (str($route)->trim()->isNotEmpty()) {
+      if (!empty($route)) {
         $reload = false;
       }
 

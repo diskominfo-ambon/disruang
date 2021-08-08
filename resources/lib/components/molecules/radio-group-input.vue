@@ -4,6 +4,7 @@ form-group
     div(v-for="key in Object.keys(items)")
       input.form-check-input(
         type="radio",
+        @input="$emit('update:modelValue', $event.target.value)"
         :value="key",
         :name="name",
         :id="`${name}-${items[key]}`"

@@ -1,10 +1,11 @@
 <template lang="pug">
 form-group.form-dropdown
   .dropdown-field(@click="isToggle = true", @mouseleave="isToggle = false")
-    label.dropdown-field__placeholder(for="checkbox-dropdown")
-      slot
-        div
-          i.fas.fa-door-closed
+    .dropdown-field__placeholder
+      div
+        i.fas.fa-door-closed
+        div.flex.align-items-center.me-1
+        slot
           p {{ placeholderText }}
       span.dropdown-icon(:class="isToggle && 'rotate-180'")
         i.fas.fa-caret-down

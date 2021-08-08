@@ -19,7 +19,27 @@ heroes
           .card-body.position-relative
             participant-registration
 </template>
-<script src="./scripts/headline-heroes.js"></script>
+<script>
+import { ref } from "vue";
+
+import ParticipantRegistration from "~/components/organisms/participants/registration";
+import Heroes from "~/components/atoms/heroes/";
+
+export default {
+  setup() {
+    const formOverlay = ref(false);
+
+    return {
+      formOverlay
+    };
+  },
+  components: {
+    Heroes,
+    ParticipantRegistration
+  },
+};
+
+</script>
 
 
 <style lang="scss" scoped>

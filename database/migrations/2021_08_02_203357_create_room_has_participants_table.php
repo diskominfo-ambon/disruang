@@ -18,7 +18,7 @@ class CreateRoomHasParticipantsTable extends Migration
           $table->string('name');
           $table->string('phone_number');
           $table->string('signature')->nullable();
-          $table->string('email')->unique();
+          $table->string('email')->unique()->nullable();
           $table->timestamp('email_verified_at')->nullable();
 
           // is ASN
