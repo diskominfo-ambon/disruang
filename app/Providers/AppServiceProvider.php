@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
     $this->loadViewsFrom([
       resource_path('views/web'),
+      resource_path('views/web/auth'),
     ], 'web');
   }
 }

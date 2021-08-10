@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\user;
+namespace App\Http\Controllers\Web\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class SubmissionsController extends Controller
       ->get();
 
 
-    return view('web::pages.user.dashboards.submission', compact('schedules', 'order'));
+    return view('web::user.dashboards.submission', compact('schedules', 'order'));
 
   }
 

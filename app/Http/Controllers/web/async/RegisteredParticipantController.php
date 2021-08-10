@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\async;
+namespace App\Http\Controllers\Web\Async;
 
 use App\Http\Controllers\Controller;
 
@@ -8,7 +8,7 @@ use App\Http\Requests\ParticipantRequest;
 use App\Models\Participant;
 use Illuminate\Support\Facades\Response;
 
-class CreationParticipantController extends Controller
+class RegisteredParticipantController extends Controller
 {
   public function store(ParticipantRequest $request)
   {

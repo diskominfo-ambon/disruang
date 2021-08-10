@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
-class UserRegistrationController extends Controller
+class RegistredUserController extends Controller
 {
   public function store(Request $request)
   {

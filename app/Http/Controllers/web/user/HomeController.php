@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\user;
+namespace App\Http\Controllers\Web\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,6 +18,6 @@ class HomeController extends Controller
       ->with(['participants', 'room'])
       ->get();
 
-    return view('web::pages.user.dashboards.home', compact('schedules'));
+    return view('web::user.dashboards.home', compact('schedules'));
   }
 }

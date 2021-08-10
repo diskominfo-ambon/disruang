@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\user;
+namespace App\Http\Controllers\Web\User;
 
 use App\Http\Controllers\Controller;
 
@@ -52,6 +52,6 @@ class SchedulesController extends Controller
     }
 
 
-    return view('web::pages.user.schedules.show', compact('schedule', 'participants', 'keyword'));
+    return view('web::user.schedules.show', compact('schedule', 'participants', 'keyword'));
   }
 }

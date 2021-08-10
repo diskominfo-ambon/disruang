@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\web\async\CreationParticipantController;
+use App\Http\Controllers\Web\Async\RegisteredParticipantController;
 use App\Http\Controllers\Web\Async\SchedulesController;
 
 
@@ -15,5 +15,5 @@ Route::group(['middleware' =>  'auth'], function () {
     ->name('async.schedules.update');
 });
 
-Route::post('participants/new', [CreationParticipantController::class, 'store'])
+Route::post('participants/new', [RegisteredParticipantController::class, 'store'])
   ->name('async.participants.new');
