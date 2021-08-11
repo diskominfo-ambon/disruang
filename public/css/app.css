@@ -10861,10 +10861,42 @@ textarea.form-control-lg {
   font-family: "museo" !important;
 }
 
+.navbar {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+.navbar-top {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  right: 0;
+}
+@media screen and (max-width: 760px) {
+  .navbar-top {
+    top: 4rem;
+  }
+}
+.navbar .btn-login {
+  font-size: 0.9rem;
+  color: #1BA0E2 !important;
+  background-color: white;
+}
+.navbar-brand {
+  transform: scale(1.3);
+  color: white !important;
+}
+@media (max-width: 767.98px) {
+  .navbar-brand {
+    position: relative;
+    left: 10px;
+  }
+}
+
 .error-text {
   color: tomato;
   font-size: 0.9rem;
   margin-top: 0.5rem;
+  display: block;
 }
 .error-text::before {
   content: "* ";

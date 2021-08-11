@@ -78,7 +78,17 @@ $currentItr = null;
                   </div>
                   <div class="tranx-data">
                       <div class="tranx-label">{{ str($schedule->title)->limit(70) }}</div>
-                      <div class="tranx-date">{{ str($schedule->room->name)->upper() }} • Menunggu tinjauan</div>
+
+                      <div class="tranx-date">{{ str($schedule->room->name)->upper() }} •
+                        @if ($order === 'pending')
+                          <span>Menunggu tinjauan</span>
+                        @elseif($order === 'confirm')
+                          <span class="text-success">Telah diverifikasi</span>
+                        @else
+                          <span class="text-danger">Ditolak</span>
+                        @endif
+                      </div>
+
                   </div>
               </div>
           </div>

@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/vendor/dashlite-v2/lib/app.js": "/vendor/dashlite-v2/lib/app.js",
+    "/js/vendor/create.js": "/js/vendor/create.js",
     "/js/lib/welcome.js": "/js/lib/welcome.js",
     "/css/app.css": "/css/app.css"
 }

@@ -31,9 +31,7 @@ class AppServiceProvider extends ServiceProvider
   {
     Blade::stringable(fn (Carbon $carbon) => $carbon->isoFormat('LL'));
 
-    $this->loadViewsFrom([
-      resource_path('views/web'),
-      resource_path('views/web/auth'),
-    ], 'web');
+    $this->loadViewsFrom(resource_path('views/web'), 'web');
+    $this->loadViewsFrom(resource_path('views/web/auth'), 'auth');
   }
 }
