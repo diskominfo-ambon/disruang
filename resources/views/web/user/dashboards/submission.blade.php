@@ -95,9 +95,13 @@ $currentItr = null;
 
           @if (in_array($order, ['pending', 'reject']))
           <div class="tranx-col">
-            <a href="{{ route('user.submissions.destroy', $schedule) }}" onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-sm btn-outline-danger">
-              <em class="icon ni ni-trash-alt mr-1"></em> Permohonan
-            </a>
+            <form action="{{ route('user.submissions.destroy', $schedule) }}" method="POST">
+              @csrf
+
+              <button onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-sm btn-outline-danger">
+                <em class="icon ni ni-trash-alt mr-1"></em> Permohonan
+              </button>
+            </form>
           </div>
           @endif
 
