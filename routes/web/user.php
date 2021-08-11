@@ -13,7 +13,7 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('/submissions', [SubmissionsController::class, 'index'])
   ->name('user.submissions');
 
-Route::delete('/submissions/{schedule}', [SubmissionsController::class, 'destory'])
+Route::delete('/submissions/{schedule}', [SubmissionsController::class, 'destroy'])
   ->name('user.submissions.destroy');
 
 Route::view('/schedules/new', 'web::user.schedules.new')

@@ -97,6 +97,7 @@ $currentItr = null;
           <div class="tranx-col">
             <form action="{{ route('user.submissions.destroy', $schedule) }}" method="POST">
               @csrf
+              @method('DELETE')
 
               <button onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-sm btn-outline-danger">
                 <em class="icon ni ni-trash-alt mr-1"></em> Permohonan
