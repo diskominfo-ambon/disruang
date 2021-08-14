@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use App\Support\Eloquent\HasNatureASN;
+use Illuminate\Support\Facades\Storage;
 
 class Participant extends Model
 {
@@ -40,7 +41,8 @@ class Participant extends Model
 
   public function getHasSignatureAttribute(): bool
   {
-    return Str::of($this->signature)->isNotEmpty();
+    return Str::of($this->signature)->isNotEmpty()
+      && Storage::disk('public')->exists($this->signature);
   }
 
 
