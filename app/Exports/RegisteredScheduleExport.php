@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 
 use App\Models\Schedule;
 
-class ScheduleRegisteredParticipantExport implements FromView
+class RegisteredScheduleExport implements FromView
 {
 
 

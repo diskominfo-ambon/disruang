@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
 
-use App\Exports\ScheduleRegisteredParticipantExport;
+use App\Exports\RegisteredScheduleExport;
 use App\Models\Schedule;
 
-class ScheduleRegisteredParticipantController extends Controller
+class RegisteredScheduleController extends Controller
 {
   public function index(Schedule $schedule)
   {
     $fileName = now()->year. '-'.now()->month.'_'.$schedule->title.'.xlsx';
 
     return Excel::download(
-      new ScheduleRegisteredParticipantExport($schedule),
+      new RegisteredScheduleExport($schedule),
       $fileName
     );
   }
