@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\Exports\ScheduleRegisteredParticipantController;
+use App\Http\Controllers\Web\Exports\ScheduleRegisteredParticipantController;
 
 Route::inertia('/', 'welcome')->name('welcome');
 
