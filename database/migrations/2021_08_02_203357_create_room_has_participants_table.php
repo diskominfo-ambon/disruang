@@ -17,6 +17,7 @@ class CreateRoomHasParticipantsTable extends Migration
           $table->id();
           $table->string('name');
           $table->string('phone_number');
+          $table->enum('gender', ['L', 'P']);
           $table->string('signature')->nullable();
           $table->string('email')->unique()->nullable();
           $table->timestamp('email_verified_at')->nullable();
