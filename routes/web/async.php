@@ -8,10 +8,13 @@ use App\Http\Controllers\Web\Async\SchedulesController;
 
 Route::group(['middleware' =>  'auth'], function () {
 
+  Route::get('/schedules/{schedule}', [SchedulesController::class, 'show'])
+    ->name('async.schedules.show');
+
   Route::post('/schedules', [SchedulesController::class, 'store'])
     ->name('async.schedules.store');
 
-  Route::put('/schedules', [SchedulesController::class, 'update'])
+  Route::put('/schedules/{schedule}', [SchedulesController::class, 'update'])
     ->name('async.schedules.update');
 });
 

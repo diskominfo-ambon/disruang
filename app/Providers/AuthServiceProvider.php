@@ -38,6 +38,13 @@ class AuthServiceProvider extends ServiceProvider
           ['ended_at', '>', $request->started_at],
           ['room_id', $request->room_id]
         ])
+        ->where(function (Builder $builder) use ($request) {
+          if ($request->filled('schedule_id')) {
+            $builder->where('id', '!=', $request->schedule_id);
+          }
+
+          return $builder;
+        })
         ->select('id')
         ->exists();
     });

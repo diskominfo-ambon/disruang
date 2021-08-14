@@ -7,23 +7,42 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
 
 class SchedulesController extends Controller
 {
-  public function store(ScheduleRequest $request)
+  public function edit(Schedule $schedule)
   {
-    Schedule::create(
-      $request->all()
-    );
+    if (!$schedule->isPending) {
+      return Redirect::back()
+        ->with(
+          'message',
+          'Kegiatan tidak tersedia'
+        );
+    }
+
+    return view('web::user.schedules.edit', compact('schedule'));
+  }
+
+  public function destroy(Schedule $schedule)
+  {
+    // schedule status has confirm.
+    if ($schedule->status === 'confirm') {
+      return redirect()
+        ->back();
+    }
+
+    $schedule->delete();
 
     return redirect()
-      ->route('user.submission')
+      ->back()
       ->with(
         'message',
-        'Berhasil, permohonan kegiatan kamu masih tahap pending.'
+        'Berhasil menghapus permohonan kegiatan'
       );
   }
 

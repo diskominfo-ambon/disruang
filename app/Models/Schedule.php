@@ -104,6 +104,24 @@ class Schedule extends Model
   }
 
 
+
+  public function getIsPendingAttribute(): bool
+  {
+    return $this->status === Schedule::PENDING;
+  }
+
+
+  public function getIsConfirmAttribute(): bool
+  {
+    return $this->status === Schedule::CONFIRM;
+  }
+
+  public function getIsRejectAttribute(): bool
+  {
+    return $this->status === Schedule::REJECT;
+  }
+
+
   // relationships join.
 
   public function participants(): HasMany

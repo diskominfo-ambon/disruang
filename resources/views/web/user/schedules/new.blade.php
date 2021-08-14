@@ -10,7 +10,7 @@
 
 <!-- .buysell-block -->
 <div class="buysell-block" id="app">
-  <form class="buysell-form" method="post" @submit.prevent="onSubmit">
+  <form class="buysell-form" ref="myformRef" action="{{ route('async.schedules.store') }}" method="post" @submit.prevent="onSubmit">
     {{-- has error message --}}
     <p v-if="form.errors.hasErrorMessage" class="text-white my-2 text-center bg-danger rounded-sm py-1">
       @{{ form.errors.message }}
@@ -154,6 +154,6 @@
 @endsection
 
 
-@section('script')
-<script src="{{ mix('js/vendor/create.js') }}"></script>
+@section('head')
+<script defer src="{{ mix('js/vendor/dashlite/schedule.js') }}"></script>
 @endsection

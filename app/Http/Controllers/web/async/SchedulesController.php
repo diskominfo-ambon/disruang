@@ -37,19 +37,34 @@ class SchedulesController extends Controller
   }
 
 
+  public function show(Schedule $schedule)
+  {
+    return Response::payload($schedule);
+  }
+
+
 
   public function update(ScheduleRequest $request, Schedule $schedule)
   {
-    if (Gate::check('schedule.must.unique', $request)) {
+
+    if (Auth::user()->id !== $schedule->user_id) {
+      return Response::failed(403);
+    }
+
+    if (Auth::user()->hasRole('user') && !$schedule->isPending) {
+      return Response::failed(
+        code: 403,
+        message: 'Kegiatan telah ditinjau, untuk saat ini tidak dapat dirubah',
+      );
+    }
+
+    if (Gate::check('schedule.must.unique', $request->merge(['schedule_id' => $schedule->id])) ) {
       return Response::failed(
         code: 403,
         message: 'Keliatanya waktu telah digunakan/booking oleh kegiatan lain.'
       );
     }
 
-    if (Auth::user()->id !== $schedule->user_id) {
-      return Response::failed(403);
-    }
 
     // update schedule to db.
     $schedule->update(
@@ -57,8 +72,8 @@ class SchedulesController extends Controller
     );
 
     return Response::success(
-      message: 'Berhasil merubah kegiatan!',
-      route: route('user.home')
+      message: 'Berhasil menyimpan perubahan kegiatan!',
+      route: route('user.submissions')
     );
   }
 }

@@ -1,7 +1,8 @@
-import { createApp, computed, reactive, onErrorCaptured, defineComponent } from 'vue';
+import { createApp, computed, reactive, onErrorCaptured, defineComponent, onMounted, ref } from 'vue';
 
+import { assign, merge, pick, omit } from 'lodash';
 import { DatePicker } from 'v-calendar';
-import { omit, assign, mapValues } from 'lodash';
+import { Skeletor } from 'vue-skeletor';
 
 import { format, Formatter } from '~/support/helpers/datetime-formatter';
 import useFetch from '~/support/helpers/use-fetch';
@@ -10,14 +11,16 @@ import '~/bootstrap';
 
 const component = defineComponent({
   components: {
-    DatePicker
+    DatePicker,
+    Skeletor
   },
   setup() {
     const rooms = reactive({
       data: [],
       isNotEmpty: computed(() => rooms.data.length > 0),
     });
-
+    const isMounted = ref(false);
+    const myformRef = ref(null);
     const form = reactive({
       room_id: null,
       title: '',
@@ -55,23 +58,57 @@ const component = defineComponent({
       // error capture..
     });
 
-    // use fetch to fetching all of list rooms avaiable.
-    useFetch('/api/rooms')
-      .then(res => {
-        if (res.data.payload.length > 0) {
+
+    onMounted( async () => {
+      // use fetch to fetching all of list rooms avaiable.
+      try {
+        const { data, status } = await useFetch('/api/rooms');
+        if (data.payload.length > 0 && data.code === status) {
           // set initial room.
-          form.room_id = res.data.payload[0]?.id;
-          rooms.data = res.data.payload;
+          form.room_id = data.payload[0]?.id;
+          rooms.data = data.payload;
         }
 
-      })
-        .catch(err => {
-          // handle error.
-        });
+      } catch (err) {
+        // handle room error.
+      }
+
+
+      if (myformRef.value.dataset?.scheduleMethod === 'put') {
+        // fetch schedule.
+        try {
+          const endpoint = route('async.schedules.show', myformRef.value.dataset?.scheduleId);
+          const { data, status } = await useFetch(endpoint);
+          if (data.code === status) {
+            // pick list key in form.
+            const pickKey = ['room_id', 'title', 'desc'];
+            const body = merge( pick(data.payload, pickKey), {
+              range: {
+                start: new Date(data.payload?.started_at),
+                end: new Date(data.payload?.ended_at),
+              }
+            });
+
+            for (const key in body) {
+              form[key] = body[key];
+            }
+          }
+        } catch (err) {
+          throw new Error(err ?? 'Error fetch schedule');
+        }
+
+      }
+
+
+      isMounted.value = true;
+    });
+
 
 
     function onSubmit() {
-      const endpoint = `/async/schedules`;
+      const endpoint =  myformRef.value.getAttribute('action');
+      const method = myformRef.value.dataset.scheduleMethod ?? 'post';
+
 
       // form fields.
       const body = assign(
@@ -87,7 +124,7 @@ const component = defineComponent({
       form.errors.data = [];
       form.errors.message = '';
 
-      axios.post(endpoint, body)
+      axios[method](endpoint, body)
         .then(({data, status}) => {
           if (data.code === status &&
             data.payload.ajax.reload
@@ -122,12 +159,15 @@ const component = defineComponent({
       onSubmit,
       form,
       rooms,
+      myformRef, // ref to my form DOM.
+      isMounted,
       roomSelected,
       scheduleFormatter
     }
   }
 });
 
-createApp(component)
-  .mount('#app');
+const app = createApp(component)
+
+app.mount('#app');
 

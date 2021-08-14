@@ -95,12 +95,17 @@ $currentItr = null;
 
           @if (in_array($order, ['pending', 'reject']))
           <div class="tranx-col">
-            <form action="{{ route('user.submissions.destroy', $schedule) }}" method="POST">
+            @if ($order === 'pending')
+              <a href="{{ route('user.schedules.edit', $schedule) }}" class="btn btn-sm btn-secondary text-white mb-1">
+                <em class="icon ni ni-edit mr-1"></em> Ubah
+              </a>
+            @endif
+            <form action="{{ route('user.schedules.destroy', $schedule) }}" method="POST">
               @csrf
               @method('DELETE')
 
               <button onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-sm btn-outline-danger">
-                <em class="icon ni ni-trash-alt mr-1"></em> Permohonan
+                <em class="icon ni ni-trash-alt mr-1"></em> Hapus
               </button>
             </form>
           </div>

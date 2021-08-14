@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Web\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Models\Schedule;
+use App\Http\Requests\ScheduleRequest;
 
-class SubmissionsController extends Controller
+class FindScheduleSubmissionController extends Controller
 {
   public function index(Request $request)
   {
@@ -25,25 +27,6 @@ class SubmissionsController extends Controller
 
 
     return view('web::user.dashboards.submission', compact('schedules', 'order'));
-
   }
 
-
-  public function destroy(Schedule $schedule)
-  {
-    // schedule status has confirm.
-    if ($schedule->status === 'confirm') {
-      return redirect()
-        ->back();
-    }
-
-    $schedule->delete();
-
-    return redirect()
-      ->back()
-      ->with(
-        'message',
-        'Berhasil menghapus permohonan kegiatan'
-      );
-  }
 }

@@ -3,7 +3,7 @@ const mix = require('laravel-mix');
 
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.js('resources/js/inertia/app.js', 'public/js')
-  .js('resources/js/lib/**/*.js', 'public/js/vendor')
+  .js('resources/js/lib/dashlite/schedule.js', 'public/js/vendor/dashlite')
   .vue();
 
 
