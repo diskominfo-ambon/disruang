@@ -30,11 +30,13 @@ class ParticipantSeeder extends Seeder
   {
     $schedules = Schedule::confirm()->get();
     $participants = [];
+    $gender = collect(['L', 'P']);
 
     for ($i = 0; $i<500; $i++) {
       $participants[$i] = [
         'name' => $this->faker->name(),
         'phone_number' => $this->faker->phoneNumber(),
+        'gender' => $gender->random(),
         'email' => $this->faker->unique()->safeEmail(),
         'schedule_id' => $schedules->random()->id,
         'created_at' => now()
