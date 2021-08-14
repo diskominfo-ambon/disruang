@@ -11,7 +11,7 @@
           </div>
       </div>
       <div class="nk-block-head-content">
-          <a href="#" class="btn btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
+          <a href="{{ route('exports.schedules.participants', $schedule) }}" class="btn btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
         </div>
       </div>
   </div>
