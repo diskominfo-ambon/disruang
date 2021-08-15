@@ -41,11 +41,37 @@
     <div class="overflay-backdrop" v-if="overlay" @mousedown="overlay = false"></div>
   </transition>
   <!-- end -->
+
+
+  <!-- modal -->
+  <div v-show="flashMessage" class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-success" id="messageModalLabel">
+            ✨Kamu berhasil melakukan pendaftaran
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img width="300" src="/images/ilustrations/teamwork.svg" alt="succes ilustration"/>
+          <div>
+            <p style="color: gray !important;">
+              {{ flashMessage }}
+            </p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- end -->
 </div>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watchEffect } from 'vue'
+
+import { usePage } from '@inertiajs/inertia-vue3';
 
 import FooterInformation from '~inertia/components/templates/footer-information';
 import RegistratedParticipant from '~inertia/components/templates/registrated-participant';
@@ -64,10 +90,24 @@ export default defineComponent({
   setup() {
     // form focus overlay.
     const overlay = ref(false);
+    const $page = usePage();
+    const flashMessage = computed(() =>  $page.props.value.flash.message);
 
+
+    watchEffect(() => {
+      if ($page.props.value.flash.message !== null) {
+        new bootstrap.Modal(
+          document.getElementById('messageModal')
+        ).show();
+
+        // disable form overflay.
+        overlay.value = false;
+      }
+    });
 
     return {
-      overlay
+      overlay,
+      flashMessage
     }
   }
 

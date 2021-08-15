@@ -3626,10 +3626,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertia_components_templates_footer_information__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~inertia/components/templates/footer-information */ "./resources/js/inertia/components/templates/footer-information.vue");
-/* harmony import */ var _inertia_components_templates_registrated_participant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~inertia/components/templates/registrated-participant */ "./resources/js/inertia/components/templates/registrated-participant.vue");
-/* harmony import */ var _inertia_components_templates_guideline_information__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~inertia/components/templates/guideline-information */ "./resources/js/inertia/components/templates/guideline-information.vue");
-/* harmony import */ var _inertia_components_templates_schedule_information__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~inertia/components/templates/schedule-information */ "./resources/js/inertia/components/templates/schedule-information.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertia_components_templates_footer_information__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~inertia/components/templates/footer-information */ "./resources/js/inertia/components/templates/footer-information.vue");
+/* harmony import */ var _inertia_components_templates_registrated_participant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~inertia/components/templates/registrated-participant */ "./resources/js/inertia/components/templates/registrated-participant.vue");
+/* harmony import */ var _inertia_components_templates_guideline_information__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~inertia/components/templates/guideline-information */ "./resources/js/inertia/components/templates/guideline-information.vue");
+/* harmony import */ var _inertia_components_templates_schedule_information__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~inertia/components/templates/schedule-information */ "./resources/js/inertia/components/templates/schedule-information.vue");
+
 
 
 
@@ -3638,16 +3640,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   name: 'Welcome',
   components: {
-    RegistratedParticipant: _inertia_components_templates_registrated_participant__WEBPACK_IMPORTED_MODULE_2__.default,
-    GuidelineInformation: _inertia_components_templates_guideline_information__WEBPACK_IMPORTED_MODULE_3__.default,
-    ScheduleInformation: _inertia_components_templates_schedule_information__WEBPACK_IMPORTED_MODULE_4__.default,
-    FooterInformation: _inertia_components_templates_footer_information__WEBPACK_IMPORTED_MODULE_1__.default
+    RegistratedParticipant: _inertia_components_templates_registrated_participant__WEBPACK_IMPORTED_MODULE_3__.default,
+    GuidelineInformation: _inertia_components_templates_guideline_information__WEBPACK_IMPORTED_MODULE_4__.default,
+    ScheduleInformation: _inertia_components_templates_schedule_information__WEBPACK_IMPORTED_MODULE_5__.default,
+    FooterInformation: _inertia_components_templates_footer_information__WEBPACK_IMPORTED_MODULE_2__.default
   },
   setup: function setup() {
     // form focus overlay.
     var overlay = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var $page = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage)();
+    var flashMessage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return $page.props.value.flash.message;
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(function () {
+      if ($page.props.value.flash.message !== null) {
+        new bootstrap.Modal(document.getElementById('messageModal')).show(); // disable form overflay.
+
+        overlay.value = false;
+      }
+    });
     return {
-      overlay: overlay
+      overlay: overlay,
+      flashMessage: flashMessage
     };
   }
 }));
@@ -4560,6 +4574,51 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "card shadow-sm border-none"
 };
+var _hoisted_7 = {
+  "class": "modal fade",
+  id: "messageModal",
+  tabindex: "-1",
+  "aria-labelledby": "messageModalLabel",
+  "aria-hidden": "true"
+};
+var _hoisted_8 = {
+  "class": "modal-dialog"
+};
+var _hoisted_9 = {
+  "class": "modal-content"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "modal-header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
+  "class": "modal-title text-success",
+  id: "messageModalLabel"
+}, " ✨Kamu berhasil melakukan pendaftaran "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  type: "button",
+  "class": "btn-close",
+  "data-bs-dismiss": "modal",
+  "aria-label": "Close"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_11 = {
+  "class": "modal-body text-center"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+  width: "300",
+  src: "/images/ilustrations/teamwork.svg",
+  alt: "succes ilustration"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_13 = {
+  style: {
+    "color": "gray !important"
+  }
+};
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -4597,7 +4656,11 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end ")]);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.flashMessage), 1
+  /* TEXT */
+  )])])])])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.flashMessage]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end ")]);
 });
 
 /***/ }),

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\ParticipantRequest;
 use App\Models\Participant;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisteredParticipantController extends Controller
 {
@@ -23,12 +23,10 @@ class RegisteredParticipantController extends Controller
       $request->except(['asn', 'signatureFile', 'phoneNumber'])
     );
 
-    dump($participant);
-
-    return Response::success(
-      message: "Selamat {$participant->name}, Berhasil mendaftar pada kegiatan",
-      code: 201,
-      reload: true
-    );
+    return Redirect::back()
+      ->with(
+        'message',
+        "Semoga kegiatan yang ikuti dapat bermanfaat bagi kamu {$participant->name} dan teman-teman."
+      );
   }
 }

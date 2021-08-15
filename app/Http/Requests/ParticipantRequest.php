@@ -47,9 +47,9 @@ class ParticipantRequest extends FormRequest
 
   public function passedValidation()
   {
-    if ($this->filled('asn.originName') && $this->filled('asn.jobTitle')) {
+    if ($this->filled('asn.origin') && $this->filled('asn.jobTitle')) {
       $this->merge([
-        'origin' => $this->asn['originName'],
+        'origin' => $this->asn['origin'],
         'origin_job_title' => $this->asn['jobTitle'],
       ]);
     }

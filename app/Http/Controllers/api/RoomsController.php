@@ -23,6 +23,7 @@ class RoomsController extends Controller
 
     $schedules = $room->schedules()
       ->with(['user:id,name'])
+      ->confirm()
       ->where(function (Builder $builder) use ($request) {
         if ($request->filled('day')) {
           $builder->whereDay('started_at', $request->get('day'));

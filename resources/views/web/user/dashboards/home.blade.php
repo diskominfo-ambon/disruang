@@ -1,6 +1,5 @@
 @extends('web.layouts.dashlite')
 
-
 @section('content')
 <div class="nk-block-head-sub"><span>Beranda</span> </div>
 <div class="nk-block-between-md g-4">
@@ -53,7 +52,6 @@
                           <li><a href="{{ route('exports.schedules.participants', $schedule) }}"><em class="icon ni ni-file-download"></em><span>Download</span></a></li>
                       </ul>
                   </div>
-
               </div>
           </div><!-- .card -->
         </div><!-- .col -->
