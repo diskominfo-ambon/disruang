@@ -1,6 +1,6 @@
 import { createApp, computed, reactive, onErrorCaptured, defineComponent, onMounted, ref } from 'vue';
 
-import { assign, merge, pick, omit } from 'lodash';
+import { assign, merge, pick, omit, mapValues } from 'lodash';
 import { DatePicker } from 'v-calendar';
 import { Skeletor } from 'vue-skeletor';
 

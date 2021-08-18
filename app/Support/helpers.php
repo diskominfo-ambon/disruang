@@ -8,9 +8,9 @@ use Carbon\Carbon;
 // Global functions.
 
 if (!function_exists('str')) {
-  function str(string $str): Stringable
+  function str($str): Stringable
   {
-    return Str::of($str);
+    return Str::of($str ?: '');
   }
 }
 
@@ -18,7 +18,6 @@ if (!function_exists('str')) {
 if (!function_exists('carbon')) {
   function carbon($datetime)
   {
-
     return Carbon::parse($datetime)
       ->timezone(env('APP_TIMEZONE'));
   }

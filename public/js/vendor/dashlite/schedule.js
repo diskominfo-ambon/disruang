@@ -53705,7 +53705,7 @@ var component = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
 
         // is validation error.
         if (response.status === 422 && Object.keys(response.data.errors).length > 0) {
-          form.errors.data = mapValues(response.data.errors, function (value) {
+          form.errors.data = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.mapValues)(response.data.errors, function (value) {
             return value[0];
           });
         }

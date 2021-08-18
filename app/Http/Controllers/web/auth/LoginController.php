@@ -28,7 +28,8 @@ class LoginController extends Controller
 
     if ($user->hasRole('admin')) {
       // to admin page
-      dd('admin');
+      return redirect()
+        ->route('admin.home');
     }
 
     // to user page.
