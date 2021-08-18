@@ -22,14 +22,17 @@ Route::resource('schedules', SchedulesController::class, ['as' => 'admin']);
 
 Route::resource('d', SuperUsersController::class, ['as' => 'admin'])
   ->except('show')
+  ->middleware('permission:kominfo')
   ->parameters([
     'd' => 'user'
   ]);
 
+Route::resource('rooms', RoomsController::class, ['as' => 'admin'])
+  ->middleware('permission:kominfo')
+  ->except('show');
 
 Route::resources([
-  'users' => UsersController::class,
-  'rooms' => RoomsController::class
+  'users' => UsersController::class,  
 ], [
   'as' => 'admin',
   'except' => ['show']

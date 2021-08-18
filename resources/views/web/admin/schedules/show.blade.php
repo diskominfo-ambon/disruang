@@ -12,13 +12,13 @@
       </div>
       <div class="nk-block-head-content nk-block-between">
           <a href="{{ route('exports.schedules.participants', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
-          @cannot(['humas', 'protocol'])
+          @can('kominfo')
           <form action="{{ route('admin.schedules.destroy', $schedule) }}" method="POST">
             @csrf
             @method('DELETE')
             <button onclick="return confirm('Yakin ingin menghapus kegiatan ini?');" class="btn btn-danger d-none d-sm-inline-flex"><em class="icon ni ni-trash-fill"></em><span>Hapus kegiatan</span></button>
           </form>
-          @endcannot
+          @endcan
         </div>
       </div>
   </div>

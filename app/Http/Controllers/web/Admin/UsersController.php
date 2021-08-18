@@ -100,7 +100,7 @@ class UsersController extends Controller
    */
   public function destroy(User $user)
   {
-    abort_if(Gate::allows(['humas', 'protocol']), 401);
+    abort_if(!auth()->user()->can('kominfo'), 401);
     $user->delete();
 
 

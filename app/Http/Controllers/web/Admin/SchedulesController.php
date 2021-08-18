@@ -140,7 +140,7 @@ class SchedulesController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-      abort_if(Gate::allows(['humas', 'protocol']), 401);
+      abort_if(!auth()->user()->can('kominfo'), 401);
 
       $schedule->delete();
 

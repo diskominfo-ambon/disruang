@@ -79,13 +79,13 @@
                         <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-icon btn-trigger" data-toggle="tooltip" title="Ubah pengguna"><em class="icon ni ni-edit-fill"></em></a>
                       </div>
                       <div class="nk-tb-col nk-tb-col-tools">
-                        @cannot(['humas', 'protocol'])
+                        @can('kominfo')
                         <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <button onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-icon btn-trigger" data-toggle="tooltip" title="Hapus pengguna"><em class="icon ni ni-trash-fill text-danger"></em></button>
                         </form>
-                        @endcannot
+                        @endcan
                       </div>
                   </div><!-- .nk-tb-item -->
                   @endforeach

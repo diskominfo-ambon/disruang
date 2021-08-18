@@ -34,16 +34,20 @@
                                     <h6 class="overline-title-alt">Selamat datang kembali</h6>
                                     <div class="user-balance">{{ str(auth()->user()->name)->title()->limit(20) }}</div>
                                     <div class="user-balance-alt">
-                                      {{ str(auth()->user()->getRoleNames()->first())->upper() }} • {{ str(auth()->user()?->permissions->first() ?? 'kominfo')->upper() }}
+                                      {{ str(auth()->user()->getRoleNames()->first())->upper() }} • {{
+                                        auth()->user()?->permissions->first()
+                                          ? str( auth()->user()?->permissions->first()->name)->upper()
+                                          : strtoupper('Kominfo')
+                                        }}
                                     </div>
                                 </div>
                                 <a href="#" class="btn btn-white btn-icon btn-light"><em class="icon ni ni-user-fill"></em></a>
                             </div>
                             <div class="user-account-actions">
-                              @cannot(['protocol'])
+                              @canany(['humas', 'kominfo'])
                               <a href="{{ route('admin.users.create') }}" class="btn btn-lg btn-primary"><span>Buat tamu pengguna baru</span></a>
                               <a href="{{ route('admin.schedules.create') }}" class="btn btn-lg btn-primary mt-2"><span>Buat kegiatan baru</span></a>
-                              @endcannot
+                              @endcanany
                             </div>
                         </div><!-- .nk-sidebar-widget -->
                         <div class="nk-sidebar-widget nk-sidebar-widget-full d-xl-none pt-0">
@@ -108,7 +112,9 @@
                                       <span class="nk-menu-text">Tamu pengguna</span>
                                   </a>
                                 </li>
-                                @cannot(['humas', 'protocol'])
+
+
+                                @can('kominfo')
                                 <li class="nk-menu-item">
                                   <a href="{{ route('admin.d.index') }}" class="nk-menu-link">
                                       <span class="nk-menu-icon"><em class="icon ni ni-user-fill-c"></em></span>
@@ -121,7 +127,7 @@
                                     <span class="nk-menu-text">Ruangan</span>
                                   </a>
                                 </li>
-                                @endcannot
+                                @endcan
                                 <li class="nk-menu-item">
                                     <a href="#" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-chat-circle"></em></span>

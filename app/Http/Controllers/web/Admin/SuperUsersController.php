@@ -14,11 +14,6 @@ use App\Http\Requests\UserRequest;
 class SuperUsersController extends Controller
 {
 
-  public function __construct()
-  {
-    abort_if(Gate::allows(['humas', 'protocol']), 401);
-  }
-
   /**
    * Display a listing of the resource.
    *
@@ -61,11 +56,10 @@ class SuperUsersController extends Controller
 
     $permission = $request->permission;
 
-    if ($permission !== 'kominfo') {
-      $user->syncPermissions(
-        $permission
-      );
-    }
+    $user->syncPermissions(
+      $permission
+    );
+    
 
     return Redirect::route('admin.d.index')
       ->with(
@@ -100,11 +94,9 @@ class SuperUsersController extends Controller
 
     $permission = $request->permission;
 
-    if ($permission !== 'kominfo') {
-      $user->syncPermissions(
-        $permission
-      );
-    }
+    $user->syncPermissions(
+      $permission
+    );    
 
     return Redirect::route('admin.d.index')
       ->with(

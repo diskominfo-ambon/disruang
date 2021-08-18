@@ -47,6 +47,9 @@ class RoleSeeder extends Seeder
 
     // set permisionn in users;
 
+    $users->find(2)
+      ->syncPermissions('kominfo');
+
     $users->find(3)
       ->syncPermissions('humas');
 
