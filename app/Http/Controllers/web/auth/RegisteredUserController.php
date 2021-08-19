@@ -17,7 +17,9 @@ class RegisteredUserController extends Controller
       'password' => 'required|confirmed'
     ]);
 
-    User::create($body);
+    $user = User::create($body);
+
+    $user->assingRole('user');
 
     return redirect()
       ->route('auth.login')
