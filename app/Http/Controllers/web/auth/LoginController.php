@@ -11,7 +11,7 @@ class LoginController extends Controller
   public function store(Request $request)
   {
     $credentials = $request->validate([
-      'email' => 'required|email|exists:users,email',
+      'username' => 'required|exists:users,username',
       'password' => 'required'
     ]);
 
@@ -20,7 +20,7 @@ class LoginController extends Controller
         ->back()
         ->with(
           'message.auth.error',
-          "{$credentials['email']} memiliki kata sandi yang tidak valid."
+          "{$credentials['username']} memiliki kata sandi yang tidak valid."
         );
     }
 

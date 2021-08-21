@@ -20,6 +20,7 @@ class RoleSeeder extends Seeder
   {
     $roles = ['user', 'admin'];
     $permissions = [
+      'kominfo',
       'humas',
       'protocol'
     ];
@@ -36,7 +37,7 @@ class RoleSeeder extends Seeder
     // set role in users.
     $users = User::all();
 
-    $users->first(1)
+    $users->first()
       ->assignRole('admin');
 
     $users->find(2)
@@ -47,7 +48,7 @@ class RoleSeeder extends Seeder
 
     // set permisionn in users;
 
-    $users->find(1)
+    $users->first()
       ->syncPermissions('kominfo');
 
     $users->find(2)
@@ -59,6 +60,5 @@ class RoleSeeder extends Seeder
     $users->skip(3)->each(function ($user) {
       $user->assignRole('user');
     });
-
   }
 }

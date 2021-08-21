@@ -81,9 +81,9 @@
   <form method="post" action="{{ route('auth.login.store') }}">
     @csrf
     <div class="form-group">
-      <label class="form-label" for="email">Alamat email</label>
-      <input type="email" autocomplete="off" placeholder="Alamat email Anda" value="{{ old("email") }}" autofocus class="form-control form-control-underline" name="email" id="email"/>
-      @error('email')
+      <label class="form-label" for="username">Username</label>
+      <input type="text" autocomplete="off" placeholder="Username Anda" value="{{ old("username") }}" autofocus class="form-control form-control-underline" name="username" id="username"/>
+      @error('username')
       <span class="error-text">{{ $message }}</span>
       @enderror
 
