@@ -35,9 +35,13 @@ class UserRequest extends FormRequest
         $rules['password'] = 'required|confirmed';
       }
 
-      if ($this->routeIs('admin.d.store') || $this->routeIs('admin.d.update')) {
+      if (($this->routeIs('admin.d.store') || $this->routeIs('admin.d.update'))
+        && auth()->user()->id !== $this->user->id
+      ) {
         $rules['permission'] = 'required';
       }
+
+      dd($rules);
 
       return $rules;
     }

@@ -196,7 +196,7 @@
 
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-fill"></em><span>Ubah profil</span></a></li>
+                                                <li><a href="{{ route('admin.d.edit', auth()->user()->id) }}"><em class="icon ni ni-user-fill"></em><span>Ubah profil</span></a></li>
                                                 <li><a class="dark-switch" href="#"><em class="icon ni ni-moon-fill"></em><span>Dark Mode</span></a></li>
                                             </ul>
                                         </div>

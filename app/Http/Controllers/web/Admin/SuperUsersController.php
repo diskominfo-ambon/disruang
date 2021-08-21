@@ -24,6 +24,7 @@ class SuperUsersController extends Controller
     $keyword = $request->get('keyword', '');
 
     $users = User::role('admin')
+      ->withoutCurrentUser()
       ->where('name', 'like', "%{$keyword}%")
       ->paginate(20);
 
@@ -59,7 +60,7 @@ class SuperUsersController extends Controller
     $user->syncPermissions(
       $permission
     );
-    
+
 
     return Redirect::route('admin.d.index')
       ->with(
@@ -96,7 +97,7 @@ class SuperUsersController extends Controller
 
     $user->syncPermissions(
       $permission
-    );    
+    );
 
     return Redirect::route('admin.d.index')
       ->with(

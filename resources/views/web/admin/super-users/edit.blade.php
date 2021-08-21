@@ -1,10 +1,18 @@
 @extends('web.layouts.admin')
 
 @section('content')
+
+@php
+$isNotSameUserId = auth()->user()->id != $user->id;
+$permission = $user->permissions()->first()
+            ? $user->permissions()->first()->name
+            : 'kominfo';
+@endphp
+
 <!-- .buysell-title -->
 <div class="buysell wide-xs m-auto">
   <div class="buysell-title text-center">
-    <h2 class="title"><em class="icon ni ni-user-add"></em> Tambahkan admin?</h2>
+    <h2 class="title"><em class="icon ni ni-user-fill"></em> Ubah profil {{ $user->name }}?</h2>
 </div>
 <!-- .buysell-title -->
 
@@ -42,14 +50,12 @@
       @enderror
     </div>
 
+    @if ($isNotSameUserId)
     <div class="buysell-field form-group">
       <div class="form-label-group">
           <label class="form-label">Pilih Akses</label>
       </div>
       <div class="form-pm-group">
-        @php
-          $permission = $user->permissions()->first() ?: 'kominfo';
-        @endphp
           <ul class="buysell-pm-list">
               <li class="buysell-pm-item">
                   <input class="buysell-pm-control" {{ $permission === 'kominfo' ? 'checked': '' }} value="kominfo" type="radio" name="permission" id="pm-paypal" />
@@ -87,7 +93,22 @@
       @error('permission')
       <span class="error-text">{{ $message }}</span>
       @enderror
-  </div><!-- .buysell-field -->
+    </div><!-- .buysell-field -->
+    @endif
+
+    <div class="buysell-field form-group">
+      <div class="form-label-group">
+        <label for="username" class="form-label">
+          Username
+        </label>
+      </div>
+      <div class="form-control-group">
+        <input type="text" value="{{ $user->username }}" placeholder="Username pengguna.." id="username" name="username" class="form-control form-control-lg form-control-number">
+      </div>
+      @error('username')
+      <span class="error-text">{{ $message }}</span>
+      @enderror
+    </div>
 
     <div class="buysell-field form-group">
       <div class="form-label-group">

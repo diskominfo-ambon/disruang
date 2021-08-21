@@ -71,13 +71,20 @@
                     </div>
                     <div class="nk-tb-col tb-col-md">
                       @if ($user->schedules()->count() > 0)
-                      <span class="tb-amount">{{ $user->schedules()->count() }} kegiatan yang pernah dibuat</span>
+                      <span class="tb-amount">{{ $user->schedules()->count() }} kegiatan dibuat</span>
                       @else
-                        <span class="tb-amount">Belum pernah membuat kegiatan</span>
+                        <span class="tb-amount">Belum membuat kegiatan</span>
                       @endif
                     </div>
                     <div class="nk-tb-col tb-col-md">
-                      <span class="tb-status text-primary">{{ strtoupper($user->permissions()->first() ?: 'kominfo') }}</span>
+                      @php
+                        $permission = $user->permissions()->first();
+                      @endphp
+                      <span class="tb-status text-primary">
+                        {{ is_null($permission)
+                          ? strtoupper('kominfo')
+                          : strtoupper($permission->name)
+                        }}</span>
                     </div>
                       <div class="nk-tb-col tb-col-md">
                           <span class="tb-status text-success">Aktif</span>
