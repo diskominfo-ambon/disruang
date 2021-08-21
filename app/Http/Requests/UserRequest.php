@@ -26,12 +26,13 @@ class UserRequest extends FormRequest
     {
       $rules = [
         'name' => 'required',
+        'username' => 'required',
         'phone_number' => 'required',
         'email' => 'required'
       ];
 
       if ($this->method() === 'POST' || $this->filled('password')) {
-        $rules['password'] = 'required';
+        $rules['password'] = 'required|confirmed';
       }
 
       if ($this->routeIs('admin.d.store') || $this->routeIs('admin.d.update')) {
@@ -55,9 +56,10 @@ class UserRequest extends FormRequest
       return [
         'name' => 'Nama',
         'phone_number' => 'Nomor telepon',
+        'username' => 'Username',
         'email' => 'Alamat email',
         'password' => 'Kata sandi',
-        'password-confirmation' => 'Konfirmasi kata sandi',
+        'password_confirmation' => 'Konfirmasi kata sandi',
         'permission' => 'Akses pengguna'
       ];
     }

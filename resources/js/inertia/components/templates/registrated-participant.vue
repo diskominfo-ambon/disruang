@@ -71,7 +71,7 @@
     </div>
 
 
-
+    <!-- FIXME: dropdown suggestion in disable on clicked  -->
     <dropdown-input
       class="flex-1 mt-2 mb-0"
       labelText="Pilih kegiatan Anda"
@@ -261,9 +261,6 @@ export default {
       showSignaturePad.value = false;
     }
 
-    /**
-     * ! please refactor.
-     */
     function onSubmit() {
       const endpoint = '/async/participants/new';
 

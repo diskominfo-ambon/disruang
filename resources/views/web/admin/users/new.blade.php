@@ -35,12 +35,27 @@
         </label>
       </div>
       <div class="form-control-group">
-        <input type="number" value="{{ old('phone_number') }}" placeholder="Alamat email pengguna.." id="phone_number" name="phone_number" class="form-control form-control-lg form-control-number">
+        <input type="number" value="{{ old('phone_number') }}" placeholder="Nomor telepon pengguna.." id="phone_number" name="phone_number" class="form-control form-control-lg form-control-number">
       </div>
       @error('phone_number')
       <span class="error-text">{{ $message }}</span>
       @enderror
     </div>
+
+    <div class="buysell-field form-group">
+      <div class="form-label-group">
+        <label for="username" class="form-label">
+          Username
+        </label>
+      </div>
+      <div class="form-control-group">
+        <input type="text" value="{{ old('username') }}" placeholder="Username pengguna.." id="username" name="username" class="form-control form-control-lg form-control-number">
+      </div>
+      @error('username')
+      <span class="error-text">{{ $message }}</span>
+      @enderror
+    </div>
+
 
     <div class="buysell-field form-group">
       <div class="form-label-group">
@@ -55,6 +70,7 @@
       <span class="error-text">{{ $message }}</span>
       @enderror
     </div>
+
 
     <div class="buysell-field form-group">
       <div class="form-label-group">

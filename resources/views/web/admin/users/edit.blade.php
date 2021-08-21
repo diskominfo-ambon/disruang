@@ -44,6 +44,20 @@
 
     <div class="buysell-field form-group">
       <div class="form-label-group">
+        <label for="username" class="form-label">
+          Username
+        </label>
+      </div>
+      <div class="form-control-group">
+        <input type="text" value="{{ $user->username }}" placeholder="Username pengguna.." id="username" name="username" class="form-control form-control-lg form-control-number">
+      </div>
+      @error('username')
+      <span class="error-text">{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="buysell-field form-group">
+      <div class="form-label-group">
         <label for="email" class="form-label">
           Alamat email
         </label>
