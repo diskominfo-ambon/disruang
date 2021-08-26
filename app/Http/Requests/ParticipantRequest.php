@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Rules\IsScheduleAvailable;
+
 class ParticipantRequest extends FormRequest
 {
   /**
@@ -28,7 +30,7 @@ class ParticipantRequest extends FormRequest
       'gender' => 'required',
       'phoneNumber' => 'required',
       'signatureFile' => 'required',
-      'schedule_id' => 'required'
+      'schedule_id' => ['required', new IsScheduleAvailable()]
     ];
   }
 
