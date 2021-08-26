@@ -173,7 +173,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .calendar {
-  margin-top: 1rem !important;
+  margin-top: 8rem !important;
   background-image: url(/images/svg/blue-wall.svg);
   background-position: center;
   padding-top: 10rem;
