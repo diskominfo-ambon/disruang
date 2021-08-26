@@ -32,6 +32,7 @@ class ScheduleSeeder extends Seeder
           'status' => 'pending',
           'room_id' => $rooms->random()->id,
           'user_id' => $users->random()->id,
+          'max_capacity' => random_int(10, 100),
           'created_at' => now()
         ],
         [
@@ -43,6 +44,7 @@ class ScheduleSeeder extends Seeder
           'status' => 'pending',
           'room_id' => $rooms->random()->id,
           'user_id' => $users->random()->id,
+          'max_capacity' => random_int(10, 100),
           'created_at' => now()
         ],
         [
@@ -54,6 +56,7 @@ class ScheduleSeeder extends Seeder
           'status' => 'pending',
           'room_id' => $rooms->random()->id,
           'user_id' => $users->random()->id,
+          'max_capacity' => random_int(10, 100),
           'created_at' => now()
         ],
 
@@ -67,6 +70,7 @@ class ScheduleSeeder extends Seeder
           'status' => 'confirm',
           'room_id' => $rooms->random()->id,
           'user_id' => $users->random()->id,
+          'max_capacity' => random_int(10, 100),
           'created_at' => now()
         ],
         [
@@ -78,6 +82,7 @@ class ScheduleSeeder extends Seeder
           'status' => 'confirm',
           'room_id' => $rooms->random()->id,
           'user_id' => $users->random()->id,
+          'max_capacity' => random_int(10, 100),
           'created_at' => now()
         ],
       ];
