@@ -3135,8 +3135,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup() {
     var isToggle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+
+    function hideDropdown() {
+      isToggle.value = false;
+    }
+
     return {
-      isToggle: isToggle
+      isToggle: isToggle,
+      hideDropdown: hideDropdown
     };
   },
   computed: {
@@ -3327,11 +3333,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })
     });
     var schedule = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      selected: (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-        return suggestions.data.find(function (data) {
-          return data.id === form.schedule_id;
-        });
-      }),
+      selected: null,
       isNotEmpty: (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
         return !(0,lodash__WEBPACK_IMPORTED_MODULE_2__.isEmpty)(schedule.selected);
       })
@@ -3360,6 +3362,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showASNForm.value = e.target.checked;
     }
 
+    function onSuggestionClick(id) {
+      form.schedule_id = id;
+      schedule.selected = suggestions.data.find(function (suggestion) {
+        return suggestion.id == id;
+      });
+    }
+
     function onAcceptSignature(e) {
       showSignaturePad.value = e.target.checked;
 
@@ -3379,10 +3388,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       showSignaturePad.value = false;
     }
-    /**
-     * ! please refactor.
-     */
-
 
     function onSubmit() {
       var endpoint = '/async/participants/new';
@@ -3462,6 +3467,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       onAcceptSignature: onAcceptSignature,
       onAcceptedSignature: onAcceptedSignature,
       onDropdownFilter: onDropdownFilter,
+      onSuggestionClick: onSuggestionClick,
       form: form,
       rooms: rooms,
       schedule: schedule,
@@ -3580,7 +3586,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 attrs.value.push({
                   key: 'today',
-                  highlight: true,
+                  highlight: {
+                    fillMode: 'light'
+                  },
                   popover: {
                     label: 'Hari ini'
                   },
@@ -3811,7 +3819,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         onMouseleave: _cache[2] || (_cache[2] = function ($event) {
           return _ctx.isToggle = false;
         })
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" suggestion "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "suggestion", {}, undefined, true)], 544
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" suggestion "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "suggestion", {
+        hide: _ctx.hideDropdown
+      }, undefined, true)], 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.isToggle]])];
     }),
@@ -4136,57 +4146,65 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_17 = {
+  "class": "mt-2"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-clock me-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_18 = {
+var _hoisted_19 = {
   "class": "py-2"
 };
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "suggestion-wrapper"
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "suggestion-label"
 }, "Daftar kegiatan", -1
 /* HOISTED */
 );
 
-var _hoisted_21 = {
+var _hoisted_22 = {
   key: 0,
   "class": "suggestion-loading"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "👀 Sedang memuat tunggu...", -1
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "👀 Sedang memuat tunggu...", -1
 /* HOISTED */
 );
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "suggestion-empty"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "🤷‍♂️ Kegiatan tidak tersedia untuk hari ini.")], -1
 /* HOISTED */
 );
 
-var _hoisted_24 = {
+var _hoisted_25 = {
   "class": "suggestion-items"
 };
-var _hoisted_25 = {
+var _hoisted_26 = {
   "class": "suggestion-title"
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   "class": "suggestion-meta"
 };
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-user-tag me-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_29 = {
+  "class": "mt-2"
+};
+
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-clock me-1"
 }, null, -1
 /* HOISTED */
@@ -4317,7 +4335,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dropdown_input, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n        FIXME:\n        1. Pastikan nilai dropdown bedasarkan dari v-model.\n        2. Tambahkan trigger untuk menutupi 'dropdown suggestions' setelah memilih.\n        3. Pastikan DOM 'dropdown placholder' itu bersalah dari clone DOM 'dropdown suggestion'.\n        "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dropdown_input, {
     "class": "flex-1 mt-2 mb-0",
     labelText: "Pilih kegiatan Anda",
     placeholderText: "Telusuri kegiatan hari ini",
@@ -4328,18 +4346,20 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     errors: $setup.form.errors.schedule_id
   }, {
     "default": _withId(function () {
-      var _$setup$schedule$sele, _$setup$schedule$sele2, _$setup$schedule$sele3, _$setup$schedule$sele4;
+      var _$setup$schedule$sele, _$setup$schedule$sele2, _$setup$schedule$sele3, _$setup$schedule$sele4, _$setup$schedule$sele5;
 
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele = $setup.schedule.selected) === null || _$setup$schedule$sele === void 0 ? void 0 : _$setup$schedule$sele.title), 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele2 = $setup.schedule.selected) === null || _$setup$schedule$sele2 === void 0 ? void 0 : _$setup$schedule$sele2.user.name), 1
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele2 = $setup.schedule.selected) === null || _$setup$schedule$sele2 === void 0 ? void 0 : _$setup$schedule$sele2.user.name) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele3 = $setup.schedule.selected) === null || _$setup$schedule$sele3 === void 0 ? void 0 : _$setup$schedule$sele3.user.phone_number), 1
       /* TEXT */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele3 = $setup.schedule.selected) === null || _$setup$schedule$sele3 === void 0 ? void 0 : _$setup$schedule$sele3.started_at) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele4 = $setup.schedule.selected) === null || _$setup$schedule$sele4 === void 0 ? void 0 : _$setup$schedule$sele4.ended_at), 1
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Mulai " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele4 = $setup.schedule.selected) === null || _$setup$schedule$sele4 === void 0 ? void 0 : _$setup$schedule$sele4.started_at), 1
       /* TEXT */
-      )])])])];
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Sampai " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$schedule$sele5 = $setup.schedule.selected) === null || _$setup$schedule$sele5 === void 0 ? void 0 : _$setup$schedule$sele5.ended_at), 1
+      /* TEXT */
+      )])])])])];
     }),
     suggestion: _withId(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
         name: "room",
         labelText: "Pilih ruangan",
         onChange: $setup.onDropdownFilter,
@@ -4349,26 +4369,28 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         }
       }, null, 8
       /* PROPS */
-      , ["onChange", "items", "displayItem"]), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" is loading "), $setup.suggestions.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_21, [_hoisted_22])) : $setup.suggestions.isEmpty ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      , ["onChange", "items", "displayItem"]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" is loading "), $setup.suggestions.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, [_hoisted_23])) : $setup.suggestions.isEmpty ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 1
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" is empty "), _hoisted_23], 2112
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" is empty "), _hoisted_24], 2112
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
       )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 2
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" is available "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_24, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.suggestions.data, function (suggestion) {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" is available "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.suggestions.data, function (suggestion) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
           "class": "suggestion-item",
           key: suggestion.id,
-          onClick: function onClick($event) {
-            return $setup.form.schedule_id = suggestion.id;
+          onClick: function onClick() {
+            return $setup.onSuggestionClick(suggestion.id);
           }
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.title), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.title), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.user.name), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.user.name) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.user.phone_number), 1
         /* TEXT */
-        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.started_at) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.ended_at), 1
+        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Mulai " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.started_at), 1
         /* TEXT */
-        )])])], 8
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Sampai " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(suggestion.ended_at), 1
+        /* TEXT */
+        )])])])], 8
         /* PROPS */
         , ["onClick"]);
       }), 128
@@ -4961,7 +4983,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".signature-enter-active[data-v-1581ddd8], .signature-leave-active[data-v-1581ddd8] {\n  transition: all 400ms ease;\n}\n.signature-enter-from[data-v-1581ddd8], .signature-leave-to[data-v-1581ddd8] {\n  opacity: 0;\n  filter: blur(2px);\n  transform: translateY(200px);\n  overflow: hidden;\n}\n.signature-pad[data-v-1581ddd8] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: white;\n  display: flex;\n  flex-direction: column;\n  border-radius: 4px;\n  z-index: 7;\n}\n.signature-pad-header[data-v-1581ddd8] {\n  background-color: #f6f9ff;\n  border-bottom: 1px solid #f1f5ff;\n  display: flex;\n  align-items: center;\n  border-radius: 4px 4px 0 0;\n  justify-content: flex-end;\n  padding: 0.3rem 0.5rem;\n}\n.signature-pad-header button[data-v-1581ddd8] {\n  margin-right: 0.3rem;\n  color: white !important;\n}\n.signature-pad-header button[data-v-1581ddd8]:last-child {\n  margin-right: 0;\n}\n.signature-pad-content[data-v-1581ddd8] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.asn-enter-active[data-v-1581ddd8], .asn-leave-active[data-v-1581ddd8] {\n  transition: all 300ms ease;\n}\n.asn-enter-from[data-v-1581ddd8], .asn-leave-to[data-v-1581ddd8] {\n  opacity: 0;\n  transform: translateY(-20px);\n  overflow: hidden;\n}\n.asn__form[data-v-1581ddd8] {\n  border: 1px solid #ced4da;\n  border-radius: 3px;\n  position: relative;\n  padding: 0.5rem;\n  margin: 1rem 0;\n}\n.asn__form-title[data-v-1581ddd8] {\n  margin: 0;\n  position: absolute;\n  top: -0.7rem;\n  color: #2283B5 !important;\n  border-radius: 2px;\n  border: 1px solid #ced4da;\n  padding: 0.1rem 0.3rem;\n  font-size: 0.9rem;\n  background-color: white;\n}\n.asn__form :last-child .form-group[data-v-1581ddd8] {\n  margin-top: 0.9rem;\n  margin-bottom: 0 !important;\n}\n.form-information[data-v-1581ddd8] {\n  margin: 0;\n}\n.form-information > .form-label[data-v-1581ddd8] {\n  margin-bottom: 0.1rem;\n}\n.form-information > .form-group[data-v-1581ddd8] {\n  margin-bottom: 0 !important;\n}\n.btn-submit[data-v-1581ddd8] {\n  background-color: #F28C3D;\n  border-color: #cf844b;\n  margin-top: 1rem;\n  color: white !important;\n}\n.suggestion-label[data-v-1581ddd8] {\n  margin-bottom: 0.5rem;\n  font-size: 0.9rem;\n  color: #8a93a7 !important;\n  padding: 0 0.6rem;\n}\n.suggestion-wrapper .form-group[data-v-1581ddd8] {\n  padding: 0 0.6rem;\n}\n.suggestion-loading[data-v-1581ddd8], .suggestion-empty[data-v-1581ddd8] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.suggestion-loading p[data-v-1581ddd8], .suggestion-empty p[data-v-1581ddd8] {\n  margin-top: 0.5rem;\n  margin-bottom: 0.8rem;\n  color: #8a93a7 !important;\n  font-size: 0.9rem;\n}\n.suggestion-title[data-v-1581ddd8] {\n  margin: 0;\n  margin-bottom: 0.5rem;\n}\n.suggestion-items[data-v-1581ddd8] {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n}\n.suggestion-item[data-v-1581ddd8] {\n  border-bottom: 1px solid #ddd;\n  padding: 0.6rem;\n  cursor: pointer;\n}\n.suggestion-item[data-v-1581ddd8]:hover {\n  background-color: #eee;\n}\n.suggestion-item-selected[data-v-1581ddd8] {\n  border: none;\n  flex: 1;\n  display: block !important;\n}\n.suggestion-item-selected .suggestion-title[data-v-1581ddd8] {\n  margin: 0rem;\n}\n.suggestion-meta[data-v-1581ddd8] {\n  margin-top: 0.5rem;\n}\n.suggestion-meta p[data-v-1581ddd8] {\n  font-size: 0.8rem !important;\n  display: flex;\n  margin: 0;\n  color: #8a93a7 !important;\n}\n.suggestion-meta p span[data-v-1581ddd8] {\n  margin-left: 0.3rem;\n  display: block;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".signature-enter-active[data-v-1581ddd8], .signature-leave-active[data-v-1581ddd8] {\n  transition: all 400ms ease;\n}\n.signature-enter-from[data-v-1581ddd8], .signature-leave-to[data-v-1581ddd8] {\n  opacity: 0;\n  filter: blur(2px);\n  transform: translateY(200px);\n  overflow: hidden;\n}\n.signature-pad[data-v-1581ddd8] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: white;\n  display: flex;\n  flex-direction: column;\n  border-radius: 4px;\n  z-index: 7;\n}\n.signature-pad-header[data-v-1581ddd8] {\n  background-color: #f6f9ff;\n  border-bottom: 1px solid #f1f5ff;\n  display: flex;\n  align-items: center;\n  border-radius: 4px 4px 0 0;\n  justify-content: flex-end;\n  padding: 0.3rem 0.5rem;\n}\n.signature-pad-header button[data-v-1581ddd8] {\n  margin-right: 0.3rem;\n  color: white !important;\n}\n.signature-pad-header button[data-v-1581ddd8]:last-child {\n  margin-right: 0;\n}\n.signature-pad-content[data-v-1581ddd8] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.asn-enter-active[data-v-1581ddd8], .asn-leave-active[data-v-1581ddd8] {\n  transition: all 300ms ease;\n}\n.asn-enter-from[data-v-1581ddd8], .asn-leave-to[data-v-1581ddd8] {\n  opacity: 0;\n  transform: translateY(-20px);\n  overflow: hidden;\n}\n.asn__form[data-v-1581ddd8] {\n  border: 1px solid #ced4da;\n  border-radius: 3px;\n  position: relative;\n  padding: 0.5rem;\n  margin: 1rem 0;\n}\n.asn__form-title[data-v-1581ddd8] {\n  margin: 0;\n  position: absolute;\n  top: -0.7rem;\n  color: #2283B5 !important;\n  border-radius: 2px;\n  border: 1px solid #ced4da;\n  padding: 0.1rem 0.3rem;\n  font-size: 0.9rem;\n  background-color: white;\n}\n.asn__form :last-child .form-group[data-v-1581ddd8] {\n  margin-top: 0.9rem;\n  margin-bottom: 0 !important;\n}\n.form-information[data-v-1581ddd8] {\n  margin: 0;\n}\n.form-information > .form-label[data-v-1581ddd8] {\n  margin-bottom: 0.1rem;\n}\n.form-information > .form-group[data-v-1581ddd8] {\n  margin-bottom: 0 !important;\n}\n.btn-submit[data-v-1581ddd8] {\n  background-color: #F28C3D;\n  border-color: #cf844b;\n  margin-top: 1rem;\n  color: white !important;\n}\n.suggestion-label[data-v-1581ddd8] {\n  margin-bottom: 0.5rem;\n  font-size: 0.9rem;\n  color: #8a93a7 !important;\n  padding: 0 0.6rem;\n}\n.suggestion-wrapper .form-group[data-v-1581ddd8] {\n  padding: 0 0.6rem;\n}\n.suggestion-loading[data-v-1581ddd8], .suggestion-empty[data-v-1581ddd8] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.suggestion-loading p[data-v-1581ddd8], .suggestion-empty p[data-v-1581ddd8] {\n  margin-top: 0.5rem;\n  margin-bottom: 0.8rem;\n  color: #8a93a7 !important;\n  font-size: 0.9rem;\n}\n.suggestion-title[data-v-1581ddd8] {\n  margin: 0;\n  margin-bottom: 0.5rem;\n}\n.suggestion-items[data-v-1581ddd8] {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n}\n.suggestion-item[data-v-1581ddd8] {\n  border-bottom: 1px solid #ddd;\n  padding: 0.6rem;\n  cursor: pointer;\n}\n.suggestion-item[data-v-1581ddd8]:hover {\n  background-color: #eee;\n}\n.suggestion-item-selected[data-v-1581ddd8] {\n  border: none;\n  flex: 1;\n  display: block !important;\n}\n.suggestion-item-selected .suggestion-title[data-v-1581ddd8] {\n  margin: 0rem;\n}\n.suggestion-meta[data-v-1581ddd8] {\n  margin-top: 0.5rem;\n}\n.suggestion-meta p[data-v-1581ddd8] {\n  font-size: 0.8rem !important;\n  display: flex;\n  align-items: center;\n  margin: 0;\n  color: #8a93a7 !important;\n}\n.suggestion-meta p p[data-v-1581ddd8], .suggestion-meta p span[data-v-1581ddd8] {\n  margin-left: 0.3rem;\n  display: block;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4985,7 +5007,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".calendar[data-v-29283a82] {\n  margin-top: 1rem !important;\n  background-image: url(/images/svg/blue-wall.svg);\n  background-position: center;\n  padding-top: 10rem;\n  padding-bottom: 7rem;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-bottom: 1px solid #eee;\n}\n@media screen and (max-width: 760px) {\n.calendar[data-v-29283a82] {\n    padding-top: 30rem;\n}\n}\n.calendar-headline[data-v-29283a82] {\n  display: flex;\n  margin-bottom: 0.8rem;\n}\n.calendar-headline img[data-v-29283a82] {\n  width: 4rem;\n  height: 3rem;\n}\n.calendar-headline div[data-v-29283a82] {\n  margin-left: 0.4rem;\n}\n.calendar-title[data-v-29283a82] {\n  font-size: 1.5rem;\n  font-weight: bolder;\n}\n.calendar-subtitle[data-v-29283a82] {\n  color: #8A93A7 !important;\n  font-size: 0.9rem;\n}\n.calendar .card[data-v-29283a82] {\n  border-color: #CBD5E0;\n}\n@media screen and (max-width: 760px) {\n.calendar .card[data-v-29283a82] {\n    margin-top: 1rem;\n}\n}\n.calendar .card-header[data-v-29283a82] {\n  background-color: #F6F9FF !important;\n}\n.calendar .card-header p[data-v-29283a82] {\n  margin: 0;\n}\n.calendar .card-header p[data-v-29283a82]::before {\n  content: \"\";\n  height: 10px;\n  width: 10px;\n  display: inline-block;\n  margin-right: 0.5rem;\n  border-radius: 55%;\n  background-color: #066ECD;\n}\n.calendar .card .list-group[data-v-29283a82] {\n  max-height: 15.2rem;\n  overflow-y: scroll;\n}\n.calendar .card .list-group-item__title[data-v-29283a82] {\n  margin: 0;\n  margin-left: 0.4rem;\n  margin-bottom: 0.2rem;\n  display: inline-block;\n}\n.calendar .card .list-group-item__subtitle[data-v-29283a82] {\n  font-size: 0.9rem;\n  margin-bottom: 0.3rem;\n}\n.calendar .card .list-group-item__meta div[data-v-29283a82] {\n  margin-right: 0.5rem;\n  color: #8A93A7;\n}\n.calendar .card .list-group-item__meta div[data-v-29283a82]:last-child {\n  margin: 0;\n}\n.calendar .card .list-group-item__meta svg[data-v-29283a82] {\n  width: 0.9rem;\n  color: #8A93A7;\n}\n.calendar .card .list-group-item__meta span[data-v-29283a82] {\n  font-size: 0.8rem;\n  margin-left: 0.3rem;\n  color: #8A93A7 !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".calendar[data-v-29283a82] {\n  margin-top: 8rem !important;\n  background-image: url(/images/svg/blue-wall.svg);\n  background-position: center;\n  padding-top: 10rem;\n  padding-bottom: 7rem;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-bottom: 1px solid #eee;\n}\n@media screen and (max-width: 760px) {\n.calendar[data-v-29283a82] {\n    padding-top: 30rem;\n}\n}\n.calendar-headline[data-v-29283a82] {\n  display: flex;\n  margin-bottom: 0.8rem;\n}\n.calendar-headline img[data-v-29283a82] {\n  width: 4rem;\n  height: 3rem;\n}\n.calendar-headline div[data-v-29283a82] {\n  margin-left: 0.4rem;\n}\n.calendar-title[data-v-29283a82] {\n  font-size: 1.5rem;\n  font-weight: bolder;\n}\n.calendar-subtitle[data-v-29283a82] {\n  color: #8A93A7 !important;\n  font-size: 0.9rem;\n}\n.calendar .card[data-v-29283a82] {\n  border-color: #CBD5E0;\n}\n@media screen and (max-width: 760px) {\n.calendar .card[data-v-29283a82] {\n    margin-top: 1rem;\n}\n}\n.calendar .card-header[data-v-29283a82] {\n  background-color: #F6F9FF !important;\n}\n.calendar .card-header p[data-v-29283a82] {\n  margin: 0;\n}\n.calendar .card-header p[data-v-29283a82]::before {\n  content: \"\";\n  height: 10px;\n  width: 10px;\n  display: inline-block;\n  margin-right: 0.5rem;\n  border-radius: 55%;\n  background-color: #066ECD;\n}\n.calendar .card .list-group[data-v-29283a82] {\n  max-height: 15.2rem;\n  overflow-y: scroll;\n}\n.calendar .card .list-group-item__title[data-v-29283a82] {\n  margin: 0;\n  margin-left: 0.4rem;\n  margin-bottom: 0.2rem;\n  display: inline-block;\n}\n.calendar .card .list-group-item__subtitle[data-v-29283a82] {\n  font-size: 0.9rem;\n  margin-bottom: 0.3rem;\n}\n.calendar .card .list-group-item__meta div[data-v-29283a82] {\n  margin-right: 0.5rem;\n  color: #8A93A7;\n}\n.calendar .card .list-group-item__meta div[data-v-29283a82]:last-child {\n  margin: 0;\n}\n.calendar .card .list-group-item__meta svg[data-v-29283a82] {\n  width: 0.9rem;\n  color: #8A93A7;\n}\n.calendar .card .list-group-item__meta span[data-v-29283a82] {\n  font-size: 0.8rem;\n  margin-left: 0.3rem;\n  color: #8A93A7 !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -5009,7 +5031,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".hero[data-v-13d75618] {\n  height: 20rem;\n  max-height: 21.75rem;\n}\n.hero-bg_gradient[data-v-13d75618] {\n  background: linear-gradient(170deg, #2E6DC5, #0770cd, #0064D2) !important;\n}\n.hero-headline[data-v-13d75618] {\n  position: relative;\n  top: 4rem;\n}\n.hero-title[data-v-13d75618] {\n  margin-top: 1.2rem;\n  color: white !important;\n  font-size: 1.7rem;\n}\n.hero-subtitle[data-v-13d75618] {\n  color: white !important;\n  font-size: 1rem;\n}\n.hero-meta p[data-v-13d75618] {\n  color: white !important;\n  font-size: 0.9rem;\n}\n.hero-meta div[data-v-13d75618] {\n  margin: 0.5rem 0;\n}\n.hero-meta div img[data-v-13d75618]:last-child {\n  margin-right: 0;\n  width: 35px;\n}\n.hero-meta div img[data-v-13d75618] {\n  width: 40px;\n  margin-top: -0.2rem;\n  margin-right: 1rem;\n  filter: saturate(10%);\n}\n.hero .card[data-v-13d75618] {\n  margin-top: 3rem;\n}\n@media screen and (max-width: 760px) {\n.hero .card[data-v-13d75618] {\n    margin-top: 4rem;\n}\n}\n.hero .card-body[data-v-13d75618] {\n  position: relative;\n  z-index: 5 !important;\n  background-color: white;\n  border-radius: 3px;\n}\n.overflay-leave-active[data-v-13d75618] {\n  transition: all 400ms ease;\n}\n.overflay-enter-from[data-v-13d75618], .overflay-leave-to[data-v-13d75618] {\n  opacity: 0;\n}\n.overflay-backdrop[data-v-13d75618] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 2;\n  background: rgba(15, 23, 37, 0.911);\n  transition: all 300ms ease;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".hero[data-v-13d75618] {\n  height: 30rem;\n  max-height: 30.75rem;\n}\n.hero-bg_gradient[data-v-13d75618] {\n  background: linear-gradient(170deg, #2E6DC5, #0770cd, #0064D2) !important;\n}\n.hero-headline[data-v-13d75618] {\n  position: relative;\n  top: 4rem;\n}\n.hero-title[data-v-13d75618] {\n  margin-top: 1.2rem;\n  color: white !important;\n  font-size: 1.7rem;\n}\n.hero-subtitle[data-v-13d75618] {\n  color: white !important;\n  font-size: 1rem;\n}\n.hero-meta p[data-v-13d75618] {\n  color: white !important;\n  font-size: 0.9rem;\n}\n.hero-meta div[data-v-13d75618] {\n  margin: 0.5rem 0;\n}\n.hero-meta div img[data-v-13d75618]:last-child {\n  margin-right: 0;\n  width: 35px;\n}\n.hero-meta div img[data-v-13d75618] {\n  width: 40px;\n  margin-top: -0.2rem;\n  margin-right: 1rem;\n  filter: saturate(10%);\n}\n.hero .card[data-v-13d75618] {\n  margin-top: 3rem;\n}\n@media screen and (max-width: 760px) {\n.hero .card[data-v-13d75618] {\n    margin-top: 4rem;\n}\n}\n.hero .card-body[data-v-13d75618] {\n  position: relative;\n  z-index: 5 !important;\n  background-color: white;\n  border-radius: 3px;\n}\n.overflay-leave-active[data-v-13d75618] {\n  transition: all 400ms ease;\n}\n.overflay-enter-from[data-v-13d75618], .overflay-leave-to[data-v-13d75618] {\n  opacity: 0;\n}\n.overflay-backdrop[data-v-13d75618] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 2;\n  background: rgba(15, 23, 37, 0.911);\n  transition: all 300ms ease;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

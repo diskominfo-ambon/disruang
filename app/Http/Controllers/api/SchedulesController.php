@@ -19,7 +19,7 @@ class SchedulesController extends Controller
     ];
 
     $schedules = Schedule::confirm()
-      ->with(['room:id,name', 'user:id,name'])
+      ->with(['room:id,name', 'user:id,name,phone_number'])
       ->whereMonth('started_at', $month)
       ->whereYear('started_at', $year)
       ->get();

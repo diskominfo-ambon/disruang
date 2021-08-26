@@ -70,8 +70,12 @@
       <!-- end -->
     </div>
 
-
-    <!-- FIXME: dropdown suggestion in disable on clicked  -->
+    <!--
+        FIXME:
+        1. Pastikan nilai dropdown bedasarkan dari v-model.
+        2. Tambahkan trigger untuk menutupi 'dropdown suggestions' setelah memilih.
+        3. Pastikan DOM 'dropdown placholder' itu bersalah dari clone DOM 'dropdown suggestion'.
+        -->
     <dropdown-input
       class="flex-1 mt-2 mb-0"
       labelText="Pilih kegiatan Anda"
@@ -85,11 +89,14 @@
           <div class="suggestion-meta">
             <p>
               <i class="fas fa-user-tag me-1"></i>
-              <span>{{ schedule.selected?.user.name }}</span>
+              <span>{{ schedule.selected?.user.name }} • {{ schedule.selected?.user.phone_number }} </span>
             </p>
-            <p>
+            <p class="mt-2">
               <i class="fas fa-clock me-1"></i>
-              <span>{{ schedule.selected?.started_at }} • {{ schedule.selected?.ended_at }}</span>
+              <div>
+                  <p>Mulai {{ schedule.selected?.started_at }}</p>
+                  <p>Sampai {{ schedule.selected?.ended_at }}</p>
+              </div>
             </p>
           </div>
         </div>
@@ -122,17 +129,20 @@
                 <li class="suggestion-item"
                   v-for="suggestion in suggestions.data"
                   :key="suggestion.id"
-                  @click="form.schedule_id = suggestion.id"
+                  @click="() => onSuggestionClick(suggestion.id)"
                 >
                   <p class="suggestion-title">{{ suggestion.title }}</p>
                   <div class="suggestion-meta">
                     <p>
                       <i class="fas fa-user-tag me-1"></i>
-                      <span>{{ suggestion.user.name }}</span>
+                      <span>{{ suggestion.user.name }} • {{ suggestion.user.phone_number }}</span>
                     </p>
-                    <p>
+                    <p class="mt-2">
                       <i class="fas fa-clock me-1"></i>
-                      <span>{{ suggestion.started_at }} • {{ suggestion.ended_at }}</span>
+                      <div>
+                        <p>Mulai {{ suggestion.started_at }}</p>
+                        <p>Sampai {{ suggestion.ended_at }}</p>
+                      </div>
                     </p>
                   </div>
                 </li>
@@ -206,7 +216,7 @@ export default {
       isEmpty: computed(() => suggestions.data.length <= 0)
     });
     const schedule = reactive({
-      selected: computed(() => suggestions.data.find(data => data.id === form.schedule_id)),
+      selected: null,
       isNotEmpty: computed(() => !isEmpty(schedule.selected))
     });
     const rooms = ref([]);
@@ -241,6 +251,11 @@ export default {
       showASNForm.value = e.target.checked;
     }
 
+    function onSuggestionClick(id) {
+        form.schedule_id = id;
+        schedule.selected = suggestions.data.find(suggestion => suggestion.id == id);
+    }
+
     function onAcceptSignature(e) {
       showSignaturePad.value = e.target.checked;
 
@@ -249,7 +264,6 @@ export default {
         form.signatureFile = '';
       }
     }
-
 
     function onAcceptedSignature() {
       if (signatureRef.value.isEmpty()) {
@@ -369,6 +383,7 @@ export default {
       onAcceptSignature,
       onAcceptedSignature,
       onDropdownFilter,
+      onSuggestionClick,
       form,
       rooms,
       schedule,
@@ -568,9 +583,10 @@ export default {
     p {
       font-size: .8rem !important;
       display: flex;
+      align-items: center;
       margin: 0;
       color: #8a93a7 !important;
-      span {
+      p, span {
         margin-left: .3rem;
         display: block;
       }

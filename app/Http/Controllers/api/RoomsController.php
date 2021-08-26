@@ -22,7 +22,7 @@ class RoomsController extends Controller
   {
 
     $schedules = $room->schedules()
-      ->with(['user:id,name'])
+      ->with(['user:id,name,phone_number'])
       ->confirm()
       ->where(function (Builder $builder) use ($request) {
         if ($request->filled('day')) {

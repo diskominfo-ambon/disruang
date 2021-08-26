@@ -146,7 +146,9 @@ export default defineComponent({
         attrs.value.push(
           {
             key: 'today',
-            highlight: true,
+            highlight: {
+                fillMode: 'light',
+            },
             popover: {
               label: 'Hari ini'
             },

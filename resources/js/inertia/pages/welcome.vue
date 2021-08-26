@@ -117,8 +117,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .hero {
-  height: 20rem;
-  max-height: 21.75rem;
+  height: 30rem;
+  max-height: 30.75rem;
 
 
 
