@@ -24,7 +24,7 @@
   <transition name="dropdown" mode="out-in">
     <div class="dropdown-suggestion shadow" v-show="isToggle" @mouseleave="isToggle = false">
       <!-- suggestion -->
-      <slot name="suggestion" :hide="hideDropdown"></slot>
+      <slot name="suggestion"></slot>
     </div>
   </transition>
 
@@ -53,13 +53,8 @@ export default defineComponent({
   setup() {
     const isToggle = ref(false);
 
-    function hideDropdown() {
-        isToggle.value = false;
-    }
-
     return {
-      isToggle,
-      hideDropdown
+      isToggle
     };
   },
   computed: {

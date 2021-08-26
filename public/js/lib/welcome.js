@@ -3135,14 +3135,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup() {
     var isToggle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-
-    function hideDropdown() {
-      isToggle.value = false;
-    }
-
     return {
-      isToggle: isToggle,
-      hideDropdown: hideDropdown
+      isToggle: isToggle
     };
   },
   computed: {
@@ -3819,9 +3813,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         onMouseleave: _cache[2] || (_cache[2] = function ($event) {
           return _ctx.isToggle = false;
         })
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" suggestion "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "suggestion", {
-        hide: _ctx.hideDropdown
-      }, undefined, true)], 544
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" suggestion "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "suggestion", {}, undefined, true)], 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.isToggle]])];
     }),
