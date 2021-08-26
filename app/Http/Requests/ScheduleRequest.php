@@ -28,9 +28,10 @@ class ScheduleRequest extends FormRequest
     return [
       'room_id' => 'required',
       'title' => 'required',
-      'desc' => 'required|max:200',
+      'desc' => 'required|max:800',
       'started_at' => 'required|date',
-      'ended_at' => 'required|date'
+      'ended_at' => 'required|date',
+      'max_capacity' => 'required|numeric'
     ];
   }
 
@@ -42,7 +43,8 @@ class ScheduleRequest extends FormRequest
       'title' => 'Judul',
       'desc' => 'Deskripsi',
       'started_at' => 'Waktu mulai',
-      'ended_at' => 'Waktu akhir'
+      'ended_at' => 'Waktu akhir',
+      'max_capacity' => 'Kapasitas pendaftar'
     ];
   }
 

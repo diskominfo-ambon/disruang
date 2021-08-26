@@ -12,7 +12,7 @@ trait Confirmable
      * @var string
      * @const
      */
-    protected static $PENDING = 'pending';
+    public static $PENDING = 'pending';
 
     /**
      * Status confirmed.
@@ -20,7 +20,7 @@ trait Confirmable
      * @var string
      * @const
      */
-    protected static $CONFIRM = 'confirm';
+    public static $CONFIRM = 'confirm';
 
     /**
      * Status rejected.
@@ -28,7 +28,7 @@ trait Confirmable
      * @var string
      * @const
      */
-    protected static $REJECT = 'reject';
+    public static $REJECT = 'reject';
 
     public function scopeConfirm(Builder $builder): Builder
     {

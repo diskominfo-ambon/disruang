@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
 
     Gate::define('schedule.must.unique', function (?User $user, Request $request): bool {
 
-      return Schedule::order([Schedule::PENDING, Schedule::CONFIRM])
+      return Schedule::order([Schedule::$PENDING, Schedule::$CONFIRM])
         ->where([
           ['started_at', '<', $request->ended_at],
           ['ended_at', '>', $request->started_at],

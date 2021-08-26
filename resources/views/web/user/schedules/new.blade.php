@@ -83,20 +83,36 @@
       <span class="error-text">@{{ form.errors.data?.title }}</span>
     </div>
 
+
+    <div class="buysell-field form-group">
+        <div class="form-label-group">
+          <label for="max_capcity" class="form-label">
+            Kapasitas pendaftar yang dibutuhkan
+          </label>
+        </div>
+        <div class="form-control-group">
+          <input type="number" v-model="form.max_capacity" placeholder="Contoh: 10?, 20?" id="max_capcity" name="max_capcity" class="form-control form-control-lg form-control-number">
+        </div>
+        <div class="form-note-group">
+          <span class="buysell-min form-note-alt">
+            Kamu dapat mengatur batasan pendaftar untuk kegiatan ini.
+          </span>
+        </div>
+        <span class="error-text">@{{ form.errors.data?.max_capacity }}</span>
+    </div>
+
     <div class="buysell-field form-group">
       <div class="form-label-group">
-        <label for="desc" class="form-label">Deskripsi kegiatan
-          <em>
-            <span class="buysell-min form-note-alt">
-              (Opsional)
-            </span>
-          </em>
-        </label>
+        <label for="desc" class="form-label">Deskripsi kegiatan</label>
       </div>
       <div class="form-control-group">
         <textarea maxlength="200" v-model="form.desc" name="desc" id="desc" class="form-control form-control-lg form-control-number"></textarea>
       </div>
-
+      <div class="form-note-group">
+        <span class="buysell-min form-note-alt">
+          Kamu menambahkan informasi lengkap lainya terkait kegiatan ini seperti kontak, dll..
+        </span>
+      </div>
       <span class="error-text">@{{ form.errors.data?.desc }}</span>
     </div>
 
