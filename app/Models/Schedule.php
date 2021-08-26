@@ -38,8 +38,8 @@ class Schedule extends Model
   {
     // global scope status query is pending.
     static::addGlobalScope(
-      Schedule::PENDING,
-      fn (Builder $builder) => $builder->active()->where('status', self::PENDING)
+      Schedule::$PENDING,
+      fn (Builder $builder) => $builder->active()->where('status', self::$PENDING)
     );
 
     static::saving(function (Schedule $schedule) {

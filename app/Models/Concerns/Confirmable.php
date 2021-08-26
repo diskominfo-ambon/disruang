@@ -6,16 +6,35 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Confirmable
 {
-    const PENDING = 'pending';
-    const CONFIRM = 'confirm';
-    const REJECT = 'reject';
+    /**
+     * Status is pending.
+     *
+     * @var string
+     * @const
+     */
+    protected static $PENDING = 'pending';
 
+    /**
+     * Status confirmed.
+     *
+     * @var string
+     * @const
+     */
+    protected static $CONFIRM = 'confirm';
+
+    /**
+     * Status rejected.
+     *
+     * @var string
+     * @const
+     */
+    protected static $REJECT = 'reject';
 
     public function scopeConfirm(Builder $builder): Builder
     {
         return $builder->withoutGlobalScopes()
         ->active()
-        ->where('status', self::CONFIRM);
+        ->where('status', self::$CONFIRM);
     }
 
 
@@ -23,7 +42,7 @@ trait Confirmable
     {
         return $builder->withoutGlobalScopes()
         ->active()
-        ->where('status', self::REJECT);
+        ->where('status', self::$REJECT);
     }
 
 
@@ -49,18 +68,18 @@ trait Confirmable
 
     public function getIsPendingAttribute(): bool
     {
-        return $this->status === self::PENDING;
+        return $this->status === self::$PENDING;
     }
 
 
     public function getIsConfirmAttribute(): bool
     {
-        return $this->status === self::CONFIRM;
+        return $this->status === self::$CONFIRM;
     }
 
     public function getIsRejectAttribute(): bool
     {
-        return $this->status === self::REJECT;
+        return $this->status === self::$REJECT;
     }
 
 }
