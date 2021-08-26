@@ -27,7 +27,8 @@ class IsScheduleAvailable implements Rule
      */
     public function passes($attribute, $id)
     {
-        $schedule = Schedule::find($id);
+        $schedule = Schedule::with('participants')
+            ->confirm()->find((int) $id, ['id', 'max_capacity']);
 
         // Melakukan pengecekan, apakah kegiatan masih tersedia (kapasitasnya)
         // saat melakukan pendaftaran.
@@ -41,6 +42,6 @@ class IsScheduleAvailable implements Rule
      */
     public function message()
     {
-        return 'Maaf, :attribute saat ini telah penuh.';
+        return 'Maaf, :attribute yang dipilih telah penuh.';
     }
 }

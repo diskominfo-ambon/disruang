@@ -30,7 +30,7 @@ class ParticipantRequest extends FormRequest
       'gender' => 'required',
       'phoneNumber' => 'required',
       'signatureFile' => 'required',
-      'schedule_id' => ['required', new IsScheduleAvailable()]
+      'schedule_id' => ['required', new IsScheduleAvailable]
     ];
   }
 
