@@ -8,15 +8,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\Concerns\Confirmable;
+
 class Schedule extends Model
 {
-  use HasFactory;
-
-
-  // schedule status.
-  const PENDING = 'pending';
-  const CONFIRM = 'confirm';
-  const REJECT = 'reject';
+  use HasFactory, Confirmable;
 
 
   protected $table = 'room_has_schedules';
@@ -40,13 +36,16 @@ class Schedule extends Model
    */
   protected static function booted()
   {
+    // global scope status query is pending.
     static::addGlobalScope(
       Schedule::PENDING,
-      fn (Builder $builder) => $builder->active()->where('status', Schedule::PENDING)
+      fn (Builder $builder) => $builder->active()->where('status', self::PENDING)
     );
 
     static::saving(function (Schedule $schedule) {
-      $schedule->slug = str($schedule->title)->lower()->slug();
+      $schedule->slug = str($schedule->title)
+            ->lower()
+            ->slug();
     });
   }
 
@@ -63,64 +62,10 @@ class Schedule extends Model
   }
 
 
-  public function scopeConfirm(Builder $builder): Builder
-  {
-    return $builder->withoutGlobalScopes()
-      ->active()
-      ->where('status', Schedule::CONFIRM);
-  }
-
-
-  public function scopeReject(Builder $builder): Builder
-  {
-    return $builder->withoutGlobalScopes()
-      ->active()
-      ->where('status', Schedule::REJECT);
-  }
-
-
   public function scopeActive(Builder $builder): Builder
   {
     return $builder->where('is_active', 1);
   }
-
-
-  public function scopeOrder(Builder $builder, string|array $order): Builder
-  {
-    return $builder
-      ->withoutGlobalScopes()
-      ->active()
-      ->where(function (Builder $builder) use ($order) {
-        if (is_array($order)) {
-          $builder->whereIn('status', $order);
-        }
-
-        if (is_string($order)) {
-          $builder->where('status', $order);
-        }
-
-        return $builder;
-      });
-  }
-
-
-
-  public function getIsPendingAttribute(): bool
-  {
-    return $this->status === Schedule::PENDING;
-  }
-
-
-  public function getIsConfirmAttribute(): bool
-  {
-    return $this->status === Schedule::CONFIRM;
-  }
-
-  public function getIsRejectAttribute(): bool
-  {
-    return $this->status === Schedule::REJECT;
-  }
-
 
   // relationships join.
 

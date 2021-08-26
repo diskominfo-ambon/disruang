@@ -80,7 +80,7 @@
                             </a>
                             <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
                                 <ul class="link-list">
-                                    <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>Ubah profil</span></a></li>
+                                    <li><a href="#"><em class="icon ni ni-user-alt"></em><span>Ubah profil</span></a></li>
                                 </ul>
                                 <ul class="link-list">
                                     <li>
