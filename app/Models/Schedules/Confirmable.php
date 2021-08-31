@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Concerns;
+namespace App\Models\Schedules;
 
 use Illuminate\Database\Eloquent\Builder;
 

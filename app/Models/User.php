@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -53,6 +52,12 @@ class User extends Authenticatable
     return $this->hasMany(Schedule::class);
   }
 
+  /**
+   * Query all user without this current 'user'.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $builder
+   * @return Illuminate\Database\Eloquent\Builder
+   */
   public function scopeWithoutCurrentUser(Builder $builder): Builder
   {
     return $builder->where('id', '!=', Auth::user()->id);

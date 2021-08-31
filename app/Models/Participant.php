@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use App\Support\Eloquent\HasNatureASN;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Concerns\MustVerifySignature;
+use App\Models\Concerns\HasEmployee;
 
 class Participant extends Model
 {
-  use HasFactory, HasNatureASN;
+  use HasFactory, HasEmployee, MustVerifySignature;
 
 
   protected $table = 'room_has_participants';
@@ -22,30 +20,11 @@ class Participant extends Model
     'id'
   ];
 
-
-  public function scopeAsn(Builder $builder): Builder
-  {
-    return $builder
-      ->whereNotNull('origin')
-      ->whereNotNull('origin_job_title');
-  }
-
-
-  public function scopeGuest(Builder $builder): Builder
-  {
-    return $builder
-      ->whereNull('origin')
-      ->whereNull('origin_job_title');
-  }
-
-
-  public function getHasSignatureAttribute(): bool
-  {
-    return Str::of($this->signature)->isNotEmpty()
-      && Storage::disk('public')->exists($this->signature);
-  }
-
-
+  /**
+   * Relationship: One Participant has belongs to schedules.
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
   public function schedule(): BelongsTo
   {
     return $this->belongsTo(Schedule::class);

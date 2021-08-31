@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-use App\Models\Concerns\Confirmable;
+use App\Models\Schedules\Confirmable;
 
 class Schedule extends Model
 {
@@ -67,8 +67,12 @@ class Schedule extends Model
     return $builder->where('is_active', 1);
   }
 
-  // relationships join.
 
+  /**
+   * Relationship: Schedules can has many Participant.
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\HasMany
+   */
   public function participants(): HasMany
   {
     return $this->hasMany(Participant::class);

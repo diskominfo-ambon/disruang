@@ -14,6 +14,11 @@ class Room extends Model
       'name'
     ];
 
+    /**
+     * Relationship: One room has can one or many schedules.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function schedules(): HasMany
     {
       return $this->hasMany(Schedule::class);

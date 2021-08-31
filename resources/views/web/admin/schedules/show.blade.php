@@ -90,7 +90,7 @@
                             <span class="tb-lead-sub">{{ $participant->phone_number }}</span>
                         </div>
                         <div class="nk-tb-col tb-col-md">
-                          @if ($participant->asn())
+                          @if ($participant->isEmployee)
                             <span class="tb-status text-success">ASN</span>
                           @else
                             <span class="tb-status text-info">Umum</span>
