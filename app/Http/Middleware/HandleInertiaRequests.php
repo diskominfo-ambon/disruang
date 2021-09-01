@@ -14,7 +14,7 @@ class HandleInertiaRequests extends Middleware
    * @see https://inertiajs.com/server-side-setup#root-template
    * @var string
    */
-  protected $rootView = 'inertia';
+  protected $rootView = 'web::layouts.inertia';
 
   /**
    * Defines the props that are shared by default.
@@ -27,6 +27,7 @@ class HandleInertiaRequests extends Middleware
   {
     return array_merge(parent::share($request), [
       'isAuthenticated' => fn () => $request?->user() || false,
+      'csrf' => csrf_token(),
       'auth.user' => fn () => $request?->user()?->only(['id', 'name', 'email']),
       'flash' => [
         'message' => fn () => $request->session()->get('message')

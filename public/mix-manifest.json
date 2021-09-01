@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/vendor/dashlite/schedule.js": "/js/vendor/dashlite/schedule.js",
+    "/js/lib/welcome.js": "/js/lib/welcome.js",
     "/css/app.css": "/css/app.css"
 }
