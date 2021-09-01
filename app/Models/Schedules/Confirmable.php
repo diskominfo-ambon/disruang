@@ -33,16 +33,16 @@ trait Confirmable
     public function scopeConfirm(Builder $builder): Builder
     {
         return $builder->withoutGlobalScopes()
-        ->active()
-        ->where('status', self::$CONFIRM);
+            ->active()
+            ->where('status', self::$CONFIRM);
     }
 
 
     public function scopeReject(Builder $builder): Builder
     {
         return $builder->withoutGlobalScopes()
-        ->active()
-        ->where('status', self::$REJECT);
+            ->active()
+            ->where('status', self::$REJECT);
     }
 
 
