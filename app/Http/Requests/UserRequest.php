@@ -36,12 +36,10 @@ class UserRequest extends FormRequest
       }
 
       if (($this->routeIs('admin.d.store') || $this->routeIs('admin.d.update'))
-        && auth()->user()->id !== $this->user->id
+        && auth()->user()->id !== $this?->user?->id
       ) {
         $rules['permission'] = 'required';
       }
-
-      dd($rules);
 
       return $rules;
     }
