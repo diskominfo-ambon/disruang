@@ -13,10 +13,10 @@ class SubmissionsController extends Controller
 {
   public function index(Request $request)
   {
-    $order = $request->get('order', Schedule::PENDING);
+    $order = $request->get('order', Schedule::$PENDING);
 
-    if (!in_array($order, [Schedule::PENDING, Schedule::REJECT])) {
-      $order = Schedule::PENDING;
+    if (!in_array($order, [Schedule::$PENDING, Schedule::$REJECT])) {
+      $order = Schedule::$PENDING;
     }
 
     $schedules = Schedule::order($order)->get();
@@ -26,9 +26,9 @@ class SubmissionsController extends Controller
 
   public function update(Request $request, Schedule $schedule)
   {
-    $status = $request->get('order') === Schedule::CONFIRM
-    ? Schedule::CONFIRM
-    : Schedule::REJECT;
+    $status = $request->get('order') === Schedule::$CONFIRM
+      ? Schedule::$CONFIRM
+      : Schedule::$REJECT;
 
 
     $schedule->update(compact('status'));
