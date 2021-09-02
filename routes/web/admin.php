@@ -32,7 +32,7 @@ Route::resource('rooms', RoomsController::class, ['as' => 'admin'])
   ->except('show');
 
 Route::resources([
-  'users' => UsersController::class,  
+  'users' => UsersController::class,
 ], [
   'as' => 'admin',
   'except' => ['show']

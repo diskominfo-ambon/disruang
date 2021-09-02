@@ -44,21 +44,9 @@ class Schedule extends Model
 
     static::saving(function (Schedule $schedule) {
       $schedule->slug = str($schedule->title)
-            ->lower()
-            ->slug();
+        ->lower()
+        ->slug();
     });
-  }
-
-
-  /**
-   * Route bind key name
-   *
-   * @override
-   * @return void
-   */
-  public function getRouteKeyName()
-  {
-    return 'slug';
   }
 
 
@@ -89,5 +77,4 @@ class Schedule extends Model
   {
     return $this->belongsTo(User::class);
   }
-
 }
