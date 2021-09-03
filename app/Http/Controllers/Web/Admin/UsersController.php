@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
@@ -81,11 +82,15 @@ class UsersController extends Controller
    */
   public function update(UserRequest $request, User $user)
   {
+    $body = collect($request->except(['_method', '_token']))
+      ->filter(fn ($field) => Str::of($field)->isNotEmpty());
+
     $user->update(
-      $request->all()
+      $body->toArray()
     );
 
-    return Redirect::route('admin.guests.index')
+
+    return Redirect::route('admin.users.index')
       ->with(
         'message',
         'Berhasil menyimpan perubahan'
