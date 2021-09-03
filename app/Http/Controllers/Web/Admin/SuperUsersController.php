@@ -49,6 +49,7 @@ class SuperUsersController extends Controller
    */
   public function store(UserRequest $request)
   {
+
     $user = User::create(
       $request->all()
     );
@@ -96,7 +97,7 @@ class SuperUsersController extends Controller
     $permission = $request->permission;
 
     $user->syncPermissions(
-      $permission
+      $permission,
     );
 
     return Redirect::route('admin.d.index')
