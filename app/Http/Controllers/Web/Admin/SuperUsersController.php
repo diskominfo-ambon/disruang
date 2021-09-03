@@ -90,8 +90,11 @@ class SuperUsersController extends Controller
    */
   public function update(UserRequest $request, User $user)
   {
+    $body = collect($request->except(['_method', '_token']))
+      ->filter(fn ($field) => Str::of($field)->isNotEmpty());
+
     $user->update(
-      $request->all()
+      $body->toArray()
     );
 
     $permission = $request->permission;
