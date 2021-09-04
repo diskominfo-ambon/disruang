@@ -11,7 +11,7 @@ class RegisteredUserController extends Controller
 {
   public function store(Request $request)
   {
-    $body = $request->validate([
+    $request->validate([
       'name' => 'required',
       'email' => 'required',
       'username' => 'required|unique:users,username',
@@ -22,7 +22,11 @@ class RegisteredUserController extends Controller
       'phone_number' => 'Nomor telepon'
     ]);
 
-    $user = User::create($body);
+    $body = $request->merge([
+        'password' => bcrypt($request->password)
+    ]);
+
+    $user = User::create($body->all());
 
     $user->assignRole('user');
 
