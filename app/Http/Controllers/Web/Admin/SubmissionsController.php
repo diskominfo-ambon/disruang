@@ -45,8 +45,8 @@ class SubmissionsController extends Controller
     // sending notification from reviewed schedule.
     Notification::send(
       $schedule, $status === Schedule::$CONFIRM
-        ? new ScheduleConfirmed($schedule)
-        : new ScheduleRejected($schedule, $message)
+        ? new ScheduleConfirmed()
+        : new ScheduleRejected($message)
     );
 
     $schedule->update(compact('status'));

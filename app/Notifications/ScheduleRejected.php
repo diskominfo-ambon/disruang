@@ -19,7 +19,6 @@ class ScheduleRejected extends Notification
    * @return void
    */
   public function __construct(
-    private Schedule $schedule,
     private string $message = ''
   )
   {
@@ -65,7 +64,6 @@ class ScheduleRejected extends Notification
     return [
       'title' => 'Maaf, kegiatan kamu ditolak',
       'message' => $this->message,
-      'schedule' => $this->schedule?->title
     ];
   }
 }

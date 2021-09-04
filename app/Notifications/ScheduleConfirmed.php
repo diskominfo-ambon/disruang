@@ -18,7 +18,7 @@ class ScheduleConfirmed extends Notification
    *
    * @return void
    */
-  public function __construct(private Schedule $schedule)
+  public function __construct()
   {
     //
   }
@@ -58,7 +58,6 @@ class ScheduleConfirmed extends Notification
   {
     return [
       'title' => 'Terima kasih jadwal kamu berhasil disetujui',
-      'schedule' => $this->schedule->title
     ];
   }
 }
