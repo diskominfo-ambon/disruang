@@ -66,7 +66,6 @@
                       <div class="nk-tb-col tb-col-md"><span>ASN?</span></div>
                       <div class="nk-tb-col tb-col-lg"><span>Asal instansi</span></div>
                       <div class="nk-tb-col tb-col-lg"><span>Status jabatan</span></div>
-                      <div class="nk-tb-col nk-tb-col-tools">&nbsp;</div>
                   </div>
 
                   @foreach ($participants as $participant)
@@ -101,15 +100,6 @@
                         </div>
                         <div class="nk-tb-col tb-col-md">
                           <span class="tb-lead-sub">{{ $participant->origin_job_title ?? '-' }}</span>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                          <ul class="nk-tb-actions gx-1">
-                            <li>
-                              <a href="html/kyc-details-regular.html" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="left" title="Lihat informasi">
-                                <em class="icon ni ni-eye-fill"></em>
-                                </a>
-                            </li>
-                          </ul>
                         </div>
                     </div>
                     <!-- .nk-tb-item -->
