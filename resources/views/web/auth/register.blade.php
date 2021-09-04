@@ -94,6 +94,13 @@
       @enderror
     </div>
     <div class="form-group">
+        <label class="form-label" for="phone_number">Nomor telepon</label>
+        <input type="text" autocomplete="off" placeholder="Nomor telepon Anda" value="{{ old("phone_number") }}" autofocus class="form-control form-control-underline" name="phone_number" id="phone_number"/>
+        @error('phone_number')
+        <span class="error-text">{{ $message }}</span>
+        @enderror
+      </div>
+    <div class="form-group">
       <label class="form-label" for="email">Alamat email</label>
       <input type="email" autocomplete="off" placeholder="Alamat email Anda" value="{{ old("email") }}" autofocus class="form-control form-control-underline" name="email" id="email"/>
       @error('email')

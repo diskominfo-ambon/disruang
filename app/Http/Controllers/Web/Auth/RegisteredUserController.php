@@ -15,9 +15,11 @@ class RegisteredUserController extends Controller
       'name' => 'required',
       'email' => 'required',
       'username' => 'required|unique:users,username',
+      'phone_number' => 'required|numeric',
       'password' => 'required|confirmed'
     ], [], [
-      'name' => 'Nama'
+      'name' => 'Nama',
+      'phone_number' => 'Nomor telepon'
     ]);
 
     $user = User::create($body);
