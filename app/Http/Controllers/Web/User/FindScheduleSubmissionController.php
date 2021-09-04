@@ -22,9 +22,9 @@ class FindScheduleSubmissionController extends Controller
 
     $schedules = Auth::user()
       ->schedules()
+      ->with('notifications')
       ->order($order)
       ->get();
-
 
     return view('web::user.dashboards.submission', compact('schedules', 'order'));
   }

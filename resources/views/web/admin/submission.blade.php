@@ -6,12 +6,16 @@
   <div class="nk-block-between-md g-4">
       <div class="nk-block-head-content">
           <h3 class="nk-block-title fw-normal">Semua permohonan kegiatan pengguna</h3>
-          <div class="nk-block-des">
-              <p></p>
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </div>
+
+<!-- show validation message schedule rejected -->
+@error('message')
+<div class="alert alert-danger">
+    Pesan alasan penolakan {{ $message }}
+</div>
+@enderror
 
 <!-- .nav-tabs -->
 <ul class="nk-nav nav nav-tabs">
@@ -64,13 +68,9 @@ $currentItr = null;
                   </button>
                 </form>
 
-                <form action="{{ route('admin.submissions.update', $schedule) }}?order=reject" method="POST">
-                  @csrf
-                  @method('PUT')
-                  <button data-toggle="tooltip" data-placement="left" title="Hapus kegiatan ini?" onclick="return confirm('Yakin ingin menolak kegiatan ini?')" class="btn btn-sm btn-outline-danger">
-                    <em class="icon ni ni-cross"></em>
-                  </button>
-                </form>
+                <button data-action="{{ route('admin.submissions.update', $schedule) }}?order=reject"  data-toggle="tooltip" data-placement="left" title="Hapus kegiatan ini?" class="btn btn-sm btn-outline-danger btn-schedule__rejected">
+                  <em class="icon ni ni-cross"></em>
+                </button>
               </div>
               @endif
           </div>
@@ -117,13 +117,9 @@ $currentItr = null;
               </button>
             </form>
 
-            <form method="POST" action="{{ route('admin.submissions.update', $schedule) }}?order=reject" method="POST">
-              @csrf
-              @method('PUT')
-              <button data-toggle="tooltip" data-placement="left" title="Hapus kegiatan ini?" onclick="return confirm('Yakin ingin menolak kegiatan ini?')" class="btn btn-sm btn-outline-danger">
-                <em class="icon ni ni-cross"></em>
-              </button>
-            </form>
+            <button data-action="{{ route('admin.submissions.update', $schedule) }}?order=reject" data-toggle="tooltip" data-placement="left" title="Hapus kegiatan ini?" class="btn btn-sm btn-outline-danger btn-schedule__rejected">
+              <em class="icon ni ni-cross"></em>
+            </button>
           </div>
           @endif
 
@@ -150,4 +146,66 @@ $currentItr = null;
       <a href="#" class="link link-soft"><em class="icon ni ni-redo"></em><span>Muat lebih</span></a>
   </div> -->
 </div>
+
+
+
+<!-- Modal content for schedule rejected. -->
+<div class="modal fade" tabindex="-1" id="modalScheduleRejected">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <form method="POST">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title">Menolak kegiatan</h5>
+                        <p>Berikan alasan terhadap penolakan yang anda berikan.</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    @method('PUT')
+                    @csrf
+                    <div class="form-group">
+                        <label>Alasan penolakan</label>
+                        <textarea name="message" class="form-control" placeholder="Contoh: Jadwal mengalami bentrok dsb..." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-schedule__rejected-submit" onclick="return confirm('Yakin ingin melakukan ini?')">Tolak kegiatan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+@section('script')
+<script>
+    $(document).ready(main);
+
+
+    function main() {
+        $('button.btn-schedule__rejected').on('click', function () {
+            // action endpoint for rejected schedule.
+            const uri = $(this).data().action;
+
+            // replace modal form action endpoint.
+            $('#modalScheduleRejected').find('form').attr('action', uri);
+
+
+            $('#modalScheduleRejected').modal();
+        });
+
+        $('#modalScheduleRejected').find('form').on('submit', () => {
+            $('.btn-schedule__rejected-submit')
+                .attr('disabled', 'disabled')
+                .text('Tunggu sebentar...');
+        });
+
+
+
+    }
+</script>
 @endsection

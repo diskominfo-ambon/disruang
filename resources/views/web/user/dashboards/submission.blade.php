@@ -2,6 +2,8 @@
 
 
 @section('content')
+
+
 <div class="nk-block-head">
   <div class="nk-block-between-md g-4">
       <div class="nk-block-head-content">
@@ -23,7 +25,6 @@
   </li>
   <li class="nav-item">
       <a class="nav-link" href="{{ route('user.submissions') }}?order=reject">Ditolak</a>
-
   </li>
 </ul>
 <!-- end -->
@@ -32,6 +33,19 @@ $currentItr = null;
 @endphp
 <div class="nk-block nk-block-sm">
   @forelse ( $schedules as $key => $schedule )
+    @php
+    // find all unread notification for this schedule.
+    $hasNotification = $schedule->unreadNotifications->count() > 0;
+
+    // mark as read notification.
+    if ($hasNotification && session()->missing('rejected_on_view')) {
+        $schedule->unreadNotifications
+            ->first()
+            ->markAsRead();
+    }
+
+    @endphp
+
     @if (
         !is_null($currentItr) &&
         $schedule->created_at
@@ -42,19 +56,53 @@ $currentItr = null;
               <div class="tranx-col">
                   <div class="tranx-info">
                       <div class="tranx-badge">
-                          <span class="tranx-icon icon ni ni-live"></span>
+                        @if ($hasNotification)
+                            <span class="tranx-icon icon ni ni-live text-primary"></span>
+                            <span class="badge badge-primary d-block w-full">Baru</span>
+                        @else
+                            <span class="tranx-icon icon ni ni-live"></span>
+                        @endif
                       </div>
                       <div class="tranx-data">
                         <div class="tranx-label">{{ str($schedule->title)->limit(70) }}</div>
-                        <div class="tranx-date">{{ str($schedule->room->name)->upper() }} • Menunggu tinjauan</div>
+                        <div class="tranx-date">{{ str($schedule->room->name)->upper() }} •
+                          @if ($order === 'pending')
+                            <span>Menunggu tinjauan</span>
+                          @elseif($order === 'confirm')
+                            <span class="text-success">Telah diverifikasi</span>
+                          @else
+                            <span class="text-danger">Ditolak</span>
+                          @endif
+                        </div>
+
+
+                        <!-- show message schedule rejected notification. -->
+                        @if ($schedule->notifications->count() > 0)
+                            @php
+                                $notification = $schedule->notifications->first();
+
+                            @endphp
+                            <div class="mt-2">
+                                <p class="m-0 text-danger">❌ {{ $notification->data['title'] }}.</p>
+                                <p class="fs-13px pl-2 mt-2" style="border-left: 3px solid red;">
+                                    Pesan: {{ $notification->data['message'] ?: 'Alasan tidak disertakan.' }}
+                                </p>
+                            </div>
+                        @endif
+
                       </div>
                   </div>
               </div>
               <div class="tranx-col">
                 @if (in_array($order, ['pending', 'reject']))
-                <a href="{{ route('user.submissions.destroy', $schedule) }}" onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-sm btn-outline-danger">
-                  <em class="icon ni ni-trash-alt mr-1"></em> Permohonan
-                </a>
+                <form action="{{ route('user.schedules.destroy', $schedule) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+
+                    <button onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-sm btn-outline-danger">
+                      <em class="icon ni ni-trash-alt mr-1"></em> Hapus
+                    </button>
+                </form>
                 @endif
               </div>
           </div>
@@ -74,7 +122,12 @@ $currentItr = null;
           <div class="tranx-col">
               <div class="tranx-info">
                   <div class="tranx-badge">
-                      <span class="tranx-icon icon ni ni-live"></span>
+                    @if ($hasNotification)
+                        <span class="tranx-icon icon ni ni-live text-primary"></span>
+                        <span class="badge badge-primary d-block w-full">Baru</span>
+                    @else
+                        <span class="tranx-icon icon ni ni-live"></span>
+                    @endif
                   </div>
                   <div class="tranx-data">
                       <div class="tranx-label">{{ str($schedule->title)->limit(70) }}</div>
@@ -88,6 +141,20 @@ $currentItr = null;
                           <span class="text-danger">Ditolak</span>
                         @endif
                       </div>
+
+                      <!-- show message schedule rejected notification. -->
+                      @if ($schedule->notifications->count() > 0)
+                        @php
+                            $notification = $schedule->notifications->first();
+
+                        @endphp
+                        <div class="mt-2">
+                            <p class="m-0 text-danger">❌ {{ $notification->data['title'] }}.</p>
+                            <p class="fs-13px pl-2 mt-2" style="border-left: 3px solid red;">
+                                Pesan: {{ $notification->data['message'] ?: 'Alasan tidak disertakan.' }}
+                            </p>
+                        </div>
+                      @endif
 
                   </div>
               </div>
