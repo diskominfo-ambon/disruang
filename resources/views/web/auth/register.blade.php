@@ -115,8 +115,11 @@
       @enderror
     </div>
     <div class="form-group">
-      <label class="form-label" for="password-confirmation">Konfirmasi kata sandi</label>
-      <input type="password" autocomplete="off" placeholder="Konfirmasi kata sandi"  autofocus class="form-control form-control-underline" name="password-confirmation" id="password-confirmation"/>
+      <label class="form-label" for="password_confirmation">Konfirmasi kata sandi</label>
+      <input type="password" autocomplete="off" placeholder="Konfirmasi kata sandi"  autofocus class="form-control form-control-underline" name="password_confirmation" id="password_confirmation"/>
+      @error('password_confirmation')
+      <span class="error-text">{{ $message }}</span>
+      @enderror
     </div>
     <div class="form-group d-flex align-items-center mt-3">
       <button class="btn btn-primary text-white">Buat akun pengguna</button>

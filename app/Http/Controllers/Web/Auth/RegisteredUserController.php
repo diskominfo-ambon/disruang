@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
 
     $user = User::create($body);
 
-    $user->assingRole('user');
+    $user->assignRole('user');
 
     return redirect()
       ->route('auth.login')
