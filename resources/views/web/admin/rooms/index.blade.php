@@ -60,7 +60,7 @@
                           <form action="{{ route('admin.rooms.destroy', $room) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button onclick="return confirm('Yakin ingin menghapus ini?')" class="btn btn-icon btn-trigger" data-toggle="tooltip" title="Hapus ruangan"><em class="icon ni ni-trash-fill text-danger"></em></button>
+                            <button onclick="return confirm('Yakin? ini akan mengahapus semua kegiatan dari  ruangan {{ strtoupper($room->name) }}' )" class="btn btn-icon btn-trigger" data-toggle="tooltip" title="Hapus ruangan"><em class="icon ni ni-trash-fill text-danger"></em></button>
                           </form>
                         </div>
                       </div>

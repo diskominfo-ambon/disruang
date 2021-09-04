@@ -4,7 +4,7 @@
 <!-- .buysell-title -->
 <div class="buysell wide-xs m-auto">
   <div class="buysell-title text-center">
-    <h2 class="title"><em class="icon ni ni-building-fill"></em> Tambahkan ruangan?</h2>
+    <h2 class="title"><em class="icon ni ni-building-fill"></em> Ubah ruangan?</h2>
 </div>
 <!-- .buysell-title -->
 
@@ -32,7 +32,7 @@
 
     <div class="buysell-field form-action">
       <button class="btn btn-lg btn-block btn-primary">
-      Tambahkan ruangan
+      Simpan perubahan
       </button>
     </div>
   </form>
