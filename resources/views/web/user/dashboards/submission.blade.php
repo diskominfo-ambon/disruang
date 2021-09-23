@@ -18,7 +18,7 @@
 <!-- .nav-tabs -->
 <ul class="nk-nav nav nav-tabs">
   <li class="nav-item">
-      <a class="nav-link @if ($order === 'pending') active current-page @endif" href="{{ route('user.submissions') }}?order=pending">Pending</a>
+      <a class="nav-link @if ($order === Schedule::$PENDING) active current-page @endif" href="{{ route('user.submissions') }}?order=pending">Pending</a>
   </li>
   <li class="nav-item">
       <a class="nav-link" href="{{ route('user.submissions') }}?order=confirm">Diterima</a>
@@ -36,6 +36,7 @@ $currentItr = null;
     @php
     // find all unread notification for this schedule.
     $hasNotification = $schedule->unreadNotifications->count() > 0;
+    $status = $schedule->status; // current status of schedule.
 
     // mark as read notification.
     if ($hasNotification && session()->missing('rejected_on_view')) {
@@ -66,13 +67,7 @@ $currentItr = null;
                       <div class="tranx-data">
                         <div class="tranx-label">{{ str($schedule->title)->limit(70) }}</div>
                         <div class="tranx-date">{{ str($schedule->room->name)->upper() }} •
-                          @if ($order === 'pending')
-                            <span>Menunggu tinjauan</span>
-                          @elseif($order === 'confirm')
-                            <span class="text-success">Telah diverifikasi</span>
-                          @else
-                            <span class="text-danger">Ditolak</span>
-                          @endif
+                          @include('components.schedules.badge-status', ['status' => $order])
                         </div>
 
 
@@ -83,10 +78,7 @@ $currentItr = null;
 
                             @endphp
                             <div class="mt-2">
-                                <p class="m-0 text-danger">❌ {{ $notification->data['title'] }}.</p>
-                                <p class="fs-13px pl-2 mt-2" style="border-left: 3px solid red;">
-                                    Pesan: {{ $notification->data['message'] ?: 'Alasan tidak disertakan.' }}
-                                </p>
+                                @include('components.schedules.notification-message', ['payload' => $notification, 'status' => $schedule->status]);
                             </div>
                         @endif
 
@@ -94,7 +86,7 @@ $currentItr = null;
                   </div>
               </div>
               <div class="tranx-col">
-                @if (in_array($order, ['pending', 'reject']))
+                @if (in_array($order, [Schedule::$PENDING, Schedule::$REJECT]))
                 <form action="{{ route('user.schedules.destroy', $schedule) }}" method="post">
                     @csrf
                     @method('DELETE')
@@ -133,13 +125,7 @@ $currentItr = null;
                       <div class="tranx-label">{{ str($schedule->title)->limit(70) }}</div>
 
                       <div class="tranx-date">{{ str($schedule->room->name)->upper() }} •
-                        @if ($order === 'pending')
-                          <span>Menunggu tinjauan</span>
-                        @elseif($order === 'confirm')
-                          <span class="text-success">Telah diverifikasi</span>
-                        @else
-                          <span class="text-danger">Ditolak</span>
-                        @endif
+                        @include('components.schedules.badge-status', ['status' => $order])
                       </div>
 
                       <!-- show message schedule rejected notification. -->
@@ -149,10 +135,7 @@ $currentItr = null;
 
                         @endphp
                         <div class="mt-2">
-                            <p class="m-0 text-danger">❌ {{ $notification->data['title'] }}.</p>
-                            <p class="fs-13px pl-2 mt-2" style="border-left: 3px solid red;">
-                                Pesan: {{ $notification->data['message'] ?: 'Alasan tidak disertakan.' }}
-                            </p>
+                            @include('components.schedules.notification-message', ['notification' => $notification, 'status' => $schedule->status])
                         </div>
                       @endif
 
@@ -160,13 +143,14 @@ $currentItr = null;
               </div>
           </div>
 
-          @if (in_array($order, ['pending', 'reject']))
+          @if (in_array($order, [Schedule::$PENDING, Schedule::$REJECT]))
           <div class="tranx-col">
-            @if ($order === 'pending')
+            @if ($order === Schedule::$PENDING)
               <a href="{{ route('user.schedules.edit', $schedule) }}" class="btn btn-sm btn-secondary text-white mb-1">
                 <em class="icon ni ni-edit mr-1"></em> Ubah
               </a>
             @endif
+
             <form action="{{ route('user.schedules.destroy', $schedule) }}" method="POST">
               @csrf
               @method('DELETE')

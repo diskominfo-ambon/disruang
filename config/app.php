@@ -234,6 +234,9 @@ return [
     /** package */
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
+    // my alias
+    'Schedule' => App\Models\Schedule::class,
+
   ],
 
 ];
