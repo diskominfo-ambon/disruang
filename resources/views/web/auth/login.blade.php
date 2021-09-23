@@ -104,7 +104,7 @@
     </div>
   </form>
 
-  <div class="form-media-social">
+  {{-- <div class="form-media-social">
     <p class="divider-text">Atau</p>
     <a class="btn btn-secondary btn-media-social" href="#">
       <img src="{{ asset('images/google.webp') }}"/>
@@ -112,6 +112,6 @@
         Lanjutkan dengan Google
       </span>
     </a>
-  </div>
+  </div> --}}
 </div>
 @endsection
