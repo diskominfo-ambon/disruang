@@ -19,7 +19,7 @@ class RegisteredScheduleExport implements FromView
   public function view(): View
   {
     // load relation participants.
-    $this->schedule->load('participants');
+    $this->schedule->load(['participants', 'room']);
 
     return view('exports.schedules.participants', [
       'schedule' => $this->schedule
