@@ -124,10 +124,12 @@ export default defineComponent({
           return {
             ...payload,
             started_at: format(payload.started_at)
-              .toDate(Formatter.FULL)
+              .toTime(Formatter.LONG)
+              .toDate(Formatter.LONG)
               .value(),
             ended_at: format(payload.ended_at)
-              .toTime(Formatter.FULL)
+              .toTime(Formatter.LONG)
+              .toDate(Formatter.LONG)
               .value()
               .replaceAll('.', ':')
           }

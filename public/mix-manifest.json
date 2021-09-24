@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/vendor/dashlite/schedule.js": "/js/vendor/dashlite/schedule.js",
-    "/js/lib/welcome.js": "/js/lib/welcome.js",
-    "/css/app.css": "/css/app.css"
+    "/js/app.js": "/js/app.js?id=3dd95caf22e2041ba9af",
+    "/js/vendor/dashlite/schedule.js": "/js/vendor/dashlite/schedule.js?id=6174f540b48a5cdab540",
+    "/js/lib/welcome.js": "/js/lib/welcome.js?id=41ce8a06ab1dede225ae",
+    "/css/app.css": "/css/app.css?id=def90126a0154a37017d"
 }
