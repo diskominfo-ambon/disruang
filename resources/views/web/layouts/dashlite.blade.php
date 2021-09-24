@@ -45,7 +45,7 @@
                                         <span class="sub-text">Jumlah kegiatan</span>
                                     </div>
                                     <div class="user-account-value">
-                                        <span class="lead-text">2000</span>
+                                        <span class="lead-text">--</span>
                                     </div>
                                 </li>
                                 <li>
@@ -53,7 +53,7 @@
                                         <span class="sub-text">Jumlah pemohonan</span>
                                     </div>
                                     <div class="user-account-value">
-                                        <span class="lead-text">0.005400</span>
+                                        <span class="lead-text">--</span>
                                     </div>
                                 </li>
                             </ul>

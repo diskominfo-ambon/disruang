@@ -47,7 +47,7 @@ class SchedulesController extends Controller
   public function update(ScheduleRequest $request, Schedule $schedule)
   {
 
-    if (Auth::user()->id !== $schedule->user_id) {
+    if (Auth::user()->id != $schedule->user_id) {
       return Response::failed(403);
     }
 

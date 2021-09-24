@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Carbon;
 
 
@@ -33,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
 
     $this->loadViewsFrom(resource_path('views/web'), 'web');
     $this->loadViewsFrom(resource_path('views/web/auth'), 'auth');
+
+
+    Schema::defaultStringLength(191);
   }
 }

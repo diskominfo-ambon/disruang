@@ -182,5 +182,6 @@
 
 
 @section('head')
-<script defer src="{{ mix('js/vendor/dashlite/schedule.js') }}"></script>
+<link rel="prefetch" href="{{ asset('js/vendor/dashlite/schedule.js') }}"/>
+<script defer src="{{ asset('js/vendor/dashlite/schedule.js') }}"></script>
 @endsection
