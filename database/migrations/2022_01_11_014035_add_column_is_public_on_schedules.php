@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnMaxCapacityToSchedule extends Migration
+class AddColumnIsPublicOnSchedules extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddColumnMaxCapacityToSchedule extends Migration
     public function up()
     {
         Schema::table('room_has_schedules', function (Blueprint $table) {
-            $table->unsignedInteger('max_capacity')
-                ->default(0);
+            $table->boolean('is_public')->default(false);
         });
     }
 
@@ -27,7 +26,7 @@ class AddColumnMaxCapacityToSchedule extends Migration
     public function down()
     {
         Schema::table('room_has_schedules', function (Blueprint $table) {
-            $table->dropColumn('max_capacity');
+            $table->dropColumn('is_public');
         });
     }
 }
