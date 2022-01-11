@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'Home')</title>
+  <link rel="prefetch" href="{{ asset('js/vendor/dashlite/schedule.js') }}" type="text/javascript" as="script"/>
   <link rel="stylesheet" href="{{ asset('vendor/dashlite-v2/css/dashlite.min.css') }}"/>
   @routes
   @yield('head')
