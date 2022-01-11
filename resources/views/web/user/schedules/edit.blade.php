@@ -18,6 +18,8 @@
       </p>
 
       @csrf
+      <p class="fw-bold">1. Tambahkan kegiatan</p>
+      <hr/>
       <div class="buysell-field form-group">
         <div class="form-label-group">
           <label for="room" class="form-label">
@@ -84,24 +86,6 @@
         <span class="error-text">@{{ form.errors.data?.title }}</span>
       </div>
 
-
-    <div class="buysell-field form-group">
-        <div class="form-label-group">
-          <label for="max_capcity" class="form-label">
-            Kapasitas pendaftar yang dibutuhkan
-          </label>
-        </div>
-        <div class="form-control-group">
-          <input type="number" v-model="form.max_capacity" placeholder="Contoh: 10?, 20?" id="max_capcity" name="max_capcity" class="form-control form-control-lg form-control-number">
-        </div>
-        <div class="form-note-group">
-          <span class="buysell-min form-note-alt">
-            Kamu dapat mengatur batasan pendaftar untuk kegiatan ini.
-          </span>
-        </div>
-        <span class="error-text">@{{ form.errors.data?.max_capacity }}</span>
-    </div>
-
       <div class="buysell-field form-group">
         <div class="form-label-group">
           <label for="desc" class="form-label">Deskripsi kegiatan</label>
@@ -116,7 +100,9 @@
           </div>
         <span class="error-text">@{{ form.errors.data?.desc }}</span>
       </div>
-
+      
+      <p class="fw-bold">2. Lengkapi informasi kegiatan</p>
+      <hr/>
       <div class="buysell-field form-group">
         <div class="form-label-group">
           <label for="booking-date" class="form-label">
@@ -158,6 +144,47 @@
           </date-picker>
         </div>
       </div>
+      
+      <div class="buysell-field form-group">
+        <label for="desc" class="form-label">Kegiatan tersedia untuk umum?</label>
+        <div class="d-flex">
+          <div class="flex-fill">
+            <input class="buysell-pm-control" type="radio" name="general_room" id="pm-asn">
+            <label class="buysell-pm-label" for="pm-asn"><span class="pm-name">Hanya untuk ASN</span></label>
+          </div>
+          <div class="flex-fill">
+            <input class="buysell-pm-control" type="radio" name="general_room" id="pm-general">
+            <label class="buysell-pm-label" for="pm-general"><span class="pm-name">Boleh untuk umum</span></label>
+          </div>
+          
+        </div>
+        <div class="form-note-group">
+          <span class="buysell-min form-note-alt">
+            Kamu dapat mengatur kegiatan hanya tersedia untuk pegawai ASN, atau untuk pengguanaan umum.
+          </span>
+        </div>
+        <span class="error-text">@{{ form.errors.data?.desc }}</span>
+      </div>
+
+      <p class="fw-bold">3. Undang beberapa tamu</p>
+      <hr/>
+      <div class="buysell-field form-group">
+        <div class="form-label-group">
+          <label for="title" class="form-label">
+            Pilih ASN
+          </label>
+        </div>
+        <div class="form-control-group">
+          <input type="text" v-model="form.title" placeholder="Tambahkan beberapa tamu ASN" id="title" name="title" class="form-control form-control-lg form-control-number">
+        </div>
+        <div class="form-note-group">
+          <span class="buysell-min form-note-alt">
+            kamu dapat menambahkan beberapa undangan untuk pegawai ASN.
+          </span>
+        </div>
+        <span class="error-text">@{{ form.errors.data?.title }}</span>
+      </div>
+
 
       <div class="buysell-field form-action">
         <button :disabled="form.isSubmitting" class="btn btn-lg btn-block btn-primary">

@@ -29,6 +29,7 @@ const component = defineComponent({
         start: new Date(),
         end: null,
       },
+      employees: [],
       isSubmitting: false,
       errors: {
         data: {},

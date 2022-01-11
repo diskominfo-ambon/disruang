@@ -29,9 +29,9 @@ class ScheduleRequest extends FormRequest
       'room_id' => 'required',
       'title' => 'required',
       'desc' => 'required|max:800',
+      'employees' => 'required|array',
       'started_at' => 'required|date',
       'ended_at' => 'required|date',
-      'max_capacity' => 'required|numeric'
     ];
   }
 

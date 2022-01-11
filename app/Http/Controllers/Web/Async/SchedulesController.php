@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
+use App\Models\Employee;
 
 class SchedulesController extends Controller
 {
@@ -26,7 +27,7 @@ class SchedulesController extends Controller
 
     Auth::user()->schedules()
       ->create(
-        $request->except('range')
+        $request->except(['range', 'employees'])
       );
 
 
