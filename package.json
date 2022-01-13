@@ -11,7 +11,6 @@
     "production": "mix --production"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.1.4",
     "axios": "^0.21",
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
@@ -20,7 +19,7 @@
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
-    "vue-loader": "^16.2.0"
+    "vue-loader": "^15.9.7"
   },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
@@ -28,11 +27,13 @@
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.2",
     "filepond": "^4.30.3",
+    "filepond-plugin-file-validate-type": "^1.2.6",
     "signature_pad": "^3.0.0-beta.4",
-    "v-calendar": "^3.0.0-alpha.5",
-    "vue": "^3.1.4",
-    "vue-filepond": "^7.0.2",
+    "v-calendar": "^2.3.4",
+    "vue": "^2.6.14",
+    "vue-filepond": "6.0.*",
     "vue-select": "^3.16.0",
-    "vue-skeletor": "^1.0.6"
+    "vue-skeletor": "^1.0.6",
+    "vue-template-compiler": "^2.6.14"
   }
 }
