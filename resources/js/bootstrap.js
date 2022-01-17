@@ -25,8 +25,10 @@
  // window.Pusher = require('pusher-js');
 
   import ScheduleForm from '~/components/ScheduleForm';
+  import ScheduleInfoForm from '~/components/ScheduleInfoForm';
 
   Vue.component('ScheduleForm', ScheduleForm);
+  Vue.component('ScheduleInfoForm', ScheduleInfoForm);
 
   new Vue({
    el: '#app',

@@ -11,6 +11,7 @@
   <!-- .buysell-block -->
   <div class="buysell-block mt-5" id="app">
     <schedule-form/>
+    <schedule-info-form/>
   </div>
   <!-- .buysell-block -->
 </div>

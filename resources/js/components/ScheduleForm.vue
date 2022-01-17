@@ -1,44 +1,35 @@
 <template>
   <div>
-    <Divider labelText="1. Tambahkan kegiatan"/>
-    <FormGroup 
-      labelText="Pilih ruangan"
-      >
-      <VSelect/>
-    </FormGroup>
+    <form method="POST">
+      <Divider labelText="1. Tambahkan kegiatan"/>
+      <FormGroup 
+        labelText="Pilih ruangan"
+        >
+        <VSelect/>
+      </FormGroup>
 
-    <FormGroup 
-      labelText="Judul kegiatan"
-      alertText="Pastikan gunakan judul yang deskriptif"
-      >
-      <Input type="text" isLarge/>
-    </FormGroup>
+      <FormGroup 
+        labelText="Judul kegiatan"
+        alertText="Pastikan gunakan judul yang deskriptif"
+        >
+        <Input type="text" isLarge/>
+      </FormGroup>
 
-    <FormGroup 
-      labelText="Deskripsi kegiatan"
-      alertText="Kamu menambahkan informasi lengkap lainya terkait kegiatan ini seperti kontak, dll."
-      >
-      <Textarea />
-    </FormGroup>
- 
-    <Divider labelText="2. Lengkapi informasi kegiatan"/>
+      <FormGroup 
+        labelText="Deskripsi kegiatan"
+        alertText="Kamu menambahkan informasi lengkap lainya terkait kegiatan ini seperti kontak, dll."
+        >
+        <Textarea />
+      </FormGroup>
 
-    <FormGroup labelText="Booking pada">
-      <DateRangeInput :placeholders="['Mulai kapan?', 'Sampai kapan?']"/>
-    </FormGroup>
-
-     <FormGroup 
-      labelText="Apa kegiatan tersedia untuk umum?"
-      >
-      <VSelect
-        :options="[
-          { label: 'Iya, boleh untuk umum', id: true },
-          { label: 'Tidak hanya untuk ASN', id: false}
-        ]"
-      />
-    </FormGroup>
-
-    
+      <FormGroup labelText="Booking pada">
+        <DateRangeInput :placeholders="['Mulai kapan?', 'Sampai kapan?']"/>
+      </FormGroup>
+      
+      <button class="btn btn-primary">
+        Buat kegiatan baru
+      </button>
+    </form>
   </div>
 </template>
 
