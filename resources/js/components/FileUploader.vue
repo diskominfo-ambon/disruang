@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <file-pond
+      :files="files"
+      :server="endpoint"
       :label-idle="placeholder"
       :allow-multiple="isMultiple"
       :accepted-file-types="availableFormats"
@@ -20,6 +22,8 @@ const FilePond = getFilePondInstance(
 export default {
   name: 'FileUploader',
   props: [
+    'files',
+    'endpoint',
     'placeholder',
     'isMultiple',
     'availableFormats'

@@ -1977,13 +1977,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
 var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_1___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'FileUploader',
-  props: ['placeholder', 'isMultiple', 'availableFormats'],
+  props: ['files', 'endpoint', 'placeholder', 'isMultiple', 'availableFormats'],
   components: {
     FilePond: FilePond
   }
@@ -2358,11 +2360,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Divider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Divider */ "./resources/js/components/Divider.vue");
-/* harmony import */ var _FormGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormGroup */ "./resources/js/components/FormGroup.vue");
-/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.vue");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Divider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Divider */ "./resources/js/components/Divider.vue");
+/* harmony import */ var _FormGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormGroup */ "./resources/js/components/FormGroup.vue");
+/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.vue");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/utils/use-fetch */ "./resources/js/utils/use-fetch.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2392,6 +2409,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 
@@ -2401,10 +2421,91 @@ __webpack_require__.r(__webpack_exports__);
   props: ['id' // Id kegiatan yang diambil dari basis data.
   ],
   components: {
-    Divider: _Divider__WEBPACK_IMPORTED_MODULE_0__.default,
-    FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_1__.default,
-    FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_2__.default,
-    VSelect: (vue_select__WEBPACK_IMPORTED_MODULE_3___default())
+    Divider: _Divider__WEBPACK_IMPORTED_MODULE_1__.default,
+    FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_2__.default,
+    FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_3__.default,
+    VSelect: (vue_select__WEBPACK_IMPORTED_MODULE_4___default())
+  },
+  data: function data() {
+    return {
+      availableOptions: [{
+        label: 'Ya, tersedia untuk ASN dan umum',
+        id: true
+      }, {
+        label: 'Tidak, hanya untuk ASN',
+        id: false
+      }],
+      form: {
+        is_public: {},
+        attachments: [],
+        employees: []
+      }
+    };
+  },
+  computed: {
+    getEndpoint: function getEndpoint() {
+      return "/async/schedules/".concat(this.id);
+    }
+  },
+  methods: {
+    onSubmitted: function onSubmitted() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return window.axios.put(_this.getEndpoint);
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var _yield$useFetch, data, schedule, isAvailable;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)(_this2.getEndpoint);
+
+            case 3:
+              _yield$useFetch = _context2.sent;
+              data = _yield$useFetch.data;
+              schedule = data.payload;
+              isAvailable = _this2.available.filter(function (item) {
+                return item.id === schedule.isPublic;
+              })[0];
+              _this2.form = _objectSpread(_objectSpread({}, schedule), {}, {
+                is_public: isAvailable
+              });
+              _context2.next = 12;
+              break;
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](0);
+
+            case 12:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 10]]);
+    }))();
   }
 });
 
@@ -35259,6 +35360,8 @@ var render = function () {
     [
       _c("file-pond", {
         attrs: {
+          files: _vm.files,
+          server: _vm.endpoint,
           "label-idle": _vm.placeholder,
           "allow-multiple": _vm.isMultiple,
           "accepted-file-types": _vm.availableFormats,
@@ -35597,6 +35700,13 @@ var render = function () {
                 { label: "Tidak, hanya untuk ASN", id: 0 },
               ],
             },
+            model: {
+              value: _vm.form.is_public,
+              callback: function ($$v) {
+                _vm.$set(_vm.form, "is_public", $$v)
+              },
+              expression: "form.is_public",
+            },
           }),
         ],
         1
@@ -35609,6 +35719,7 @@ var render = function () {
           _c("FileUploader", {
             attrs: {
               isMultiple: "",
+              endpoint: "/async/attachments",
               availableFormats: "application/pdf",
               placeholder: "Tarik atau tekan untuk unggah",
             },

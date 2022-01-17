@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\User\HomeController;
 use App\Http\Controllers\Web\User\SchedulesController;
+use App\Http\Controllers\Web\User\ScheduleReviewController;
 use App\Http\Controllers\Web\User\FindScheduleSubmissionController;
 
 
@@ -18,6 +19,9 @@ Route::get('/schedules/edit/{schedule}', [SchedulesController::class, 'edit'])
 
 Route::delete('/schedules/delete/{schedule}', [SchedulesController::class, 'destroy'])
   ->name('user.schedules.destroy');
+
+Route::get('/schedules/review/{schedule}', [ScheduleReviewController::class, 'index'])
+  ->name('user.schedules.review');
 
 Route::view('/schedules/new', 'web::user.schedules.new')
   ->name('user.schedules.new');
