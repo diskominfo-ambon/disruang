@@ -3,8 +3,8 @@
 @section('content')
   <!-- .buysell-title -->
 <div class="buysell wide-xs m-auto">
-  <div class="buysell-title text-center">
-    <h2 class="title">Apa yang ingin Anda usulkan?</h2>
+  <div class="buysell-title">
+    <h3 class="title" style="line-height: 47px;">Kegiatan apa yang ingin Anda usulkan?</h3>
   </div>
   <!-- .buysell-title -->
 

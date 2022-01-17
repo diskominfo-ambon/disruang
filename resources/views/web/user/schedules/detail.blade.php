@@ -4,7 +4,7 @@
   <!-- .buysell-title -->
 <div class="buysell wide-xs m-auto">
   <div class="buysell-title">
-    <h3 class="title" style="line-height: 47px;">Apa perubahan yang ingin Anda lakukan?</h3>
+    <h3 class="title" style="line-height: 47px;">Lengkapi kegiatan Anda?</h3>
   </div>
   <!-- .buysell-title -->
 

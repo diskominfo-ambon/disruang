@@ -2179,7 +2179,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var ENDPOINT, res, rooms;
+      var ENDPOINT, res, rooms, SCHEDULE_ENDPOINT, _yield$useFetch, data, _data$payload, title, desc, room_id, started_at, ended_at, room;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2199,63 +2200,103 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   id: room.id
                 };
               });
-              _context.next = 11;
-              break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](0);
+              if (!(_this.id !== null)) {
+                _context.next = 16;
+                break;
+              }
+
+              SCHEDULE_ENDPOINT = "/async/schedules/".concat(_this.id);
+              _context.next = 11;
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(SCHEDULE_ENDPOINT);
 
             case 11:
+              _yield$useFetch = _context.sent;
+              data = _yield$useFetch.data;
+              _data$payload = data.payload, title = _data$payload.title, desc = _data$payload.desc, room_id = _data$payload.room_id, started_at = _data$payload.started_at, ended_at = _data$payload.ended_at;
+              room = _this.rooms.filter(function (room) {
+                return room.id === room_id;
+              });
+              _this.form = {
+                title: title,
+                desc: desc,
+                room_id: room[0],
+                date: {
+                  start: new Date(started_at),
+                  end: new Date(ended_at)
+                }
+              };
+
+            case 16:
+              _context.next = 20;
+              break;
+
+            case 18:
+              _context.prev = 18;
+              _context.t0 = _context["catch"](0);
+
+            case 20:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 18]]);
     }))();
   },
+  computed: {
+    computedTextButton: function computedTextButton() {
+      return this.isLoading ? 'Tunggu sebentar..' : this.id != null ? 'Simpan perubahan' : 'Buat kegiatan baru';
+    }
+  },
   methods: {
+    clearErrors: function clearErrors() {
+      this.errors = [];
+    },
     onSubmitted: function onSubmitted() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var ENDPOINT, METHOD, ENTITY_ISINVALID, FORBIDDEN, STATUS, errors;
+        var ENDPOINT, METHOD, _this2$form$room_id, ENTITY_ISINVALID, FORBIDDEN, STATUS, errors;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                ENDPOINT = '/async/schedules';
+                ENDPOINT = _this2.id != undefined ? '/async/schedules/' + _this2.id : '/async/schedules';
                 /**
                  * Jika prop [id] di ketahui maka form tersebut digunakan untuk
                  * 'edit' sebaliknya jika tidak maka untuk 'create'.
                  */
 
                 METHOD = _this2.id !== undefined ? 'PUT' : 'POST';
-                _context2.prev = 2;
-                _context2.next = 5;
+
+                _this2.clearErrors();
+
+                _context2.prev = 3;
+                _context2.next = 6;
                 return window.axios({
                   url: ENDPOINT,
                   method: METHOD,
                   data: _objectSpread(_objectSpread({}, _this2.form), {}, {
-                    room_id: _this2.form.room_id.id,
+                    room_id: (_this2$form$room_id = _this2.form.room_id) === null || _this2$form$room_id === void 0 ? void 0 : _this2$form$room_id.id,
                     started_at: _this2.form.date.start,
                     ended_at: _this2.form.date.end
                   })
                 });
 
-              case 5:
+              case 6:
                 _this2.$emit('onFinished');
 
                 if (_this2.redirectUri != undefined) {
                   window.location.replace(_this2.redirectUri);
                 }
 
-                _context2.next = 17;
+                _context2.next = 18;
                 break;
 
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](2);
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](3);
                 ENTITY_ISINVALID = 422;
                 FORBIDDEN = 403;
                 STATUS = _context2.t0.response.status;
@@ -2276,12 +2317,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.alert = _context2.t0.message;
                 }
 
-              case 17:
+              case 18:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[2, 9]]);
+        }, _callee2, null, [[3, 10]]);
       }))();
     }
   },
@@ -2289,6 +2330,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       rooms: [],
       alert: null,
+      isLoading: false,
       errors: [],
       form: {
         room_id: null,
@@ -2406,6 +2448,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Textarea',
+  props: ['value'],
   computed: {
     localvalue: {
       get: function get() {
@@ -35501,7 +35544,7 @@ var render = function () {
         ),
         _vm._v(" "),
         _c("button", { staticClass: "btn btn-primary" }, [
-          _vm._v("\n      Buat kegiatan baru\n    "),
+          _vm._v("\n      " + _vm._s(_vm.computedTextButton) + "\n    "),
         ]),
       ],
       1
@@ -35629,26 +35672,30 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("textarea", {
-    directives: [
-      {
-        name: "model",
-        rawName: "v-model",
-        value: _vm.localvalue,
-        expression: "localvalue",
-      },
-    ],
-    staticClass: "form-control",
-    domProps: { value: _vm.localvalue },
-    on: {
-      input: function ($event) {
-        if ($event.target.composing) {
-          return
-        }
-        _vm.localvalue = $event.target.value
+  return _c(
+    "textarea",
+    {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.localvalue,
+          expression: "localvalue",
+        },
+      ],
+      staticClass: "form-control",
+      domProps: { value: _vm.localvalue },
+      on: {
+        input: function ($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.localvalue = $event.target.value
+        },
       },
     },
-  })
+    [_vm._v(_vm._s(_vm.value))]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

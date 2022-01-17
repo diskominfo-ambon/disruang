@@ -42,7 +42,7 @@
       </FormGroup>
       
       <button class="btn btn-primary">
-        Buat kegiatan baru
+        {{ computedTextButton }}
       </button>
     </form>
   </div>
@@ -80,7 +80,7 @@ export default {
     TextError,
   },
   async mounted() {
-
+    
     try {
       const ENDPOINT = '/api/rooms';
       const res = await useFetch(ENDPOINT)
@@ -95,13 +95,43 @@ export default {
         }
       });
 
+      if (this.id !== null) {
+        const SCHEDULE_ENDPOINT = `/async/schedules/${this.id}`;
+        const { data } = await useFetch(SCHEDULE_ENDPOINT);
+
+        const { title, desc, room_id, started_at, ended_at } = data.payload;
+        
+        const room = this.rooms.filter(room => room.id === room_id );
+
+        this.form = { 
+          title, 
+          desc, 
+          room_id: room[0], 
+          date: { start: new Date(started_at), end: new Date(ended_at) } 
+        };
+
+      }
+
     } catch {
       // Handle fetch error exception.
     }
   },
+  computed: {
+    computedTextButton() {
+      return this.isLoading 
+        ? 'Tunggu sebentar..'
+        : this.id != null ? 'Simpan perubahan' : 'Buat kegiatan baru';
+    }
+  },
   methods: {
+    clearErrors() {
+      this.errors = [];
+    },
     async onSubmitted() {
-      const ENDPOINT = '/async/schedules';
+      const ENDPOINT = this.id != undefined
+        ? '/async/schedules/' + this.id
+        : '/async/schedules';
+
       /**
        * Jika prop [id] di ketahui maka form tersebut digunakan untuk
        * 'edit' sebaliknya jika tidak maka untuk 'create'.
@@ -110,6 +140,8 @@ export default {
         ? 'PUT'
         : 'POST';
 
+      this.clearErrors();
+
       try {
 
         await window.axios({
@@ -117,7 +149,7 @@ export default {
           method: METHOD,
           data: {
             ...this.form,
-            room_id: this.form.room_id.id,
+            room_id: this.form.room_id?.id,
             started_at: this.form.date.start,
             ended_at: this.form.date.end,
           }
@@ -130,12 +162,11 @@ export default {
           window.location.replace(this.redirectUri);
         }
       } catch (e) {
-        
+
         const ENTITY_ISINVALID = 422;
         const FORBIDDEN = 403;
         const STATUS = e.response.status;
         const errors = e.response.data.errors;
-
         if (
           STATUS === ENTITY_ISINVALID
           && Object.keys(errors).length > 0
@@ -158,6 +189,7 @@ export default {
     return {
       rooms: [],
       alert: null,
+      isLoading: false,
       errors: [],
       form: {
         room_id: null,
