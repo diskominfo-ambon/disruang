@@ -13,14 +13,14 @@
       <div class="date-picker__container" v-on="inputEvents.start">
         <div class="date-picker__field">
           <em class="icon ni ni-calendar-fill"></em>
-          <p>{{ placeholders[0] }}</p>
+          <p>{{ date.start }}</p>
         </div>
         <div class="date-picker__field">
           <span>
             <em class="icon ni ni-swap"></em>
           </span>
           <em class="icon ni ni-calendar-check-fill"></em>
-          <p>{{ placeholders[1] }}</p>
+          <p>{{ date.end }}</p>
         </div>
       </div>
     </template>
@@ -31,15 +31,35 @@
 <script>
 import { DatePicker } from 'v-calendar';
 
+
+function diffForHumans(date) {
+ 
+  return new Intl.DateTimeFormat('id-ID', { dateStyle: 'long', timeStyle: 'short' })
+    .format(date);
+}
+
 export default {
   name: 'DateRangeInput',
   props: [
     'placeholders',
+    'value',
   ],
   components: {
     DatePicker
   },
   computed: {
+    date() {
+      const value = this.localvalue;
+      const start = value.start != null
+        ? diffForHumans(value.start)
+        : this.placeholders[0]; 
+
+      const end = value.end != null
+        ? diffForHumans(value.end)
+        : this.placeholders[1]; 
+
+      return { start, end };
+    },
     localvalue: {
       set(value) {
         this.$emit('input', value);

@@ -27,7 +27,7 @@ class SchedulesController extends Controller
 
     Auth::user()->schedules()
       ->create(
-        $request->except(['range', 'employees'])
+        $request->all()
       );
 
 

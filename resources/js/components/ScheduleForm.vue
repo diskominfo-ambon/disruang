@@ -1,29 +1,44 @@
 <template>
   <div>
-    <form method="POST">
+    <div class="alert alert-danger" v-if="alert">
+      Catatan: {{ alert }}
+    </div>
+
+    <form method="POST" @submit.prevent="onSubmitted">
       <Divider labelText="1. Tambahkan kegiatan"/>
       <FormGroup 
         labelText="Pilih ruangan"
         >
-        <VSelect/>
+        <VSelect
+          v-model="form.room_id"
+          :options="rooms"
+        />
+        <TextError :message="errors.room_id"/>
       </FormGroup>
 
       <FormGroup 
         labelText="Judul kegiatan"
         alertText="Pastikan gunakan judul yang deskriptif"
         >
-        <Input type="text" isLarge/>
+        <Input type="text" v-model="form.title" />
+        <TextError :message="errors.title"/>
       </FormGroup>
 
       <FormGroup 
         labelText="Deskripsi kegiatan"
         alertText="Kamu menambahkan informasi lengkap lainya terkait kegiatan ini seperti kontak, dll."
         >
-        <Textarea />
+        <Textarea v-model="form.desc" />
+        <TextError :message="errors.desc"/>
       </FormGroup>
 
       <FormGroup labelText="Booking pada">
-        <DateRangeInput :placeholders="['Mulai kapan?', 'Sampai kapan?']"/>
+        <DateRangeInput
+          v-model="form.date"
+          :placeholders="['Mulai kapan?', 'Sampai kapan?']"
+        />
+        <TextError :message="errors.started_at"/>
+        <TextError :message="errors.ended_at"/>
       </FormGroup>
       
       <button class="btn btn-primary">
@@ -34,10 +49,9 @@
 </template>
 
 <script>
+import { mapValues } from 'lodash';
 import VSelect from 'vue-select';
-
 import 'vue-select/dist/vue-select.css';
-
 
 import useFetch from '~/utils/use-fetch';
 import constant from '~/constant';
@@ -48,9 +62,13 @@ import DateRangeInput from './DateRangeInput';
 import FormGroup from './FormGroup';
 import Divider from './Divider';
 import FileUploader from './FileUploader';
+import TextError from './TextError';
 
 export default {
-  props: ['initialData'],
+  props: {
+    id: String,
+    redirectUri: String
+  },
   components: {
     VSelect,
     FormGroup,
@@ -59,23 +77,96 @@ export default {
     Divider,
     FileUploader,
     DateRangeInput,
+    TextError,
   },
-  mounted() {
-    console.log('mounted..');
+  async mounted() {
+
+    try {
+      const ENDPOINT = '/api/rooms';
+      const res = await useFetch(ENDPOINT)
+      const rooms = res.data.payload;
+      
+      this.rooms = rooms.map(room => {
+        const roomName = room.name.toUpperCase(); 
+        
+        return {
+          label: `Ruangan ${roomName}`,
+          id: room.id 
+        }
+      });
+
+    } catch {
+      // Handle fetch error exception.
+    }
+  },
+  methods: {
+    async onSubmitted() {
+      const ENDPOINT = '/async/schedules';
+      /**
+       * Jika prop [id] di ketahui maka form tersebut digunakan untuk
+       * 'edit' sebaliknya jika tidak maka untuk 'create'.
+       */
+      const METHOD = this.id !== undefined
+        ? 'PUT'
+        : 'POST';
+
+      try {
+
+        await window.axios({
+          url: ENDPOINT,
+          method: METHOD,
+          data: {
+            ...this.form,
+            room_id: this.form.room_id.id,
+            started_at: this.form.date.start,
+            ended_at: this.form.date.end,
+          }
+        });
+
+        this.$emit('onFinished');
+
+        if (this.redirectUri != undefined) {
+          
+          window.location.replace(this.redirectUri);
+        }
+      } catch (e) {
+        
+        const ENTITY_ISINVALID = 422;
+        const FORBIDDEN = 403;
+        const STATUS = e.response.status;
+        const errors = e.response.data.errors;
+
+        if (
+          STATUS === ENTITY_ISINVALID
+          && Object.keys(errors).length > 0
+        ) {
+          /**
+           * Mengetahui jika respon status adalah ENTITY_INVALID maka
+           * tampilkan hasil error formn dengan memetakan setiap [key] bidang
+           * ke [key] errrornya.
+           */
+          this.errors = mapValues(errors, error => error[0]);
+        }
+
+        if (STATUS === FORBIDDEN) {
+          this.alert = e.message;
+        }
+      }
+    }
   },
   data() {
     return {
+      rooms: [],
+      alert: null,
+      errors: [],
       form: {
-        roomId: null,
+        room_id: null,
         title: '',
-        description: '',
+        desc: '',
         date: {
           start: new Date(),
           end: null
         },
-        employees: [],
-        isPublicAvailable: true,
-        attachments: []
       }
     }
   },

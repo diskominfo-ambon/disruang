@@ -10,8 +10,9 @@
 
   <!-- .buysell-block -->
   <div class="buysell-block mt-5" id="app">
-    <schedule-form/>
-    <schedule-info-form/>
+    <schedule-form
+      redirect-uri="{{ route('user.submissions') }}"
+    />
   </div>
   <!-- .buysell-block -->
 </div>

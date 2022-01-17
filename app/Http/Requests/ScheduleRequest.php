@@ -29,7 +29,6 @@ class ScheduleRequest extends FormRequest
       'room_id' => 'required',
       'title' => 'required',
       'desc' => 'required|max:800',
-      'employees' => 'required|array',
       'started_at' => 'required|date',
       'ended_at' => 'required|date',
     ];
@@ -44,7 +43,6 @@ class ScheduleRequest extends FormRequest
       'desc' => 'Deskripsi',
       'started_at' => 'Waktu mulai',
       'ended_at' => 'Waktu akhir',
-      'max_capacity' => 'Kapasitas pendaftar'
     ];
   }
 

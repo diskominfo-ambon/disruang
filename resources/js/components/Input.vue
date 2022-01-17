@@ -1,7 +1,7 @@
 <template>
     <input
         :type="type"
-        :value="localvalue"
+        v-model="localvalue"
         :placeholder="placeholder"
         :class="isLarge && ''"
         class="form-control"
