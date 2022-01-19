@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\RoomsController;
 use App\Http\Controllers\Api\SchedulesController;
+use App\Http\Controllers\Api\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,7 @@ Route::get('/schedules', [SchedulesController::class, 'index'])
 Route::get('/rooms', [RoomsController::class, 'index'])
   ->name('api.rooms');
 
-  Route::get('/rooms/{room:id}', [RoomsController::class, 'show'])
+Route::get('/rooms/{room:id}', [RoomsController::class, 'show'])
   ->name('api.rooms.show');
+
+Route::get('/employees', [EmployeesController::class, 'index']);

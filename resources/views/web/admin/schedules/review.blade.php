@@ -4,15 +4,16 @@
   <!-- .buysell-title -->
 <div class="buysell wide-xs m-auto">
   <div class="buysell-title">
-    <h3 class="title" style="line-height: 47px;">Kegiatan apa yang ingin Anda usulkan?</h3>
+    <h3 class="title" style="line-height: 47px;">Tinjau & lengkapi kegiatan Anda?</h3>
   </div>
   <!-- .buysell-title -->
 
   <!-- .buysell-block -->
   <div class="buysell-block mt-5" id="app">
-    <schedule-form
+    <schedule-info-form 
+      id="{{ $schedule->id }}"
       base-endpoint="{{ route('admin.schedules.index') }}"
-      redirect-uri="{{ route('admin.schedules.index') }}"
+      redirect-url="{{ route('admin.schedules.index') }}"
     />
   </div>
   <!-- .buysell-block -->

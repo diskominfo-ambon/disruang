@@ -78,4 +78,19 @@ class Schedule extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+
+  public function employees()
+  {
+    return $this->belongsToMany(Employee::class, 'schedule_has_employees');
+  }
+
+  public function attachments()
+  {
+      return $this->morphToMany(
+        Attachment::class, 
+        'record',
+        'model_has_attachments',
+      );
+  }
 }

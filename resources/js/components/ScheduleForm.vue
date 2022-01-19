@@ -67,7 +67,8 @@ import TextError from './TextError';
 export default {
   props: {
     id: String,
-    redirectUri: String
+    redirectUri: String,
+    baseEndpoint: String,
   },
   components: {
     VSelect,
@@ -95,8 +96,8 @@ export default {
         }
       });
 
-      if (this.id !== null) {
-        const SCHEDULE_ENDPOINT = `/async/schedules/${this.id}`;
+      if (this.id !== undefined) {
+        const SCHEDULE_ENDPOINT = this.baseEndpoint + '/' + this.id;
         const { data } = await useFetch(SCHEDULE_ENDPOINT);
 
         const { title, desc, room_id, started_at, ended_at } = data.payload;
@@ -128,9 +129,9 @@ export default {
       this.errors = [];
     },
     async onSubmitted() {
-      const ENDPOINT = this.id != undefined
-        ? '/async/schedules/' + this.id
-        : '/async/schedules';
+      const ENDPOINT = this.id !== undefined
+        ? this.baseEndpoint + '/' + this.id
+        : this.baseEndpoint;
 
       /**
        * Jika prop [id] di ketahui maka form tersebut digunakan untuk
@@ -162,7 +163,7 @@ export default {
           window.location.replace(this.redirectUri);
         }
       } catch (e) {
-
+        console.log(e);
         const ENTITY_ISINVALID = 422;
         const FORBIDDEN = 403;
         const STATUS = e.response.status;

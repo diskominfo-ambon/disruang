@@ -8,6 +8,8 @@ use App\Http\Controllers\Web\Admin\SchedulesController;
 use App\Http\Controllers\Web\Admin\UsersController;
 use App\Http\Controllers\Web\Admin\SubmissionsController;
 use App\Http\Controllers\Web\Admin\RoomsController;
+use App\Http\Controllers\Web\Admin\ScheduleReviewController;
+
 
 Route::get('/', [HomeController::class, 'index'])
   ->name('admin.home');
@@ -19,6 +21,9 @@ Route::put('/submissions/{schedule}', [SubmissionsController::class, 'update'])
   ->name('admin.submissions.update');
 
 Route::resource('schedules', SchedulesController::class, ['as' => 'admin']);
+
+Route::put('/schedule/{schedule}/review', [ScheduleReviewController::class, 'update'])
+  ->name('admin.schedules.review');
 
 Route::resource('d', SuperUsersController::class, ['as' => 'admin'])
   ->except('show')

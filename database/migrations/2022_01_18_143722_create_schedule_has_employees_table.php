@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RoomHasEmployees extends Migration
+class CreateScheduleHasEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class RoomHasEmployees extends Migration
      */
     public function up()
     {
-        Schema::create('room_has_employees', function (Blueprint $table) {
+        Schema::create('schedule_has_employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('employee_id');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class RoomHasEmployees extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room_has_employees'); 
+        Schema::dropIfExists('schedule_has_employees');
     }
 }

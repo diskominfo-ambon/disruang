@@ -27,6 +27,7 @@
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.2",
     "filepond": "^4.30.3",
+    "filepond-plugin-file-validate-size": "^2.2.5",
     "filepond-plugin-file-validate-type": "^1.2.6",
     "signature_pad": "^3.0.0-beta.4",
     "v-calendar": "^2.3.4",

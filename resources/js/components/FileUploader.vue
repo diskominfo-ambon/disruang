@@ -1,8 +1,17 @@
 <template>
   <div id="app">
     <file-pond
+      ref="pond"
       :files="files"
-      :server="endpoint"
+      v-model="localvalue"
+      :server="{
+        url: endpoint,
+        process: {
+          headers: {
+            'X-CSRF-TOKEN': csrfToken
+          }
+        }
+      }"
       :label-idle="placeholder"
       :allow-multiple="isMultiple"
       :accepted-file-types="availableFormats"
@@ -11,11 +20,12 @@
 </template>
 
 <script>
-import getFilePondInstance from 'vue-filepond';
+import vueFilePond, { setOptions } from 'vue-filepond';
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import "filepond/dist/filepond.min.css";
 
-const FilePond = getFilePondInstance(
+
+const FilePond = vueFilePond(
   FilePondPluginFileValidateType
 );
 
@@ -26,10 +36,31 @@ export default {
     'endpoint',
     'placeholder',
     'isMultiple',
-    'availableFormats'
+    'availableFormats',
+    'value'
   ],
   components: {
     FilePond
   },
+  computed: {
+    localvalue: {
+      set(value) {
+        this.$emit('input', value);
+      },
+      get() {
+        return this.value;
+      }
+    }
+  },
+  data() {
+    return {
+      csrfToken: null
+    }
+  },
+  mounted() {
+    this.csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute('content');
+  }
 }
 </script>

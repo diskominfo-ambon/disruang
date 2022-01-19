@@ -1,31 +1,37 @@
 <template>
   <div>
-    <Divider labelText="2. Informasi kegiatan"/>
+    <form method="post" @submit.prevent="onSubmitted">
+      <Divider labelText="2. Informasi kegiatan"/>
+      <FormGroup labelText="Undang beberapa ASN">
+        <VSelect
+          multiple
+          v-model="form.employees"
+          :options="availableEmployees"
+        />
+      </FormGroup>
 
-    <FormGroup labelText="Undang beberapa ASN">
-      <VSelect/>
-    </FormGroup>
+      <FormGroup labelText="Apa kegiatan bersifat umum?">
+        <VSelect
+          v-model="form.is_public"
+          :options="[
+            {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
+            {label: 'Tidak, hanya untuk ASN', id: 0}
+          ]"
+        />
+      </FormGroup>
 
-    <FormGroup labelText="Apa kegiatan bersifat umum?">
-      <VSelect
-        v-model="form.is_public"
-        :options="[
-          {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
-          {label: 'Tidak, hanya untuk ASN', id: 0}
-        ]"
-      />
-    </FormGroup>
+      <FormGroup labelText="Unggah file materi">
+        <FileUploader
+          isMultiple
+          ref="uploader"
+          endpoint="/async/attachments"
+          availableFormats="application/pdf"
+          placeholder="Tarik atau tekan untuk unggah"
+        />
+      </FormGroup>
 
-    <FormGroup labelText="Unggah file materi">
-      <FileUploader
-        isMultiple
-        endpoint="/async/attachments"
-        availableFormats="application/pdf"
-        placeholder="Tarik atau tekan untuk unggah"
-      />
-    </FormGroup>
-
-    <button class="btn btn-primary">Simpan informasi kegiatan</button>
+      <button class="btn btn-primary">Simpan informasi kegiatan</button>
+    </form>
   </div>
 </template>
 
@@ -40,7 +46,9 @@ import useFetch from '~/utils/use-fetch';
 export default {
   name: 'ScheduleInfoForm',
   props: [
-    'id' // Id kegiatan yang diambil dari basis data.
+    'id', // Id kegiatan yang diambil dari basis data.
+    'redirectUrl',
+    'baseEndpoint',
   ],
   components: {
     Divider,
@@ -51,40 +59,71 @@ export default {
   data() {
     return {
       availableOptions: [
-        {label: 'Ya, tersedia untuk ASN dan umum', id: true},
-        {label: 'Tidak, hanya untuk ASN', id: false}
+        {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
+        {label: 'Tidak, hanya untuk ASN', id: 0}
       ],
+      availableEmployees: [],
       form: {
-        is_public: {},
+        is_public: {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
         attachments: [],
         employees: []
       }
     }
   },
-  computed: {
-    getEndpoint() {
-      return `/async/schedules/${this.id}`;
-    }
-  },
   methods: {
     async onSubmitted() {
-      await window.axios.put(this.getEndpoint)
+      
+      try {
+        const attachments = this.$refs.uploader.$refs.pond.getFiles().map( file => file.serverId);
+        const body = {
+          ...this.form,
+          attachments,
+          employees: this.form.employees.map(employee => employee.id),
+          is_public: this.form.is_public.id,
+        };
+
+        await window.axios.put(this.baseEndpoint + '/' + this.id + '/review', body);
+        
+        if (this.redirectUrl !== undefined) {
+          window.location.replace(this.redirectUrl);
+        }
+      } catch (e) {
+        console.log(e);
+        console.log('gagal');
+      }
     }
   },
   async mounted() {
+    console.log(this.$refs.uploader.$refs.pond.getFiles());
     try {
-      const { data } = await useFetch(this.getEndpoint);
+      
+      const { data } = await useFetch(this.baseEndpoint + '/' + this.id);
 
       const schedule = data.payload;
-      const isAvailable = this.available.filter(item => item.id === schedule.isPublic)[0];
+      const isAvailable = this.availableOptions.filter(item => item.id === schedule.is_public)[0];
       
+      const { data: res } = await  useFetch('/api/employees');
+      const employees = res.payload;
+
+      this.availableEmployees = employees.map(employee => {
+        return {
+          label: `${employee.name} - ${employee.nip}`,
+          id: employee.id 
+        }
+      });
+
       this.form = {
+        ...this.form,
         ...schedule,
+        employees: schedule.employees.map(employee => {
+          return {label: `${employee.name} - ${employee.nip}`, id: employee.id};
+        }),
         is_public: isAvailable
       };
       
-    }catch {
-
+    }catch (e) {
+      console.log(e);
+      console.log('error');
     }
   }
 }

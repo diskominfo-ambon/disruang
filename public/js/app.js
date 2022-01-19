@@ -1979,15 +1979,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_1___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'FileUploader',
-  props: ['files', 'endpoint', 'placeholder', 'isMultiple', 'availableFormats'],
+  props: ['files', 'endpoint', 'placeholder', 'isMultiple', 'availableFormats', 'value'],
   components: {
     FilePond: FilePond
+  },
+  computed: {
+    localvalue: {
+      set: function set(value) {
+        this.$emit('input', value);
+      },
+      get: function get() {
+        return this.value;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      csrfToken: null
+    };
+  },
+  mounted: function mounted() {
+    this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   }
 });
 
@@ -2165,7 +2192,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: String,
-    redirectUri: String
+    redirectUri: String,
+    baseEndpoint: String
   },
   components: {
     VSelect: (vue_select__WEBPACK_IMPORTED_MODULE_2___default()),
@@ -2203,12 +2231,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 };
               });
 
-              if (!(_this.id !== null)) {
+              if (!(_this.id !== undefined)) {
                 _context.next = 16;
                 break;
               }
 
-              SCHEDULE_ENDPOINT = "/async/schedules/".concat(_this.id);
+              SCHEDULE_ENDPOINT = _this.baseEndpoint + '/' + _this.id;
               _context.next = 11;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(SCHEDULE_ENDPOINT);
 
@@ -2264,7 +2292,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                ENDPOINT = _this2.id != undefined ? '/async/schedules/' + _this2.id : '/async/schedules';
+                ENDPOINT = _this2.id !== undefined ? _this2.baseEndpoint + '/' + _this2.id : _this2.baseEndpoint;
                 /**
                  * Jika prop [id] di ketahui maka form tersebut digunakan untuk
                  * 'edit' sebaliknya jika tidak maka untuk 'create'.
@@ -2293,12 +2321,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   window.location.replace(_this2.redirectUri);
                 }
 
-                _context2.next = 18;
+                _context2.next = 19;
                 break;
 
               case 10:
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](3);
+                console.log(_context2.t0);
                 ENTITY_ISINVALID = 422;
                 FORBIDDEN = 403;
                 STATUS = _context2.t0.response.status;
@@ -2319,7 +2348,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.alert = _context2.t0.message;
                 }
 
-              case 18:
+              case 19:
               case "end":
                 return _context2.stop();
             }
@@ -2368,18 +2397,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/utils/use-fetch */ "./resources/js/utils/use-fetch.js");
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2418,8 +2453,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ScheduleInfoForm',
-  props: ['id' // Id kegiatan yang diambil dari basis data.
-  ],
+  props: ['id', // Id kegiatan yang diambil dari basis data.
+  'redirectUrl', 'baseEndpoint'],
   components: {
     Divider: _Divider__WEBPACK_IMPORTED_MODULE_1__.default,
     FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_2__.default,
@@ -2430,41 +2465,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       availableOptions: [{
         label: 'Ya, tersedia untuk ASN dan umum',
-        id: true
+        id: 1
       }, {
         label: 'Tidak, hanya untuk ASN',
-        id: false
+        id: 0
       }],
+      availableEmployees: [],
       form: {
-        is_public: {},
+        is_public: {
+          label: 'Ya, tersedia untuk ASN dan umum',
+          id: 1
+        },
         attachments: [],
         employees: []
       }
     };
-  },
-  computed: {
-    getEndpoint: function getEndpoint() {
-      return "/async/schedules/".concat(this.id);
-    }
   },
   methods: {
     onSubmitted: function onSubmitted() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var attachments, body;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return window.axios.put(_this.getEndpoint);
+                _context.prev = 0;
+                attachments = _this.$refs.uploader.$refs.pond.getFiles().map(function (file) {
+                  return file.serverId;
+                });
+                body = _objectSpread(_objectSpread({}, _this.form), {}, {
+                  attachments: attachments,
+                  employees: _this.form.employees.map(function (employee) {
+                    return employee.id;
+                  }),
+                  is_public: _this.form.is_public.id
+                });
+                _context.next = 5;
+                return window.axios.put(_this.baseEndpoint + '/' + _this.id + '/review', body);
 
-              case 2:
+              case 5:
+                if (_this.redirectUrl !== undefined) {
+                  window.location.replace(_this.redirectUrl);
+                }
+
+                _context.next = 12;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+                console.log('gagal');
+
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   },
@@ -2472,39 +2532,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var _yield$useFetch, data, schedule, isAvailable;
+      var _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)(_this2.getEndpoint);
+              console.log(_this2.$refs.uploader.$refs.pond.getFiles());
+              _context2.prev = 1;
+              _context2.next = 4;
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)(_this2.baseEndpoint + '/' + _this2.id);
 
-            case 3:
+            case 4:
               _yield$useFetch = _context2.sent;
               data = _yield$useFetch.data;
               schedule = data.payload;
-              isAvailable = _this2.available.filter(function (item) {
-                return item.id === schedule.isPublic;
+              isAvailable = _this2.availableOptions.filter(function (item) {
+                return item.id === schedule.is_public;
               })[0];
-              _this2.form = _objectSpread(_objectSpread({}, schedule), {}, {
-                is_public: isAvailable
-              });
-              _context2.next = 12;
-              break;
+              _context2.next = 10;
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)('/api/employees');
 
             case 10:
-              _context2.prev = 10;
-              _context2.t0 = _context2["catch"](0);
+              _yield$useFetch2 = _context2.sent;
+              res = _yield$useFetch2.data;
+              employees = res.payload;
+              _this2.availableEmployees = employees.map(function (employee) {
+                return {
+                  label: "".concat(employee.name, " - ").concat(employee.nip),
+                  id: employee.id
+                };
+              });
+              _this2.form = _objectSpread(_objectSpread(_objectSpread({}, _this2.form), schedule), {}, {
+                employees: schedule.employees.map(function (employee) {
+                  return {
+                    label: "".concat(employee.name, " - ").concat(employee.nip),
+                    id: employee.id
+                  };
+                }),
+                is_public: isAvailable
+              });
+              _context2.next = 21;
+              break;
 
-            case 12:
+            case 17:
+              _context2.prev = 17;
+              _context2.t0 = _context2["catch"](1);
+              console.log(_context2.t0);
+              console.log('error');
+
+            case 21:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 10]]);
+      }, _callee2, null, [[1, 17]]);
     }))();
   }
 });
@@ -35359,12 +35441,27 @@ var render = function () {
     { attrs: { id: "app" } },
     [
       _c("file-pond", {
+        ref: "pond",
         attrs: {
           files: _vm.files,
-          server: _vm.endpoint,
+          server: {
+            url: _vm.endpoint,
+            process: {
+              headers: {
+                "X-CSRF-TOKEN": _vm.csrfToken,
+              },
+            },
+          },
           "label-idle": _vm.placeholder,
           "allow-multiple": _vm.isMultiple,
           "accepted-file-types": _vm.availableFormats,
+        },
+        model: {
+          value: _vm.localvalue,
+          callback: function ($$v) {
+            _vm.localvalue = $$v
+          },
+          expression: "localvalue",
         },
       }),
     ],
@@ -35677,63 +35774,86 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("Divider", { attrs: { labelText: "2. Informasi kegiatan" } }),
-      _vm._v(" "),
-      _c(
-        "FormGroup",
-        { attrs: { labelText: "Undang beberapa ASN" } },
-        [_c("VSelect")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "FormGroup",
-        { attrs: { labelText: "Apa kegiatan bersifat umum?" } },
-        [
-          _c("VSelect", {
-            attrs: {
-              options: [
-                { label: "Ya, tersedia untuk ASN dan umum", id: 1 },
-                { label: "Tidak, hanya untuk ASN", id: 0 },
-              ],
-            },
-            model: {
-              value: _vm.form.is_public,
-              callback: function ($$v) {
-                _vm.$set(_vm.form, "is_public", $$v)
+  return _c("div", [
+    _c(
+      "form",
+      {
+        attrs: { method: "post" },
+        on: {
+          submit: function ($event) {
+            $event.preventDefault()
+            return _vm.onSubmitted.apply(null, arguments)
+          },
+        },
+      },
+      [
+        _c("Divider", { attrs: { labelText: "2. Informasi kegiatan" } }),
+        _vm._v(" "),
+        _c(
+          "FormGroup",
+          { attrs: { labelText: "Undang beberapa ASN" } },
+          [
+            _c("VSelect", {
+              attrs: { multiple: "", options: _vm.availableEmployees },
+              model: {
+                value: _vm.form.employees,
+                callback: function ($$v) {
+                  _vm.$set(_vm.form, "employees", $$v)
+                },
+                expression: "form.employees",
               },
-              expression: "form.is_public",
-            },
-          }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "FormGroup",
-        { attrs: { labelText: "Unggah file materi" } },
-        [
-          _c("FileUploader", {
-            attrs: {
-              isMultiple: "",
-              endpoint: "/async/attachments",
-              availableFormats: "application/pdf",
-              placeholder: "Tarik atau tekan untuk unggah",
-            },
-          }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-primary" }, [
-        _vm._v("Simpan informasi kegiatan"),
-      ]),
-    ],
-    1
-  )
+            }),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "FormGroup",
+          { attrs: { labelText: "Apa kegiatan bersifat umum?" } },
+          [
+            _c("VSelect", {
+              attrs: {
+                options: [
+                  { label: "Ya, tersedia untuk ASN dan umum", id: 1 },
+                  { label: "Tidak, hanya untuk ASN", id: 0 },
+                ],
+              },
+              model: {
+                value: _vm.form.is_public,
+                callback: function ($$v) {
+                  _vm.$set(_vm.form, "is_public", $$v)
+                },
+                expression: "form.is_public",
+              },
+            }),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "FormGroup",
+          { attrs: { labelText: "Unggah file materi" } },
+          [
+            _c("FileUploader", {
+              ref: "uploader",
+              attrs: {
+                isMultiple: "",
+                endpoint: "/async/attachments",
+                availableFormats: "application/pdf",
+                placeholder: "Tarik atau tekan untuk unggah",
+              },
+            }),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-primary" }, [
+          _vm._v("Simpan informasi kegiatan"),
+        ]),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

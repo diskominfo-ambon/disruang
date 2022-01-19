@@ -49,8 +49,8 @@
                   <div class="nk-wgw-actions">
                       <ul>
                           <li><a href="{{ route('user.schedules.show', $schedule) }}"><em class="icon ni ni-eye-fill"></em><span>Lihat</span></a></li>
+                          <li><a href="{{ route('user.schedules.review', $schedule) }}"><em class="icon ni ni-setting"></em><span>Tinjau</span></a></li>
                           <li><a href="{{ route('exports.schedules.participants', $schedule) }}"><em class="icon ni ni-file-download"></em><span>Download</span></a></li>
-                          <li><a href="{{ route('user.schedules.review', $schedule) }}"><em class="icon ni ni-setting"></em><span>Tinjau kegiatan</span></a></li>
                       </ul>
                   </div>
               </div>

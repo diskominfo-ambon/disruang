@@ -73,11 +73,10 @@ class SchedulesController extends Controller
     }
 
     $schedule = Auth::user()->schedules()->create(
-      $request->merge([
-        'status' => Schedule::$CONFIRM
-      ])
-        ->except('range')
+      array_merge($request->all(), ['status' => Schedule::$CONFIRM])
     );
+
+    dd(array_merge($request->all(), ['status' => Schedule::$CONFIRM]));
 
 
     return Response::success(
