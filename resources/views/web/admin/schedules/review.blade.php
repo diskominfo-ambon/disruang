@@ -1,5 +1,4 @@
-@extends('web.layouts.dashlite')
-
+@extends('web.layouts.admin')
 @section('content')
   <!-- .buysell-title -->
 <div class="buysell wide-xs m-auto">

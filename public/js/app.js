@@ -2354,7 +2354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 if (STATUS === FORBIDDEN) {
-                  _this2.alert = _context2.t0.message;
+                  _this2.alert = _context2.t0.response.data.message;
                 }
 
               case 19:

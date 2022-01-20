@@ -181,7 +181,7 @@ export default {
         }
 
         if (STATUS === FORBIDDEN) {
-          this.alert = e.message;
+          this.alert = e.response.data.message;
         }
       }
     }
