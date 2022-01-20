@@ -1988,6 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1997,6 +1998,15 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
   props: ['files', 'endpoint', 'placeholder', 'isMultiple', 'availableFormats', 'value'],
   components: {
     FilePond: FilePond
+  },
+  methods: {
+    onRemoveFiled: function onRemoveFiled(err, body) {
+      window.axios["delete"](this.endpoint, {
+        data: {
+          id: body.source
+        }
+      });
+    }
   },
   computed: {
     localvalue: {
@@ -2397,6 +2407,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/utils/use-fetch */ "./resources/js/utils/use-fetch.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -2409,6 +2425,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -2477,7 +2494,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           id: 1
         },
         attachments: [],
-        employees: []
+        employees: [],
+        files: []
       }
     };
   },
@@ -2532,13 +2550,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees;
+      var $pondRef, _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees, _iterator, _step, attachment, path, file;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              console.log(_this2.$refs.uploader.$refs.pond.getFiles());
+              $pondRef = _this2.$refs.uploader.$refs.pond;
               _context2.prev = 1;
               _context2.next = 4;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)(_this2.baseEndpoint + '/' + _this2.id);
@@ -2563,6 +2581,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   id: employee.id
                 };
               });
+              _iterator = _createForOfIteratorHelper(schedule.attachments);
+
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  attachment = _step.value;
+                  path = window.location.origin + '/storage/' + attachment.path;
+                  file = new File([path], attachment.original_filename, {
+                    type: attachment.content_type
+                  });
+
+                  _this2.form.files.push({
+                    source: attachment.id,
+                    options: {
+                      type: 'local',
+                      file: file
+                    }
+                  });
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+
               _this2.form = _objectSpread(_objectSpread(_objectSpread({}, _this2.form), schedule), {}, {
                 employees: schedule.employees.map(function (employee) {
                   return {
@@ -2572,21 +2614,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }),
                 is_public: isAvailable
               });
-              _context2.next = 21;
+              _context2.next = 23;
               break;
 
-            case 17:
-              _context2.prev = 17;
+            case 19:
+              _context2.prev = 19;
               _context2.t0 = _context2["catch"](1);
               console.log(_context2.t0);
               console.log('error');
 
-            case 21:
+            case 23:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 17]]);
+      }, _callee2, null, [[1, 19]]);
     }))();
   }
 });
@@ -35456,6 +35498,7 @@ var render = function () {
           "allow-multiple": _vm.isMultiple,
           "accepted-file-types": _vm.availableFormats,
         },
+        on: { removefile: _vm.onRemoveFiled },
         model: {
           value: _vm.localvalue,
           callback: function ($$v) {
@@ -35832,12 +35875,13 @@ var render = function () {
         _vm._v(" "),
         _c(
           "FormGroup",
-          { attrs: { labelText: "Unggah file materi" } },
+          { attrs: { labelText: "Unggah file materi (Opsional)" } },
           [
             _c("FileUploader", {
               ref: "uploader",
               attrs: {
                 isMultiple: "",
+                files: _vm.form.files,
                 endpoint: "/async/attachments",
                 availableFormats: "application/pdf",
                 placeholder: "Tarik atau tekan untuk unggah",

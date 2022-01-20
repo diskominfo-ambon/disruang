@@ -4,6 +4,7 @@
       ref="pond"
       :files="files"
       v-model="localvalue"
+      v-on:removefile="onRemoveFiled"
       :server="{
         url: endpoint,
         process: {
@@ -41,6 +42,15 @@ export default {
   ],
   components: {
     FilePond
+  },
+  methods: {
+    onRemoveFiled(err, body) {
+      window.axios.delete(this.endpoint, {
+        data: {
+          id: body.source
+        }
+      })
+    }
   },
   computed: {
     localvalue: {

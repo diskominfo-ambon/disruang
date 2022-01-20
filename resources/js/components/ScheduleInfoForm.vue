@@ -20,10 +20,11 @@
         />
       </FormGroup>
 
-      <FormGroup labelText="Unggah file materi">
+      <FormGroup labelText="Unggah file materi (Opsional)">
         <FileUploader
           isMultiple
           ref="uploader"
+          :files="form.files"
           endpoint="/async/attachments"
           availableFormats="application/pdf"
           placeholder="Tarik atau tekan untuk unggah"
@@ -66,7 +67,8 @@ export default {
       form: {
         is_public: {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
         attachments: [],
-        employees: []
+        employees: [],
+        files: [],
       }
     }
   },
@@ -94,7 +96,8 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.$refs.uploader.$refs.pond.getFiles());
+    const $pondRef = this.$refs.uploader.$refs.pond;
+
     try {
       
       const { data } = await useFetch(this.baseEndpoint + '/' + this.id);
@@ -111,6 +114,21 @@ export default {
           id: employee.id 
         }
       });
+
+      for (const attachment of schedule.attachments) {
+        const path = window.location.origin + '/storage/' + attachment.path;
+        const file = new File([path], attachment.original_filename, {
+          type: attachment.content_type
+        });
+
+        this.form.files.push({
+          source: attachment.id,
+          options: {
+            type: 'local',
+            file
+          }
+        });
+      }
 
       this.form = {
         ...this.form,

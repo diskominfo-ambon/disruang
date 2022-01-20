@@ -12,7 +12,7 @@
   <div class="buysell-block mt-5" id="app">
     <schedule-info-form 
       id="{{ $schedule->id }}"
-      base-endpoint="/schedules"
+      base-endpoint="/async/schedules"
       redirect-url="{{ route('user.home') }}"
     />
   </div>

@@ -21,8 +21,9 @@ class AttachmentsController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id;
         $attachment = Attachment::findOrFail($id);
 
         $attachment->delete();
