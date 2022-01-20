@@ -20,11 +20,14 @@ Route::group(['middleware' =>  'auth'], function () {
     ->name('async.schedules.update');
 
   Route::post('/attachments', [AttachmentsController::class, 'store']);
-
-  Route::delete('attachments', [AttachmentsController::class, 'destroy']);
-
+  
+  
   Route::put('/schedules/{schedule}/review', [ScheduleReviewController::class, 'update']);
+  Route::delete('/attachments', [AttachmentsController::class, 'destroy']);
+  
+  Route::delete('/attachments/{schedule}', [AttachmentsController::class, 'destroy']);
 });
+  
 
 Route::post('participants/new', [RegisteredParticipantController::class, 'store'])
   ->name('async.participants.new');

@@ -100,9 +100,10 @@ export default {
 
     try {
       
-      const { data } = await useFetch(this.baseEndpoint + '/' + this.id);
+      const { data } = await useFetch( '/async/schedules/' + this.id);
 
       const schedule = data.payload;
+      console.log(schedule)
       const isAvailable = this.availableOptions.filter(item => item.id === schedule.is_public)[0];
       
       const { data: res } = await  useFetch('/api/employees');
@@ -116,11 +117,7 @@ export default {
       });
 
       for (const attachment of schedule.attachments) {
-        const path = window.location.origin + '/storage/' + attachment.path;
-        const file = new File([attachment.filename], attachment.original_filename, {
-          type: attachment.content_type,
-          size: attachment.size
-        });
+        
 
         this.form.files.push({
           source: attachment.id,

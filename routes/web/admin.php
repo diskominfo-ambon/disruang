@@ -23,6 +23,9 @@ Route::put('/submissions/{schedule}', [SubmissionsController::class, 'update'])
 Route::resource('schedules', SchedulesController::class, ['as' => 'admin']);
 
 Route::put('/schedules/{schedule}/review', [ScheduleReviewController::class, 'update'])
+  ->name('admin.schedules.review.update');
+
+Route::get('/schedules/{schedule}/review', [ScheduleReviewController::class, 'index'])
   ->name('admin.schedules.review');
 
 Route::resource('d', SuperUsersController::class, ['as' => 'admin'])

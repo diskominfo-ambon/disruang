@@ -76,8 +76,6 @@ class SchedulesController extends Controller
       array_merge($request->all(), ['status' => Schedule::$CONFIRM])
     );
 
-    dd(array_merge($request->all(), ['status' => Schedule::$CONFIRM]));
-
 
     return Response::success(
       message: 'Berhasil menambahkan kegiatan ' . str($schedule->title)->limit(20),

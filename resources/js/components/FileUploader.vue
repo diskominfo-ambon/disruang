@@ -7,11 +7,10 @@
       v-on:removefile="onRemoveFiled"
       :server="{
         url: endpoint,
-        process: {
-          headers: {
-            'X-CSRF-TOKEN': csrfToken
-          }
+        headers: {
+          'X-CSRF-TOKEN': csrfToken
         }
+       
       }"
       :label-idle="placeholder"
       :allow-multiple="isMultiple"

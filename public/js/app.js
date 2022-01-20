@@ -1988,7 +1988,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2550,7 +2549,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var $pondRef, _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees, _iterator, _step, attachment, path, file;
+      var $pondRef, _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees, _iterator, _step, attachment;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
@@ -2559,19 +2558,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               $pondRef = _this2.$refs.uploader.$refs.pond;
               _context2.prev = 1;
               _context2.next = 4;
-              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)(_this2.baseEndpoint + '/' + _this2.id);
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)('/async/schedules/' + _this2.id);
 
             case 4:
               _yield$useFetch = _context2.sent;
               data = _yield$useFetch.data;
               schedule = data.payload;
+              console.log(schedule);
               isAvailable = _this2.availableOptions.filter(function (item) {
                 return item.id === schedule.is_public;
               })[0];
-              _context2.next = 10;
+              _context2.next = 11;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)('/api/employees');
 
-            case 10:
+            case 11:
               _yield$useFetch2 = _context2.sent;
               res = _yield$useFetch2.data;
               employees = res.payload;
@@ -2586,11 +2586,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               try {
                 for (_iterator.s(); !(_step = _iterator.n()).done;) {
                   attachment = _step.value;
-                  path = window.location.origin + '/storage/' + attachment.path;
-                  file = new File([attachment.filename], attachment.original_filename, {
-                    type: attachment.content_type,
-                    size: attachment.size
-                  });
 
                   _this2.form.files.push({
                     source: attachment.id,
@@ -2619,21 +2614,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }),
                 is_public: isAvailable
               });
-              _context2.next = 23;
+              _context2.next = 24;
               break;
 
-            case 19:
-              _context2.prev = 19;
+            case 20:
+              _context2.prev = 20;
               _context2.t0 = _context2["catch"](1);
               console.log(_context2.t0);
               console.log('error');
 
-            case 23:
+            case 24:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 19]]);
+      }, _callee2, null, [[1, 20]]);
     }))();
   }
 });
@@ -35493,10 +35488,8 @@ var render = function () {
           files: _vm.files,
           server: {
             url: _vm.endpoint,
-            process: {
-              headers: {
-                "X-CSRF-TOKEN": _vm.csrfToken,
-              },
+            headers: {
+              "X-CSRF-TOKEN": _vm.csrfToken,
             },
           },
           "label-idle": _vm.placeholder,

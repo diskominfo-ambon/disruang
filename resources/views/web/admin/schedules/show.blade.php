@@ -11,7 +11,8 @@
           </div>
       </div>
       <div class="nk-block-head-content nk-block-between">
-          <a href="{{ route('exports.schedules.participants', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
+      <a href="{{ route('exports.schedules.participants', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
+          <a href="{{ route('admin.schedules.review', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-setting"></em><span>Tinjau</span></a>
           @can('kominfo')
           <form action="{{ route('admin.schedules.destroy', $schedule) }}" method="POST">
             @csrf
