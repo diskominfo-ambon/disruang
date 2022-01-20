@@ -2587,15 +2587,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 for (_iterator.s(); !(_step = _iterator.n()).done;) {
                   attachment = _step.value;
                   path = window.location.origin + '/storage/' + attachment.path;
-                  file = new File([path], attachment.original_filename, {
-                    type: attachment.content_type
+                  file = new File([attachment.filename], attachment.original_filename, {
+                    type: attachment.content_type,
+                    size: attachment.size
                   });
 
                   _this2.form.files.push({
                     source: attachment.id,
                     options: {
                       type: 'local',
-                      file: file
+                      file: {
+                        name: attachment.original_filename,
+                        type: attachment.content_type,
+                        size: attachment.size
+                      }
                     }
                   });
                 }

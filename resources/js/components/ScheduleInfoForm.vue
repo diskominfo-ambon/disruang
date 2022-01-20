@@ -117,15 +117,20 @@ export default {
 
       for (const attachment of schedule.attachments) {
         const path = window.location.origin + '/storage/' + attachment.path;
-        const file = new File([path], attachment.original_filename, {
-          type: attachment.content_type
+        const file = new File([attachment.filename], attachment.original_filename, {
+          type: attachment.content_type,
+          size: attachment.size
         });
 
         this.form.files.push({
           source: attachment.id,
           options: {
             type: 'local',
-            file
+            file: {
+              name: attachment.original_filename,
+              type: attachment.content_type,
+              size: attachment.size
+            }
           }
         });
       }
