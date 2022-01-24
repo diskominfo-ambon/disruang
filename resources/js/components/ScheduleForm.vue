@@ -97,7 +97,7 @@ export default {
       });
 
       if (this.id !== undefined) {
-        const SCHEDULE_ENDPOINT = this.baseEndpoint + '/' + this.id;
+        const SCHEDULE_ENDPOINT = '/' + this.baseEndpoint + '/' + this.id;
         const { data } = await useFetch(SCHEDULE_ENDPOINT);
 
         const { title, desc, room_id, started_at, ended_at } = data.payload;
@@ -130,8 +130,8 @@ export default {
     },
     async onSubmitted() {
       const ENDPOINT = this.id !== undefined
-        ? this.baseEndpoint + '/' + this.id
-        : this.baseEndpoint;
+        ? '/' + this.baseEndpoint + '/' + this.id
+        :  '/' + this.baseEndpoint;
 
       /**
        * Jika prop [id] di ketahui maka form tersebut digunakan untuk

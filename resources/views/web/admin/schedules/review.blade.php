@@ -11,7 +11,7 @@
   <div class="buysell-block mt-5" id="app">
     <schedule-info-form 
       id="{{ $schedule->id }}"
-      base-endpoint="{{ route('admin.schedules.index') }}"
+      base-endpoint="/admin/schedules"
       redirect-url="{{ route('admin.schedules.index') }}"
     />
   </div>

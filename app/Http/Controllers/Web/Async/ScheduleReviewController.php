@@ -6,16 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Schedule;
+use App\Https\Requests\ScheduleReviewRequest;
 
 
 class ScheduleReviewController extends Controller
 {
-    public function update(Request $request, Schedule $schedule)
+    public function update(ScheduleReviewRequest $request, Schedule $schedule)
     {
-        $request->validate([
-            'employees' => 'required|array|min:1',
-        ]);
-
         $schedule->update(
             $request->all()
         );

@@ -2245,7 +2245,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
               }
 
-              SCHEDULE_ENDPOINT = _this.baseEndpoint + '/' + _this.id;
+              SCHEDULE_ENDPOINT = '/' + _this.baseEndpoint + '/' + _this.id;
               _context.next = 11;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(SCHEDULE_ENDPOINT);
 
@@ -2301,7 +2301,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                ENDPOINT = _this2.id !== undefined ? _this2.baseEndpoint + '/' + _this2.id : _this2.baseEndpoint;
+                ENDPOINT = _this2.id !== undefined ? '/' + _this2.baseEndpoint + '/' + _this2.id : '/' + _this2.baseEndpoint;
                 /**
                  * Jika prop [id] di ketahui maka form tersebut digunakan untuk
                  * 'edit' sebaliknya jika tidak maka untuk 'create'.
@@ -2400,12 +2400,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Divider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Divider */ "./resources/js/components/Divider.vue");
-/* harmony import */ var _FormGroup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormGroup */ "./resources/js/components/FormGroup.vue");
-/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.vue");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/utils/use-fetch */ "./resources/js/utils/use-fetch.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Divider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Divider */ "./resources/js/components/Divider.vue");
+/* harmony import */ var _TextError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TextError */ "./resources/js/components/TextError.vue");
+/* harmony import */ var _FormGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormGroup */ "./resources/js/components/FormGroup.vue");
+/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils_use_fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ~/utils/use-fetch */ "./resources/js/utils/use-fetch.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -2462,6 +2465,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+
+
 
 
 
@@ -2472,10 +2479,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['id', // Id kegiatan yang diambil dari basis data.
   'redirectUrl', 'baseEndpoint'],
   components: {
-    Divider: _Divider__WEBPACK_IMPORTED_MODULE_1__.default,
-    FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_2__.default,
-    FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_3__.default,
-    VSelect: (vue_select__WEBPACK_IMPORTED_MODULE_4___default())
+    VSelect: (vue_select__WEBPACK_IMPORTED_MODULE_1___default()),
+    Divider: _Divider__WEBPACK_IMPORTED_MODULE_2__.default,
+    FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_4__.default,
+    FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_5__.default,
+    TextError: _TextError__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
@@ -2487,6 +2495,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id: 0
       }],
       availableEmployees: [],
+      errors: [],
       form: {
         is_public: {
           label: 'Ya, tersedia untuk ASN dan umum',
@@ -2503,12 +2512,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var attachments, body;
+        var attachments, body, ENTITY_ISINVALID, FORBIDDEN, STATUS, errors;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
+                _this.errors = [];
                 attachments = _this.$refs.uploader.$refs.pond.getFiles().map(function (file) {
                   return file.serverId;
                 });
@@ -2519,29 +2529,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }),
                   is_public: _this.form.is_public.id
                 });
-                _context.next = 5;
+                _context.next = 6;
                 return window.axios.put(_this.baseEndpoint + '/' + _this.id + '/review', body);
 
-              case 5:
+              case 6:
                 if (_this.redirectUrl !== undefined) {
                   window.location.replace(_this.redirectUrl);
                 }
 
-                _context.next = 12;
+                _context.next = 17;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
-                console.log('gagal');
+                ENTITY_ISINVALID = 422;
+                FORBIDDEN = 403;
+                STATUS = _context.t0.response.status;
+                errors = _context.t0.response.data.errors;
 
-              case 12:
+                if (STATUS === ENTITY_ISINVALID && Object.keys(errors).length > 0) {
+                  /**
+                   * Mengetahui jika respon status adalah ENTITY_INVALID maka
+                   * tampilkan hasil error formn dengan memetakan setiap [key] bidang
+                   * ke [key] errrornya.
+                   */
+                  _this.errors = (0,lodash__WEBPACK_IMPORTED_MODULE_6__.mapValues)(errors, function (error) {
+                    return error[0];
+                  });
+                }
+
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 9]]);
       }))();
     }
   },
@@ -2558,7 +2582,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               $pondRef = _this2.$refs.uploader.$refs.pond;
               _context2.prev = 1;
               _context2.next = 4;
-              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)('/async/schedules/' + _this2.id);
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_7__.default)('/async/schedules/' + _this2.id);
 
             case 4:
               _yield$useFetch = _context2.sent;
@@ -2569,7 +2593,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return item.id === schedule.is_public;
               })[0];
               _context2.next = 11;
-              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_5__.default)('/api/employees');
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_7__.default)('/api/employees');
 
             case 11:
               _yield$useFetch2 = _context2.sent;
@@ -35844,6 +35868,8 @@ var render = function () {
                 expression: "form.employees",
               },
             }),
+            _vm._v(" "),
+            _c("TextError", { attrs: { message: _vm.errors.employees } }),
           ],
           1
         ),

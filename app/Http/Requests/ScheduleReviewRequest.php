@@ -13,7 +13,7 @@ class ScheduleReviewRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,22 @@ class ScheduleReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'employess' => 'required|array|min:1',
-            'is_public' => 'required|accepted',
-            'attachments' => 'required|array|min:1'
+            'employees' => 'required|array|min:1',
+        ];
+    }
+
+
+    public function attributes()
+    {
+        return [
+            'employees' => 'Pegawai'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => ':attribute wajib untuk dimasukan',
         ];
     }
 }

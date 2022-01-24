@@ -11,7 +11,7 @@
   <!-- .buysell-block -->
   <div class="buysell-block mt-5" id="app">
     <schedule-form
-      base-endpoint="{{ route('admin.schedules.index') }}"
+      base-endpoint="admin/schedules"
       redirect-uri="{{ route('admin.schedules.index') }}"
     />
   </div>

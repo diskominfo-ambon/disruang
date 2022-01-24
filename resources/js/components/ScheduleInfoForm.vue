@@ -8,6 +8,7 @@
           v-model="form.employees"
           :options="availableEmployees"
         />
+        <TextError :message="errors.employees" />
       </FormGroup>
 
       <FormGroup labelText="Apa kegiatan bersifat umum?">
@@ -18,6 +19,7 @@
             {label: 'Tidak, hanya untuk ASN', id: 0}
           ]"
         />
+       
       </FormGroup>
 
       <FormGroup labelText="Unggah file materi (Opsional)">
@@ -37,11 +39,13 @@
 </template>
 
 <script>
+import VSelect from 'vue-select';
 import Divider from './Divider';
+import TextError from './TextError';
 import FormGroup from './FormGroup'
 import FileUploader from './FileUploader';
-import VSelect from 'vue-select';
 
+import { mapValues } from 'lodash';
 import useFetch from '~/utils/use-fetch';
 
 export default {
@@ -52,10 +56,11 @@ export default {
     'baseEndpoint',
   ],
   components: {
+    VSelect,
     Divider,
     FormGroup,
     FileUploader,
-    VSelect,
+    TextError
   },
   data() {
     return {
@@ -64,6 +69,7 @@ export default {
         {label: 'Tidak, hanya untuk ASN', id: 0}
       ],
       availableEmployees: [],
+      errors: [],
       form: {
         is_public: {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
         attachments: [],
@@ -76,7 +82,9 @@ export default {
     async onSubmitted() {
       
       try {
+        this.errors = [];
         const attachments = this.$refs.uploader.$refs.pond.getFiles().map( file => file.serverId);
+        
         const body = {
           ...this.form,
           attachments,
@@ -91,7 +99,22 @@ export default {
         }
       } catch (e) {
         console.log(e);
-        console.log('gagal');
+        const ENTITY_ISINVALID = 422;
+        const FORBIDDEN = 403;
+        const STATUS = e.response.status;
+        const errors = e.response.data.errors;
+        if (
+          STATUS === ENTITY_ISINVALID
+          && Object.keys(errors).length > 0
+        ) {
+          /**
+           * Mengetahui jika respon status adalah ENTITY_INVALID maka
+           * tampilkan hasil error formn dengan memetakan setiap [key] bidang
+           * ke [key] errrornya.
+           */
+          this.errors = mapValues(errors, error => error[0]);
+        }
+
       }
     }
   },
