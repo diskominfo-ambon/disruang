@@ -18,7 +18,7 @@
 <!-- .nav-tabs -->
 <ul class="nk-nav nav nav-tabs">
   <li class="nav-item">
-      <a class="nav-link @if ($order === Schedule::$PENDING) active current-page @endif" href="{{ route('user.submissions') }}?order=pending">Pending</a>
+      <a class="nav-link @if ($order === Schedule::$PENDING) active current-page @endif" href="{{ route('user.submissions') }}?order=pending">Menunggu</a>
   </li>
   <li class="nav-item">
       <a class="nav-link" href="{{ route('user.submissions') }}?order=confirm">Diterima</a>

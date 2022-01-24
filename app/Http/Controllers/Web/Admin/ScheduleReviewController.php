@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Schedule;
 use App\Http\Requests\ScheduleReviewRequest;
+use App\Jobs\SendEmailInvitation;
 
 class ScheduleReviewController extends Controller
 {

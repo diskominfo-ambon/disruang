@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Schedule;
-use App\Https\Requests\ScheduleReviewRequest;
+use App\Http\Requests\ScheduleReviewRequest;
 
 
 class ScheduleReviewController extends Controller

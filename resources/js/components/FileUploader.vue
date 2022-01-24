@@ -68,8 +68,7 @@ export default {
   },
   mounted() {
     this.csrfToken = document
-        .querySelector('meta[name="csrf-token"]')
-        .getAttribute('content');
+        .querySelector('meta[name="csrf-token"]').content
   }
 }
 </script>

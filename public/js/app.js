@@ -2023,7 +2023,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
     };
   },
   mounted: function mounted() {
-    this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    this.csrfToken = document.querySelector('meta[name="csrf-token"]').content;
   }
 });
 

@@ -2,6 +2,37 @@
 
 
 @section('content')
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Kumpulan materi kegiatan {{ $schedule->title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        @forelse($schedule->attachments as $attachment)
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="d-flex align-items-center justify-content-between">
+              <div style="flex: 1;">
+                {{ str($attachment->original_filename)->limit(30) }}
+              </div>
+              <a class="fw-bold" href="{{ asset('storage/'. $attachment->path) }}" download>Download</a>
+            </div>
+          </li>
+        </ul>
+        @empty
+        <p class="text-center">Tidak ada berkas materi</p>
+        @endforelse
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 <div class="nk-block-head nk-block-head-sm">
   <div class="nk-block-between g-3">
       <div class="nk-block-head-content">
@@ -11,7 +42,10 @@
           </div>
       </div>
       <div class="nk-block-head-content nk-block-between">
-      <a href="{{ route('exports.schedules.participants', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
+          <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#exampleModal">
+            <em class="icon ni ni-eye mr-1"></em> Materi
+          </button>
+          <a href="{{ route('exports.schedules.participants', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-download-cloud"></em><span>Download</span></a>
           <a href="{{ route('admin.schedules.review', $schedule) }}" class="btn mr-1 btn-primary d-none d-sm-inline-flex"><em class="icon ni ni-setting"></em><span>Tinjau</span></a>
           @can('kominfo')
           <form action="{{ route('admin.schedules.destroy', $schedule) }}" method="POST">
@@ -25,6 +59,7 @@
   </div>
 </div><!-- .nk-block-head -->
 <div class="nk-block">
+
   <div class="card card-bordered card-stretch">
       <div class="card-inner-group">
           <div class="card-inner position-relative">
