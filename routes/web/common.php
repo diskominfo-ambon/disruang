@@ -14,3 +14,6 @@ Route::group(['middleware' => 'auth'], function () {
     ->name('exports.schedules.participants');
 
 });
+
+
+Route::view('/undangan', 'vendor.prints.schedule-invitation');

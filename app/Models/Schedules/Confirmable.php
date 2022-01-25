@@ -93,7 +93,7 @@ trait Confirmable
         return $this->status === self::$REJECT;
     }
 
-    public function geIsReviewAttribute(): bool
+    public function getIsReviewAttribute(): bool
     {
         return $this->status === self::$REVIEW;
     }

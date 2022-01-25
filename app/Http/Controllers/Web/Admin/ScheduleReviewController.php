@@ -22,12 +22,12 @@ class ScheduleReviewController extends Controller
             $schedule->attachments()->sync($request->attachments);
         }
         
-        if ($schedule->isReview()) {
+        if ($schedule->isReview) {
             $request->merge([
                 'status' => Schedule::$CONFIRM
             ]);
 
-            SendBulkEmailInvitation::dispatch($employees);
+            SendBulkEmailInvitation::dispatch($schedule, $employees);
         }
         
         $schedule->update(

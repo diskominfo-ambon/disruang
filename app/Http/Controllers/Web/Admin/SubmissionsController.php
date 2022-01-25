@@ -33,7 +33,7 @@ class SubmissionsController extends Controller
 
   public function update(Request $request, Schedule $schedule)
   {
-    $order = $request->get('order', Schedule::$CONFIRM);
+    $order = $request->get('order');
     // message used for rejection notification.
     $message = $request->post('message', '');
 

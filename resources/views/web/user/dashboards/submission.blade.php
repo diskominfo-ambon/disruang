@@ -78,7 +78,7 @@ $currentItr = null;
 
                             @endphp
                             <div class="mt-2">
-                                @include('components.schedules.notification-message', ['payload' => $notification, 'status' => $schedule->status]);
+                                @include('components.schedules.notification-message', ['payload' => $notification, 'status' => $schedule->status])
                             </div>
                         @endif
 

@@ -19,6 +19,7 @@ class ScheduleInvitation extends Mailable
      * @return void
      */
     public function __construct(
+        public $schedule,
         public $employee
     )
     {
