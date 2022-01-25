@@ -14,15 +14,25 @@ class ScheduleReviewController extends Controller
     public function update(ScheduleReviewRequest $request, Schedule $schedule)
     {
 
+        $employees = $request->employees;
+        $schedule->employees()->sync($employees);
+        
+        if ($request->filled('attachments')) {
+            
+            $schedule->attachments()->sync($request->attachments);
+        }
+        
+        if ($schedule->isReview()) {
+            $request->merge([
+                'status' => Schedule::$CONFIRM
+            ]);
+
+            SendBulkEmailInvitation::dispatch($employees);
+        }
+        
         $schedule->update(
             $request->all()
         );
-        $schedule->employees()->sync($request->employees);
-
-        if ($request->filled('attachments')) {
-
-            $schedule->attachments()->sync($request->attachments);
-        }
 
         return Response::success(
             message: 'Berhasil menijau kegiatan "'. $schedule->title . '"'

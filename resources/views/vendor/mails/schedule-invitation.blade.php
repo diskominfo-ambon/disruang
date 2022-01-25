@@ -1,1 +1,4 @@
-Halo dunia
+Header email
+
+Halo {{ $employee->name }}
+nip: {{ $employee->nip }}

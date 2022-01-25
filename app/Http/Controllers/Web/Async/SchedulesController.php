@@ -24,7 +24,6 @@ class SchedulesController extends Controller
       );
     }
 
-
     Auth::user()->schedules()
       ->create(
         $request->all()

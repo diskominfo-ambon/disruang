@@ -30,6 +30,10 @@ trait Confirmable
      */
     public static $REJECT = 'reject';
 
+
+    public static $REVIEW = 'review';
+
+
     public function scopeConfirm(Builder $builder): Builder
     {
         return $builder->withoutGlobalScopes()
@@ -43,6 +47,13 @@ trait Confirmable
         return $builder->withoutGlobalScopes()
             ->active()
             ->where('status', self::$REJECT);
+    }
+
+    public function scopeReview(Builder $builder): Builder
+    {
+        return $builder->withoutGlobalScopes()
+            ->active()
+            ->where('status', self::$REVIEW);
     }
 
 
@@ -80,6 +91,11 @@ trait Confirmable
     public function getIsRejectAttribute(): bool
     {
         return $this->status === self::$REJECT;
+    }
+
+    public function geIsReviewAttribute(): bool
+    {
+        return $this->status === self::$REVIEW;
     }
 
 }

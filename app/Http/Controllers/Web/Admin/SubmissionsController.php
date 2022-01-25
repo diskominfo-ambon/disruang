@@ -37,14 +37,14 @@ class SubmissionsController extends Controller
     // message used for rejection notification.
     $message = $request->post('message', '');
 
-    $status = $order === Schedule::$CONFIRM
-      ? Schedule::$CONFIRM
+    $status = $order === Schedule::$REVIEW
+      ? Schedule::$REVIEW
       : Schedule::$REJECT;
 
 
     // sending notification from reviewed schedule.
     Notification::send(
-      $schedule, $status === Schedule::$CONFIRM
+      $schedule, $status === Schedule::$REVIEW
         ? new ScheduleConfirmed()
         : new ScheduleRejected($message)
     );

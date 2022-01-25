@@ -23,8 +23,9 @@ class EmployeeFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
             'job_position' => 'Staff',
-            'nip' => 4328942738
+            'nip' => 4328942738,
         ];
     }
 }

@@ -8,8 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ScheduleInvitation;
 
-class SendEmailInvitation implements ShouldQueue
+class SendBulkEmailInvitation implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -19,7 +21,7 @@ class SendEmailInvitation implements ShouldQueue
      * @return void
      */
     public function __construct(
-        private $user
+        public $employees
     )
     {
         //
@@ -32,6 +34,9 @@ class SendEmailInvitation implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($user)->send(new ScheduleInvitation($user));
+        foreach ($this->employees as $employee) {
+
+            Mail::to($employee->email)->send(new ScheduleInvitation($employee));
+        }
     }
 }

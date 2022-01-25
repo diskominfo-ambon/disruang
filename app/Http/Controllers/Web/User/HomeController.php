@@ -15,6 +15,7 @@ class HomeController extends Controller
     $schedules = Auth::user()
       ->schedules()
       ->confirm()
+      ->orWhere('status', Schedule::$REVIEW)
       ->with(['participants', 'room'])
       ->get();
 
