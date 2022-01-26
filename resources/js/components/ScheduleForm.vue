@@ -35,6 +35,9 @@
       <FormGroup labelText="Booking pada">
         <DateRangeInput
           v-model="form.date"
+          :attributes="booked"
+          :disabled="disabledDatePicker"
+          @navigation="onDateNavigation"
           :placeholders="['Mulai kapan?', 'Sampai kapan?']"
         />
         <TextError :message="errors.started_at"/>
@@ -54,6 +57,7 @@ import VSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 
 import useFetch from '~/utils/use-fetch';
+import colors from '~/utils/colors-rand';
 import constant from '~/constant';
 
 import Input from './Input';
@@ -83,10 +87,12 @@ export default {
   async mounted() {
     
     try {
-      const ENDPOINT = '/api/rooms';
-      const res = await useFetch(ENDPOINT)
-      const rooms = res.data.payload;
-      
+      const res = await Promise.all([
+        useFetch('/api/schedules'),
+        useFetch('/api/rooms')
+      ]);
+      const rooms = res[1].data.payload;
+
       this.rooms = rooms.map(room => {
         const roomName = room.name.toUpperCase(); 
         
@@ -95,6 +101,32 @@ export default {
           id: room.id 
         }
       });
+
+      const schedules = res[0].data.payload;
+
+      this.booked = schedules.map(schedule => {
+        const color = colors.alpha().random();
+        return {
+          key: schedule.id,
+          highlight: {
+            start: { fillMode: 'outline', color },
+            base: { fillMode: 'light', color },
+            end: { fillMode: 'outline', color },
+          },
+          popover: {
+            label: 'Kegiatan '+ schedule.title
+          },
+          dates: {
+            start: schedule.started_at,
+            end: schedule.ended_at
+          }
+        }
+      });
+
+      this.disabledDatePicker = schedules.map(schedule => {
+        return { start: schedule.started_at, end: schedule.ended_at };
+      });
+
 
       if (this.id !== undefined) {
         const SCHEDULE_ENDPOINT = '/' + this.baseEndpoint + '/' + this.id;
@@ -108,7 +140,7 @@ export default {
           title, 
           desc, 
           room_id: room[0], 
-          date: { start: new Date(started_at), end: new Date(ended_at) } 
+          dates: { start: new Date(schedule.started_at), end: new Date(schedule.ended_at) } 
         };
 
       }
@@ -125,6 +157,9 @@ export default {
     }
   },
   methods: {
+    onDateNavigation(event) {
+      console.log(event)
+    },
     clearErrors() {
       this.errors = [];
     },
@@ -192,6 +227,7 @@ export default {
       alert: null,
       isLoading: false,
       errors: [],
+      booked: [],
       form: {
         room_id: null,
         title: '',

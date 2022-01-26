@@ -1888,6 +1888,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 function diffForHumans(date) {
@@ -1899,9 +1902,14 @@ function diffForHumans(date) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'DateRangeInput',
-  props: ['placeholders', 'value'],
+  props: ['placeholders', 'value', 'attributes', 'disabled'],
   components: {
     DatePicker: v_calendar__WEBPACK_IMPORTED_MODULE_0__.DatePicker
+  },
+  methods: {
+    onNavigation: function onNavigation(event) {
+      this.$emit('navigation', event);
+    }
   },
   computed: {
     date: function date() {
@@ -2116,14 +2124,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var _utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/utils/use-fetch */ "./resources/js/utils/use-fetch.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/constant */ "./resources/js/constant.js");
-/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Input */ "./resources/js/components/Input.vue");
-/* harmony import */ var _Textarea__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Textarea */ "./resources/js/components/Textarea.vue");
-/* harmony import */ var _DateRangeInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DateRangeInput */ "./resources/js/components/DateRangeInput.vue");
-/* harmony import */ var _FormGroup__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormGroup */ "./resources/js/components/FormGroup.vue");
-/* harmony import */ var _Divider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Divider */ "./resources/js/components/Divider.vue");
-/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.vue");
-/* harmony import */ var _TextError__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./TextError */ "./resources/js/components/TextError.vue");
+/* harmony import */ var _utils_colors_rand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/utils/colors-rand */ "./resources/js/utils/colors-rand.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ~/constant */ "./resources/js/constant.js");
+/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Input */ "./resources/js/components/Input.vue");
+/* harmony import */ var _Textarea__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Textarea */ "./resources/js/components/Textarea.vue");
+/* harmony import */ var _DateRangeInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DateRangeInput */ "./resources/js/components/DateRangeInput.vue");
+/* harmony import */ var _FormGroup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormGroup */ "./resources/js/components/FormGroup.vue");
+/* harmony import */ var _Divider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Divider */ "./resources/js/components/Divider.vue");
+/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.vue");
+/* harmony import */ var _TextError__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./TextError */ "./resources/js/components/TextError.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2186,6 +2195,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2206,32 +2219,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   components: {
     VSelect: (vue_select__WEBPACK_IMPORTED_MODULE_2___default()),
-    FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_9__.default,
-    Input: _Input__WEBPACK_IMPORTED_MODULE_6__.default,
-    Textarea: _Textarea__WEBPACK_IMPORTED_MODULE_7__.default,
-    Divider: _Divider__WEBPACK_IMPORTED_MODULE_10__.default,
-    FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_11__.default,
-    DateRangeInput: _DateRangeInput__WEBPACK_IMPORTED_MODULE_8__.default,
-    TextError: _TextError__WEBPACK_IMPORTED_MODULE_12__.default
+    FormGroup: _FormGroup__WEBPACK_IMPORTED_MODULE_10__.default,
+    Input: _Input__WEBPACK_IMPORTED_MODULE_7__.default,
+    Textarea: _Textarea__WEBPACK_IMPORTED_MODULE_8__.default,
+    Divider: _Divider__WEBPACK_IMPORTED_MODULE_11__.default,
+    FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_12__.default,
+    DateRangeInput: _DateRangeInput__WEBPACK_IMPORTED_MODULE_9__.default,
+    TextError: _TextError__WEBPACK_IMPORTED_MODULE_13__.default
   },
   mounted: function mounted() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var ENDPOINT, res, rooms, SCHEDULE_ENDPOINT, _yield$useFetch, data, _data$payload, title, desc, room_id, started_at, ended_at, room;
+      var res, rooms, schedules, SCHEDULE_ENDPOINT, _yield$useFetch, data, _data$payload, title, desc, room_id, started_at, ended_at, room;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              ENDPOINT = '/api/rooms';
-              _context.next = 4;
-              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(ENDPOINT);
+              _context.next = 3;
+              return Promise.all([(0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/schedules'), (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/rooms')]);
 
-            case 4:
+            case 3:
               res = _context.sent;
-              rooms = res.data.payload;
+              rooms = res[1].data.payload;
               _this.rooms = rooms.map(function (room) {
                 var roomName = room.name.toUpperCase();
                 return {
@@ -2239,17 +2251,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   id: room.id
                 };
               });
+              schedules = res[0].data.payload;
+              _this.booked = schedules.map(function (schedule) {
+                var color = _utils_colors_rand__WEBPACK_IMPORTED_MODULE_5__.default.alpha().random();
+                return {
+                  key: schedule.id,
+                  highlight: {
+                    start: {
+                      fillMode: 'outline',
+                      color: color
+                    },
+                    base: {
+                      fillMode: 'light',
+                      color: color
+                    },
+                    end: {
+                      fillMode: 'outline',
+                      color: color
+                    }
+                  },
+                  popover: {
+                    label: 'Kegiatan ' + schedule.title
+                  },
+                  dates: {
+                    start: schedule.started_at,
+                    end: schedule.ended_at
+                  }
+                };
+              });
+              _this.disabledDatePicker = schedules.map(function (schedule) {
+                return {
+                  start: schedule.started_at,
+                  end: schedule.ended_at
+                };
+              });
 
               if (!(_this.id !== undefined)) {
-                _context.next = 16;
+                _context.next = 18;
                 break;
               }
 
               SCHEDULE_ENDPOINT = '/' + _this.baseEndpoint + '/' + _this.id;
-              _context.next = 11;
+              _context.next = 13;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(SCHEDULE_ENDPOINT);
 
-            case 11:
+            case 13:
               _yield$useFetch = _context.sent;
               data = _yield$useFetch.data;
               _data$payload = data.payload, title = _data$payload.title, desc = _data$payload.desc, room_id = _data$payload.room_id, started_at = _data$payload.started_at, ended_at = _data$payload.ended_at;
@@ -2260,26 +2306,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 title: title,
                 desc: desc,
                 room_id: room[0],
-                date: {
-                  start: new Date(started_at),
-                  end: new Date(ended_at)
+                dates: {
+                  start: new Date(schedule.started_at),
+                  end: new Date(schedule.ended_at)
                 }
               };
 
-            case 16:
-              _context.next = 20;
+            case 18:
+              _context.next = 22;
               break;
 
-            case 18:
-              _context.prev = 18;
+            case 20:
+              _context.prev = 20;
               _context.t0 = _context["catch"](0);
 
-            case 20:
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 18]]);
+      }, _callee, null, [[0, 20]]);
     }))();
   },
   computed: {
@@ -2288,6 +2334,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    onDateNavigation: function onDateNavigation(event) {
+      console.log(event);
+    },
     clearErrors: function clearErrors() {
       this.errors = [];
     },
@@ -2372,6 +2421,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       alert: null,
       isLoading: false,
       errors: [],
+      booked: [],
       form: {
         room_id: null,
         title: '',
@@ -2785,6 +2835,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "API_ENDPOINT_ROOMS": () => (/* binding */ API_ENDPOINT_ROOMS)
 /* harmony export */ });
 var API_ENDPOINT_ROOMS = 'api/rooms';
+
+/***/ }),
+
+/***/ "./resources/js/utils/colors-rand.js":
+/*!*******************************************!*\
+  !*** ./resources/js/utils/colors-rand.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function Colors() {
+  this.color = [];
+  this.alpha(); // set default color type.
+}
+
+Colors.prototype.alpha = function () {
+  var alphaColors = ['gray', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'indigo', 'purple', 'pink'];
+  this.colors = alphaColors;
+  return this;
+};
+
+Colors.prototype.random = function () {
+  var rand = Math.floor(Math.random() * this.colors.length);
+  return this.colors[rand];
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new Colors());
 
 /***/ }),
 
@@ -35392,16 +35473,19 @@ var render = function () {
       _c("date-picker", {
         attrs: {
           mode: "dateTime",
-          columns: 2,
+          columns: 1,
           locale: {
             id: "id",
             firstDayOfWeek: 3,
             masks: { weekdays: "WWW", input: ["DD-MM-YY"] },
           },
+          attributes: _vm.attributes,
+          "disabled-dates": _vm.disabled,
           "is-range": "",
           "is-expanded": "",
           is24hr: "",
         },
+        on: { "update:to-page": _vm.onNavigation },
         scopedSlots: _vm._u([
           {
             key: "default",
@@ -35791,7 +35875,12 @@ var render = function () {
           { attrs: { labelText: "Booking pada" } },
           [
             _c("DateRangeInput", {
-              attrs: { placeholders: ["Mulai kapan?", "Sampai kapan?"] },
+              attrs: {
+                attributes: _vm.booked,
+                disabled: _vm.disabledDatePicker,
+                placeholders: ["Mulai kapan?", "Sampai kapan?"],
+              },
+              on: { navigation: _vm.onDateNavigation },
               model: {
                 value: _vm.form.date,
                 callback: function ($$v) {

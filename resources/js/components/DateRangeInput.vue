@@ -3,8 +3,11 @@
    <date-picker
       v-model="localvalue"
       mode="dateTime"
-      :columns="2"
+      :columns="1"
       :locale="{ id: 'id', firstDayOfWeek: 3, masks: { weekdays: 'WWW', input: ['DD-MM-YY'] } }"
+      :attributes="attributes"
+      :disabled-dates="disabled"
+      @update:to-page="onNavigation"
       is-range
       is-expanded
       is24hr
@@ -43,9 +46,16 @@ export default {
   props: [
     'placeholders',
     'value',
+    'attributes',
+    'disabled'
   ],
   components: {
     DatePicker
+  },
+  methods: {
+    onNavigation(event) {
+      this.$emit('navigation', event);
+    }
   },
   computed: {
     date() {

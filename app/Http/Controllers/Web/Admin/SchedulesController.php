@@ -26,7 +26,7 @@ class SchedulesController extends Controller
   {
     $rooms = Room::all();
     $schedules = Schedule::confirm()
-      ->orWhrere('status', Schedule::$REVIEW)
+
       ->where(function (Builder $builder) use ($request) {
         if ($request->filled('date')) {
           $date = carbon($request->get('date')); // parse date in carbon instance.

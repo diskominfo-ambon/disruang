@@ -18,7 +18,7 @@ class SchedulesController extends Controller
       $request->get('year', date('Y')),
     ];
 
-    $schedules = Schedule::confirm()
+    $schedules = Schedule::withoutGlobalScopes()
       ->with(['room:id,name', 'user:id,name,phone_number'])
       ->whereMonth('started_at', $month)
       ->whereYear('started_at', $year)
