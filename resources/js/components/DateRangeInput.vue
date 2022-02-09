@@ -7,7 +7,7 @@
       :locale="{ id: 'id', firstDayOfWeek: 3, masks: { weekdays: 'WWW', input: ['DD-MM-YY'] } }"
       :attributes="attributes"
       :disabled-dates="disabled"
-      @update:to-page="onNavigation"
+      :min-date='new Date()'
       is-range
       is-expanded
       is24hr

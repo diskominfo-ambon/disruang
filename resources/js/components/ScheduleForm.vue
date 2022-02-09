@@ -37,7 +37,6 @@
           v-model="form.date"
           :attributes="booked"
           :disabled="disabledDatePicker"
-          @navigation="onDateNavigation"
           :placeholders="['Mulai kapan?', 'Sampai kapan?']"
         />
         <TextError :message="errors.started_at"/>
@@ -87,11 +86,9 @@ export default {
   async mounted() {
     
     try {
-      const res = await Promise.all([
-        useFetch('/api/schedules'),
-        useFetch('/api/rooms')
-      ]);
-      const rooms = res[1].data.payload;
+
+      const res = await useFetch('/api/rooms');
+      const rooms = res.data.payload;
 
       this.rooms = rooms.map(room => {
         const roomName = room.name.toUpperCase(); 
@@ -102,32 +99,8 @@ export default {
         }
       });
 
-      const schedules = res[0].data.payload;
-
-      this.booked = schedules.map(schedule => {
-        const color = colors.alpha().random();
-        return {
-          key: schedule.id,
-          highlight: {
-            start: { fillMode: 'outline', color },
-            base: { fillMode: 'light', color },
-            end: { fillMode: 'outline', color },
-          },
-          popover: {
-            label: 'Kegiatan '+ schedule.title
-          },
-          dates: {
-            start: schedule.started_at,
-            end: schedule.ended_at
-          }
-        }
-      });
-
-      this.disabledDatePicker = schedules.map(schedule => {
-        return { start: schedule.started_at, end: schedule.ended_at };
-      });
-
-
+      await this.getBookedSchedules();
+      
       if (this.id !== undefined) {
         const SCHEDULE_ENDPOINT = '/' + this.baseEndpoint + '/' + this.id;
         const { data } = await useFetch(SCHEDULE_ENDPOINT);
@@ -158,7 +131,8 @@ export default {
   },
   methods: {
     onDateNavigation(event) {
-      console.log(event)
+      console.log('event on navgation');
+      this.getBookedSchedules(event.month);
     },
     clearErrors() {
       this.errors = [];
@@ -219,6 +193,35 @@ export default {
           this.alert = e.response.data.message;
         }
       }
+    },
+    async getBookedSchedules(month) {
+      
+      const currentMonth = month ?? (new Date().getMonth() + 1)
+      const res = await useFetch('/api/schedules?month='+ currentMonth);
+      const schedules = res.data.payload;
+      
+      this.booked = schedules.map(schedule => {
+        const color = colors.alpha().random();
+        return {
+          key: schedule.id,
+          highlight: {
+            start: { fillMode: 'outline', color },
+            base: { fillMode: 'light', color },
+            end: { fillMode: 'outline', color },
+          },
+          popover: {
+            label: 'Kegiatan '+ schedule.title
+          },
+          dates: {
+            start: schedule.started_at,
+            end: schedule.ended_at
+          }
+        }
+      });
+
+      this.disabledDatePicker = schedules.map(schedule => {
+        return { start: schedule.started_at, end: schedule.ended_at };
+      });
     }
   },
   data() {

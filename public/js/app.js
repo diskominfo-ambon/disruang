@@ -2197,7 +2197,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -2231,7 +2230,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var res, rooms, schedules, SCHEDULE_ENDPOINT, _yield$useFetch, data, _data$payload, title, desc, room_id, started_at, ended_at, room;
+      var res, rooms, SCHEDULE_ENDPOINT, _yield$useFetch, data, _data$payload, title, desc, room_id, started_at, ended_at, room;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
@@ -2239,11 +2238,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return Promise.all([(0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/schedules'), (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/rooms')]);
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/rooms');
 
             case 3:
               res = _context.sent;
-              rooms = res[1].data.payload;
+              rooms = res.data.payload;
               _this.rooms = rooms.map(function (room) {
                 var roomName = room.name.toUpperCase();
                 return {
@@ -2251,51 +2250,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   id: room.id
                 };
               });
-              schedules = res[0].data.payload;
-              _this.booked = schedules.map(function (schedule) {
-                var color = _utils_colors_rand__WEBPACK_IMPORTED_MODULE_5__.default.alpha().random();
-                return {
-                  key: schedule.id,
-                  highlight: {
-                    start: {
-                      fillMode: 'outline',
-                      color: color
-                    },
-                    base: {
-                      fillMode: 'light',
-                      color: color
-                    },
-                    end: {
-                      fillMode: 'outline',
-                      color: color
-                    }
-                  },
-                  popover: {
-                    label: 'Kegiatan ' + schedule.title
-                  },
-                  dates: {
-                    start: schedule.started_at,
-                    end: schedule.ended_at
-                  }
-                };
-              });
-              _this.disabledDatePicker = schedules.map(function (schedule) {
-                return {
-                  start: schedule.started_at,
-                  end: schedule.ended_at
-                };
-              });
+              _context.next = 8;
+              return _this.getBookedSchedules();
 
+            case 8:
               if (!(_this.id !== undefined)) {
-                _context.next = 18;
+                _context.next = 17;
                 break;
               }
 
               SCHEDULE_ENDPOINT = '/' + _this.baseEndpoint + '/' + _this.id;
-              _context.next = 13;
+              _context.next = 12;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(SCHEDULE_ENDPOINT);
 
-            case 13:
+            case 12:
               _yield$useFetch = _context.sent;
               data = _yield$useFetch.data;
               _data$payload = data.payload, title = _data$payload.title, desc = _data$payload.desc, room_id = _data$payload.room_id, started_at = _data$payload.started_at, ended_at = _data$payload.ended_at;
@@ -2312,20 +2280,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
               };
 
-            case 18:
-              _context.next = 22;
+            case 17:
+              _context.next = 21;
               break;
 
-            case 20:
-              _context.prev = 20;
+            case 19:
+              _context.prev = 19;
               _context.t0 = _context["catch"](0);
 
-            case 22:
+            case 21:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 20]]);
+      }, _callee, null, [[0, 19]]);
     }))();
   },
   computed: {
@@ -2335,7 +2303,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     onDateNavigation: function onDateNavigation(event) {
-      console.log(event);
+      console.log('event on navgation');
+      this.getBookedSchedules(event.month);
     },
     clearErrors: function clearErrors() {
       this.errors = [];
@@ -2412,6 +2381,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2, null, [[3, 10]]);
+      }))();
+    },
+    getBookedSchedules: function getBookedSchedules(month) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var currentMonth, res, schedules;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                currentMonth = month !== null && month !== void 0 ? month : new Date().getMonth() + 1;
+                _context3.next = 3;
+                return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/schedules?month=' + currentMonth);
+
+              case 3:
+                res = _context3.sent;
+                schedules = res.data.payload;
+                _this3.booked = schedules.map(function (schedule) {
+                  var color = _utils_colors_rand__WEBPACK_IMPORTED_MODULE_5__.default.alpha().random();
+                  return {
+                    key: schedule.id,
+                    highlight: {
+                      start: {
+                        fillMode: 'outline',
+                        color: color
+                      },
+                      base: {
+                        fillMode: 'light',
+                        color: color
+                      },
+                      end: {
+                        fillMode: 'outline',
+                        color: color
+                      }
+                    },
+                    popover: {
+                      label: 'Kegiatan ' + schedule.title
+                    },
+                    dates: {
+                      start: schedule.started_at,
+                      end: schedule.ended_at
+                    }
+                  };
+                });
+                _this3.disabledDatePicker = schedules.map(function (schedule) {
+                  return {
+                    start: schedule.started_at,
+                    end: schedule.ended_at
+                  };
+                });
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   },
@@ -35481,11 +35508,11 @@ var render = function () {
           },
           attributes: _vm.attributes,
           "disabled-dates": _vm.disabled,
+          "min-date": new Date(),
           "is-range": "",
           "is-expanded": "",
           is24hr: "",
         },
-        on: { "update:to-page": _vm.onNavigation },
         scopedSlots: _vm._u([
           {
             key: "default",
@@ -35880,7 +35907,6 @@ var render = function () {
                 disabled: _vm.disabledDatePicker,
                 placeholders: ["Mulai kapan?", "Sampai kapan?"],
               },
-              on: { navigation: _vm.onDateNavigation },
               model: {
                 value: _vm.form.date,
                 callback: function ($$v) {
