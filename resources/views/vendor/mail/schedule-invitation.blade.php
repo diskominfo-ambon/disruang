@@ -9,9 +9,9 @@
 
 {{-- Body --}}
 
-Hai benar kamu <b>{{ $employee->name }}</b>?, kamu diundangan nih dalam kegiatan <b>{{ $schedule->title }}</b> pada {{ $schedule->created_at->locale('id-ID')->isoFormat('LLL') }} sampai {{ $schedule->ended_at->locale('id-ID')->isoFormat('LLL') }}.
+Hai benar kamu <b>{{ $employee->name }}</b>?, kamu diundangan nih dalam kegiatan <b>{{ $schedule->title }}</b> pada {{ $schedule->started_at->locale('id-ID')->isoFormat('LLL') }} sampai {{ $schedule->ended_at->locale('id-ID')->isoFormat('LLL') }}.
 
-@component('mail::button', ['url' => 'ok'])
+@component('mail::button', ['url' => route('schedule-invitation', [$schedule->slug, $employee->id])])
   Lihat undangan
 @endcomponent
 

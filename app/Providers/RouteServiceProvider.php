@@ -93,10 +93,19 @@ class RouteServiceProvider extends ServiceProvider
     });
 
 
-    Route::bind('schedule', function (int $param) {
+    Route::bind('schedule', function ($param) {
+      
       return Schedule::withoutGlobalScopes()
         ->active()
-        ->find($param);
+        ->where(function ($builder) use ($param) {
+          if ( (int) $param) {
+            return $builder->whereId($param);
+          }
+
+          return $builder->whereSlug($param);
+
+        })
+        ->first();
     });
   }
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\Web\Exports\RegisteredScheduleController;
+use App\Http\Controllers\Web\User\ScheduleInvitationController;
 
 
 Route::inertia('/', 'welcome')->name('welcome');
@@ -16,4 +17,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::view('/undangan', 'vendor.prints.schedule-invitation');
+Route::get('/undangan/{schedule:slug}/{id}', ScheduleInvitationController::class)
+  ->name('schedule-invitation');

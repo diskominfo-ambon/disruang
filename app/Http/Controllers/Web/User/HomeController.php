@@ -14,7 +14,7 @@ class HomeController extends Controller
   {
     $schedules = Auth::user()
       ->schedules()
-      ->confirm()                                                                                                                                                                                                                                                 
+      ->order([Schedule::$REVIEW, Schedule::$CONFIRM])                                                                                                                                                                                                                                        
       ->with(['participants', 'room'])
       ->get();
 
