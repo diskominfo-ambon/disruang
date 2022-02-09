@@ -14,8 +14,7 @@ class ScheduleReviewController extends Controller
     public function update(ScheduleReviewRequest $request, Schedule $schedule)
     {
 
-        $employees = $request->employees;
-        $schedule->employees()->sync($employees);
+        $schedule->employees()->sync($request->employees);
         
         if ($request->filled('attachments')) {
             
@@ -27,8 +26,9 @@ class ScheduleReviewController extends Controller
                 'status' => Schedule::$CONFIRM
             ]);
 
-            SendBulkEmailInvitation::dispatch($schedule, $employees);
         }
+
+        SendBulkEmailInvitation::dispatch($schedule);
         
         $schedule->update(
             $request->all()

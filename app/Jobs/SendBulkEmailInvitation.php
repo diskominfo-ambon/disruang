@@ -15,15 +15,21 @@ class SendBulkEmailInvitation implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
+
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 5;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(
-        public $schedule,
-        public $employees
-    )
+    public function __construct(public $schedule)
     {
         //
     }
@@ -35,9 +41,11 @@ class SendBulkEmailInvitation implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->employees as $employee) {
+      
+        foreach ($this->schedule?->employees as $employee) {
 
-            Mail::to($employee->email)->send(new ScheduleInvitation($schedule, $employee));
+            Mail::to($employee->email)
+                ->send(new ScheduleInvitation($this->schedule, $employee));
         }
     }
 }

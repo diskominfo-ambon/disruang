@@ -95,7 +95,7 @@ export default {
         await window.axios.put(this.baseEndpoint + '/' + this.id + '/review', body);
         
         if (this.redirectUrl !== undefined) {
-          window.location.replace(this.redirectUrl);
+          // window.location.replace(this.redirectUrl);
         }
       } catch (e) {
         console.log(e);

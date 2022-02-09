@@ -2610,8 +2610,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return window.axios.put(_this.baseEndpoint + '/' + _this.id + '/review', body);
 
               case 6:
-                if (_this.redirectUrl !== undefined) {
-                  window.location.replace(_this.redirectUrl);
+                if (_this.redirectUrl !== undefined) {// window.location.replace(this.redirectUrl);
                 }
 
                 _context.next = 17;

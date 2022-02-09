@@ -33,6 +33,8 @@ class ScheduleInvitation extends Mailable
      */
     public function build()
     {
-        return $this->view('vendor.mails.schedule-invitation');
+        return $this
+            ->subject('Undangan kegiatan')
+            ->markdown('vendor.mail.schedule-invitation');
     }
 }

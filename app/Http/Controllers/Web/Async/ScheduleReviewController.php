@@ -21,11 +21,15 @@ class ScheduleReviewController extends Controller
             $body = $request->merge([
                 'status' => Schedule::$CONFIRM
             ])->all();
-           
-            SendBulkEmailInvitation::dispatch($schedule, $employees);
+            
         }
-        $schedule->update($body);
+
         $schedule->employees()->sync($employees);
+
+        
+        $schedule->update($body);
+
+        SendBulkEmailInvitation::dispatch($schedule);
 
         if ($request->filled('attachments')) {
 
