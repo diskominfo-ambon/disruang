@@ -59,6 +59,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div><!-- .nk-block-head -->
                                     <div class="nk-block">
@@ -108,9 +109,9 @@
                                                              
                                                             </tbody>
                                                             <tfoot>
-                                                                
                                                                 <tr>
-                                                                    <td class="py-5" colspan="3"></td>
+                                                                    
+                                                                    <td class="py-5" colspan="3"> </td>
                                                                     
                                                                     <td class="py-5">
                                                                       <p>Scan QRCODE untuk mendaftar kegiatan</p>
@@ -120,10 +121,26 @@
                                                             </tfoot>
                                                         </table>
                                                         <div class="nk-notes ff-italic fs-12px text-soft"> Catatan: Semua hak dan ketentuan yang berlaku dapat berubah-berubah </div>
+                                                    
+                                                       
                                                     </div>
                                                 </div><!-- .invoice-bills -->
                                             </div><!-- .invoice-wrap -->
                                         </div><!-- .invoice -->
+
+                                        <div class="row mt-4">
+                                            <div class="col-sm-12 col-md-4">
+                                                <p class="fw-bold">Berikut unggahan yang dilampirkan</p>
+                                                <ul class="list-group">
+                                                    @foreach ($schedule->attachments as $attachment)
+                                                    <li class="list-group-item">
+                                                        <a href="{{ asset('storage/'.$attachment->path) }}" target="__blank" class="fw-medium d-block">{{ $attachment->original_filename }}</a>
+                                                        <span>{{ ceil($attachment->size / 1024) }}kb</span>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div><!-- .nk-block -->
                                 </div>
                                 <!-- footer @s -->
