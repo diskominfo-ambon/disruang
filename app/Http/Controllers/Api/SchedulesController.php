@@ -16,6 +16,7 @@ class SchedulesController extends Controller
   {
     // get values in filter query string by year.
     $year = $request->get('year', date('Y'));
+    $minDate = $request->get('mindate');
     $roomId = $request->get('roomid');
     $currentMonth = (int) date('m');
     $months = [];
@@ -38,15 +39,19 @@ class SchedulesController extends Controller
       ->whereRaw(
         <<<SQL
           MONTH(started_at) IN ($values)
-        SQL  
+        SQL
         ,$months
       )->when(
         Str::of($roomId)->trim()->isNotEmpty(),
         function ($builder) use ($roomId) {
           return $builder->where('room_id', $roomId);
         }
+      )->when(
+          Str::of($minDate)->trim()->isNotEmpty(),
+          fn($builder) => $builder->where('started_at', '>=', $minDate)
       )
       ->whereYear('started_at', $year)
+      ->orderBy('started_at', 'asc')
       ->get();
 
     return Response::payload($schedules);
@@ -71,7 +76,7 @@ class SchedulesController extends Controller
         401
     );
 
-    
+
     $participant = Participant::create([
       'schedule_id' => $schedule->id,
       'employee_id' => $request->employee
