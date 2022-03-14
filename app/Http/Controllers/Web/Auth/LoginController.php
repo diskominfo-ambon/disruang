@@ -19,7 +19,7 @@ class LoginController extends Controller
       return redirect()
         ->back()
         ->with(
-          'message.auth.error',
+          'auth.error',
           "{$credentials['username']} memiliki kata sandi yang tidak valid."
         );
     }

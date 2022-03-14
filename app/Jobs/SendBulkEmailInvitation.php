@@ -29,7 +29,7 @@ class SendBulkEmailInvitation implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(public $schedule)
+    public function __construct(public $schedule, public $employees)
     {
         //
     }
@@ -42,7 +42,7 @@ class SendBulkEmailInvitation implements ShouldQueue
     public function handle()
     {
       
-        foreach ($this->schedule?->employees as $employee) {
+        foreach ($this->employees as $employee) {
 
             Mail::to($employee->email)
                 ->send(new ScheduleInvitation($this->schedule, $employee));

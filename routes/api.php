@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RoomsController;
 use App\Http\Controllers\Api\SchedulesController;
 use App\Http\Controllers\Api\EmployeesController;
+use App\Http\Controllers\Api\OriginsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/schedules', [SchedulesController::class, 'index'])
   ->name('api.schedules');
 
+
+Route::post('/schedules', [SchedulesController::class, 'store'])
+  ->name('api.schedules.store');
+
 Route::get('/rooms', [RoomsController::class, 'index'])
   ->name('api.rooms');
 
@@ -33,3 +38,8 @@ Route::get('/rooms/{room:id}', [RoomsController::class, 'show'])
   ->name('api.rooms.show');
 
 Route::get('/employees', [EmployeesController::class, 'index']);
+
+Route::get('/origins', [OriginsController::class, 'index']);
+
+
+Route::get('/schedule', [EmployeesController::class, 'index']);

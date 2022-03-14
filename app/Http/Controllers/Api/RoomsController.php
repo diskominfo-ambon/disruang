@@ -43,4 +43,6 @@ class RoomsController extends Controller
 
     return Response::payload($schedules);
   }
+
+  
 }

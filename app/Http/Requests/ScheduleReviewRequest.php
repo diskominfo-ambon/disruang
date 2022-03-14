@@ -23,16 +23,23 @@ class ScheduleReviewRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'employees' => 'required|array|min:1',
+        $initialRules = [
+            'origins' => 'required|array|min:1'
         ];
+
+        if ($this->post('asn_available')) {
+            $initialRules['employees'] = 'required|array|min:1';
+        }
+
+        return $initialRules;
     }
 
 
     public function attributes()
     {
         return [
-            'employees' => 'Pegawai'
+            'employees' => 'Pegawai',
+            'origins' => 'OPD'
         ];
     }
 

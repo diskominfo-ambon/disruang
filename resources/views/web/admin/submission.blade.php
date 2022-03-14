@@ -60,7 +60,7 @@ $currentItr = null;
               </div>
               @if ($order === 'pending')
               <div class="tranx-col">
-                <form action="{{ route('admin.submissions.update', $schedule) }}?order=review" method="POST">
+                <form action="{{ route('admin.submissions.update', $schedule) }}?order=confirm" method="POST">
                   @csrf
                   @method('PUT')
                   <button onclick="return confirm('Yakin ingin konfirmasi kegiatan ini?');" data-toggle="tooltip" data-placement="left" title="Konfirmasi kegiatan ini?" class="btn btn-sm btn-primary text-white mb-1">
@@ -109,7 +109,7 @@ $currentItr = null;
 
           @if ($order === 'pending')
           <div class="tranx-col">
-            <form method="POST" action="{{ route('admin.submissions.update', $schedule) }}?order=review">
+            <form method="POST" action="{{ route('admin.submissions.update', $schedule) }}?order=confirm">
               @csrf
               @method('PUT')
               <button onclick="return confirm('Yakin ingin konfirmasi kegiatan ini?')" data-toggle="tooltip" data-placement="left" title="Konfirmasi kegiatan ini?" class="btn btn-sm btn-primary text-white mb-1">

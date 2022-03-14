@@ -52,6 +52,11 @@ class SchedulesController extends Controller
 
     // eager load relationship participants.
     $schedule->load(['user']);
+    
+    abort_if(
+      Auth::user()->id !== $schedule->user->id,
+      401
+    );
 
     $participants = $schedule->participants()
       ->paginate(12)

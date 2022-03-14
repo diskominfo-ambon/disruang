@@ -18,15 +18,18 @@ class SubmissionsController extends Controller
   {
     $order = $request->get('order', Schedule::$PENDING);
 
-    if (!in_array($order, [Schedule::$PENDING, Schedule::$REJECT])) {
+    if (!in_array($order, [Schedule::$PENDING, Schedule::$REJECT, Schedule::$CONFIRM, Schedule::$REVIEW])) {
         $order = Schedule::$PENDING;
     }
+
+    
 
     if ($order === Schedule::$REJECT) {
         Session::flash('rejected_on_view', true);
     }
 
-    $schedules = Schedule::order($order)->get();
+
+    $schedules = Schedule::order($order)->latest()->get();
 
     return view('web::admin.submission', compact('schedules', 'order'));
   }
@@ -37,14 +40,14 @@ class SubmissionsController extends Controller
     // message used for rejection notification.
     $message = $request->post('message', '');
 
-    $status = $order === Schedule::$REVIEW
-      ? Schedule::$REVIEW
+    $status = $order === Schedule::$CONFIRM
+      ? Schedule::$CONFIRM
       : Schedule::$REJECT;
 
 
     // sending notification from reviewed schedule.
     Notification::send(
-      $schedule, $status === Schedule::$REVIEW
+      $schedule, $status === Schedule::$CONFIRM
         ? new ScheduleConfirmed()
         : new ScheduleRejected($message)
     );

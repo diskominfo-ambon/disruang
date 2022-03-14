@@ -12,8 +12,20 @@
         <VSelect
           v-model="form.room_id"
           :options="rooms"
+          @input="() => getBookedSchedules()"
         />
         <TextError :message="errors.room_id"/>
+      </FormGroup>
+
+        <FormGroup labelText="Booking pada" v-if="form.room_id">
+        <DateRangeInput
+          v-model="form.date"
+          :attributes="booked"
+          :disabled="disabledDatePicker"
+          :placeholders="['Mulai kapan?', 'Sampai kapan?']"
+        />
+        <TextError :message="errors.started_at"/>
+        <TextError :message="errors.ended_at"/>
       </FormGroup>
 
       <FormGroup 
@@ -32,16 +44,7 @@
         <TextError :message="errors.desc"/>
       </FormGroup>
 
-      <FormGroup labelText="Booking pada">
-        <DateRangeInput
-          v-model="form.date"
-          :attributes="booked"
-          :disabled="disabledDatePicker"
-          :placeholders="['Mulai kapan?', 'Sampai kapan?']"
-        />
-        <TextError :message="errors.started_at"/>
-        <TextError :message="errors.ended_at"/>
-      </FormGroup>
+    
       
       <button class="btn btn-primary">
         {{ computedTextButton }}
@@ -66,6 +69,7 @@ import FormGroup from './FormGroup';
 import Divider from './Divider';
 import FileUploader from './FileUploader';
 import TextError from './TextError';
+
 
 export default {
   props: {
@@ -98,8 +102,6 @@ export default {
           id: room.id 
         }
       });
-
-      await this.getBookedSchedules();
       
       if (this.id !== undefined) {
         const SCHEDULE_ENDPOINT = '/' + this.baseEndpoint + '/' + this.id;
@@ -127,7 +129,7 @@ export default {
       return this.isLoading 
         ? 'Tunggu sebentar..'
         : this.id != null ? 'Simpan perubahan' : 'Buat kegiatan baru';
-    }
+    },
   },
   methods: {
     onDateNavigation(event) {
@@ -194,10 +196,10 @@ export default {
         }
       }
     },
-    async getBookedSchedules(month) {
+    async getBookedSchedules(month = null) {
       
-      const currentMonth = month ?? (new Date().getMonth() + 1)
-      const res = await useFetch('/api/schedules?month='+ currentMonth);
+      const currentMonth = month ?? (new Date().getMonth() + 1);
+      const res = await useFetch('/api/schedules?month='+ currentMonth + '&roomid=' + this.form.room_id.id);
       const schedules = res.data.payload;
       
       this.booked = schedules.map(schedule => {
@@ -210,7 +212,7 @@ export default {
             end: { fillMode: 'outline', color },
           },
           popover: {
-            label: 'Kegiatan '+ schedule.title
+            label: 'Kegiatan '+ schedule.title + ' pada ruangan ' + schedule.room.name.toUpperCase()
           },
           dates: {
             start: schedule.started_at,
@@ -224,11 +226,17 @@ export default {
       });
     }
   },
+  watch: {
+    "form.room_id": function (value) {
+      this.getBookedSchedules();
+    }
+  },
   data() {
     return {
       rooms: [],
       alert: null,
       isLoading: false,
+      disabledDatePicker: [],
       errors: [],
       booked: [],
       form: {

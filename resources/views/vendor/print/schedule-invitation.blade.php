@@ -72,8 +72,9 @@
                                                     <div class="invoice-contact">
                                                         <span class="overline-title">Ditunjukan kepada</span>
                                                         <div class="invoice-contact-info">
-                                                            <h4 class="title">{{ $employee->name }} - {{ $employee->nip }}</h4>
+                                                            <h4 class="title">{{ strtoupper($employee->origin->title) }}</h4>
                                                             <ul class="list-plain">
+                                                                <li>{{ $employee->name }} - {{ $employee->nip }}</li>
                                                                 <li><span>{{ $employee->email }}</span></li>
                                                                 <li><span>Jabatan {{ $employee->job_position }}</span></li>
                                                             </ul>
@@ -88,6 +89,7 @@
                                                                     <th>Ruangan</th>
                                                                     <th>Nama kegiatan</th>
                                                                     <th>Deskrpsi</th>
+                                                                    <th>Dari</th>
                                                                     <th>Waktu mulai/akhir</th>
                                                                 </tr>
                                                             </thead>
@@ -100,6 +102,7 @@
                                                                     <td>
                                                                       {{ $schedule->desc }}
                                                                     </td>
+                                                                    <td>{{ strtoupper($schedule->user->origin->title) }}</td>
                                                                     <td>
                                                                       {{ $schedule->started_at->isoFormat('LLL') }} <b>-</b> {{ $schedule->ended_at->isoFormat('LLL') }}
                                                         
@@ -115,12 +118,14 @@
                                                                     
                                                                     <td class="py-5">
                                                                       <p>Scan QRCODE untuk mendaftar kegiatan</p>
-                                                                      {!! QrCode::size(130)->format('svg')->style('round')->generate(Request::url()); !!}
+                                                                      {!! QrCode::size(130)->format('svg')->style('round')->generate(
+                                                                          json_encode(['employee' => $employee->id, 'schedule' => $schedule->id ])
+                                                                      ); !!}
                                                                     </td>
                                                                 </tr>
                                                             </tfoot>
                                                         </table>
-                                                        <div class="nk-notes ff-italic fs-12px text-soft"> Catatan: Semua hak dan ketentuan yang berlaku dapat berubah-berubah </div>
+                                                        <div class="nk-notes ff-italic fs-12px text-soft"> Catatan: Undangan dapat dicetak untuk Absesni pada saat mengikuti kegiatan </div>
                                                     
                                                        
                                                     </div>

@@ -7,7 +7,9 @@ use App\Http\Controllers\Web\Exports\RegisteredScheduleController;
 use App\Http\Controllers\Web\User\ScheduleInvitationController;
 
 
-Route::inertia('/', 'welcome')->name('welcome');
+
+Route::view('/', 'web.welcome')
+  ->name('welcome');
 
 Route::group(['middleware' => 'auth'], function () {
 

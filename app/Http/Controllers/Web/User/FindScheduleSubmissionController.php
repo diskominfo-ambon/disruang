@@ -19,11 +19,13 @@ class FindScheduleSubmissionController extends Controller
     if (!in_array($order, ['pending', 'confirm', 'reject'])) {
       $order = 'pending';
     }
+    
 
     $schedules = Auth::user()
       ->schedules()
       ->with('notifications')
       ->order($order)
+      ->latest()
       ->get();
 
     return view('web::user.dashboards.submission', compact('schedules', 'order'));

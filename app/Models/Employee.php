@@ -12,4 +12,10 @@ class Employee extends Model
     protected $guarded = [
         'id'
     ];
+
+
+    public function origin()
+    {
+        return $this->belongsTo(Origin::class);
+    }
 }

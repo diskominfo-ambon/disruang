@@ -25,7 +25,9 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
-    'phone_number'
+    'phone_number',
+    'origin_id',
+    'origin_job'
   ];
 
   /**
@@ -63,4 +65,11 @@ class User extends Authenticatable
   {
     return $builder->where('id', '!=', Auth::user()->id);
   }
+
+
+  public function origin()
+  {
+    return $this->belongsTo(Origin::class);
+  }
+
 }

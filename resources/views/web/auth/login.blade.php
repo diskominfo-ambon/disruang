@@ -66,12 +66,24 @@
       box-shadow: none !important;
     }
   }
-
+  .logo img {
+    width: 60px;
+  }
+  .logo {
+    text-align: center;
+    margin-bottom: .6rem;
+  }
 </style>
 @endsection
 
 @section('content')
 <div class="form-box shadow-sm">
+  @if (session('message'))
+  <div class="alert alert-info my-4 alert-sm">{{ session('message') }}</div>
+  @endif
+  <div class="logo">
+    <img src="{{ asset('images/logo-pemkot.png') }}" alt="">
+  </div>
   <h3 class="text-primary m-0 text-center fw-bold">disruang</h3>
   <p class="subtitle">Selamat datang, yuk jangan ketinggalan kegiatanmu.</p>
 
@@ -88,7 +100,7 @@
       @enderror
 
       {{-- message auth error --}}
-      @if(session('message.auth.error'))
+      @if(session('auth.error'))
       <span class="error-text">{{ session('message.auth.error') }}</span>
       @endif
     </div>

@@ -2197,6 +2197,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2250,20 +2253,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   id: room.id
                 };
               });
-              _context.next = 8;
-              return _this.getBookedSchedules();
 
-            case 8:
               if (!(_this.id !== undefined)) {
-                _context.next = 17;
+                _context.next = 15;
                 break;
               }
 
               SCHEDULE_ENDPOINT = '/' + _this.baseEndpoint + '/' + _this.id;
-              _context.next = 12;
+              _context.next = 10;
               return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)(SCHEDULE_ENDPOINT);
 
-            case 12:
+            case 10:
               _yield$useFetch = _context.sent;
               data = _yield$useFetch.data;
               _data$payload = data.payload, title = _data$payload.title, desc = _data$payload.desc, room_id = _data$payload.room_id, started_at = _data$payload.started_at, ended_at = _data$payload.ended_at;
@@ -2280,20 +2280,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
               };
 
-            case 17:
-              _context.next = 21;
+            case 15:
+              _context.next = 19;
               break;
 
-            case 19:
-              _context.prev = 19;
+            case 17:
+              _context.prev = 17;
               _context.t0 = _context["catch"](0);
 
-            case 21:
+            case 19:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 19]]);
+      }, _callee, null, [[0, 17]]);
     }))();
   },
   computed: {
@@ -2383,20 +2383,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, null, [[3, 10]]);
       }))();
     },
-    getBookedSchedules: function getBookedSchedules(month) {
-      var _this3 = this;
+    getBookedSchedules: function getBookedSchedules() {
+      var _arguments = arguments,
+          _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var currentMonth, res, schedules;
+        var month, currentMonth, res, schedules;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                month = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
                 currentMonth = month !== null && month !== void 0 ? month : new Date().getMonth() + 1;
-                _context3.next = 3;
-                return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/schedules?month=' + currentMonth);
+                _context3.next = 4;
+                return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_4__.default)('/api/schedules?month=' + currentMonth + '&roomid=' + _this3.form.room_id.id);
 
-              case 3:
+              case 4:
                 res = _context3.sent;
                 schedules = res.data.payload;
                 _this3.booked = schedules.map(function (schedule) {
@@ -2418,7 +2420,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       }
                     },
                     popover: {
-                      label: 'Kegiatan ' + schedule.title
+                      label: 'Kegiatan ' + schedule.title + ' pada ruangan ' + schedule.room.name.toUpperCase()
                     },
                     dates: {
                       start: schedule.started_at,
@@ -2433,7 +2435,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   };
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -2442,11 +2444,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     }
   },
+  watch: {
+    "form.room_id": function formRoom_id(value) {
+      this.getBookedSchedules();
+    }
+  },
   data: function data() {
     return {
       rooms: [],
       alert: null,
       isLoading: false,
+      disabledDatePicker: [],
       errors: [],
       booked: [],
       form: {
@@ -2544,6 +2552,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2562,6 +2592,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     FileUploader: _FileUploader__WEBPACK_IMPORTED_MODULE_5__.default,
     TextError: _TextError__WEBPACK_IMPORTED_MODULE_3__.default
   },
+  computed: {
+    isASNAvailable: function isASNAvailable() {
+      return this.form.asn_available.id;
+    }
+  },
   data: function data() {
     return {
       availableOptions: [{
@@ -2572,15 +2607,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id: 0
       }],
       availableEmployees: [],
+      availableOrigins: [],
       errors: [],
       form: {
         is_public: {
           label: 'Ya, tersedia untuk ASN dan umum',
           id: 1
         },
+        asn_available: {
+          label: 'Tidak',
+          id: 0
+        },
         attachments: [],
         employees: [],
-        files: []
+        files: [],
+        origins: []
       }
     };
   },
@@ -2589,7 +2630,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var attachments, body, ENTITY_ISINVALID, FORBIDDEN, STATUS, errors;
+        var attachments, employees, body, ENTITY_ISINVALID, FORBIDDEN, STATUS, errors;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2599,26 +2640,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 attachments = _this.$refs.uploader.$refs.pond.getFiles().map(function (file) {
                   return file.serverId;
                 });
+                employees = _this.form.asn_available.id ? _this.form.employees.map(function (employee) {
+                  return employee.id;
+                }) : [];
                 body = _objectSpread(_objectSpread({}, _this.form), {}, {
                   attachments: attachments,
-                  employees: _this.form.employees.map(function (employee) {
-                    return employee.id;
+                  employees: employees,
+                  origins: _this.form.origins.map(function (origin) {
+                    return origin.id;
                   }),
-                  is_public: _this.form.is_public.id
+                  is_public: _this.form.is_public.id,
+                  asn_available: _this.form.asn_available.id
                 });
-                _context.next = 6;
+                _context.next = 7;
                 return window.axios.put(_this.baseEndpoint + '/' + _this.id + '/review', body);
 
-              case 6:
+              case 7:
                 if (_this.redirectUrl !== undefined) {
                   window.location.replace(_this.redirectUrl);
                 }
 
-                _context.next = 17;
+                _context.next = 18;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 10:
+                _context.prev = 10;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
                 ENTITY_ISINVALID = 422;
@@ -2637,12 +2683,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 10]]);
       }))();
     }
   },
@@ -2650,7 +2696,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var $pondRef, _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees, _iterator, _step, attachment;
+      var $pondRef, _yield$useFetch, data, schedule, isAvailable, _yield$useFetch2, res, employees, _yield$useFetch3, result, origins, _iterator, _step, attachment;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
@@ -2676,10 +2722,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _yield$useFetch2 = _context2.sent;
               res = _yield$useFetch2.data;
               employees = res.payload;
+              _context2.next = 16;
+              return (0,_utils_use_fetch__WEBPACK_IMPORTED_MODULE_7__.default)('/api/origins');
+
+            case 16:
+              _yield$useFetch3 = _context2.sent;
+              result = _yield$useFetch3.data;
+              origins = result.payload;
               _this2.availableEmployees = employees.map(function (employee) {
                 return {
-                  label: "".concat(employee.name, " - ").concat(employee.nip),
+                  label: "".concat(employee.name, " - ").concat(employee.nip, " ( ").concat(employee === null || employee === void 0 ? void 0 : employee.origin.title.toUpperCase(), " - ").concat(employee.job_position, ")"),
                   id: employee.id
+                };
+              });
+              _this2.availableOrigins = origins.map(function (origin) {
+                return {
+                  label: origin.title.toUpperCase(),
+                  id: origin.id
                 };
               });
               _iterator = _createForOfIteratorHelper(schedule.attachments);
@@ -2707,29 +2766,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               }
 
               _this2.form = _objectSpread(_objectSpread(_objectSpread({}, _this2.form), schedule), {}, {
+                asn_available: schedule.origins.length > 0 ? {
+                  label: 'Ya',
+                  id: 1
+                } : {
+                  label: 'Tidak',
+                  id: 0
+                },
+                origins: schedule.origins.map(function (origin) {
+                  return {
+                    label: origin.title.toUpperCase(),
+                    id: origin.id
+                  };
+                }),
                 employees: schedule.employees.map(function (employee) {
                   return {
-                    label: "".concat(employee.name, " - ").concat(employee.nip),
+                    label: "".concat(employee.name, " - ").concat(employee.nip, " ( ").concat(employee === null || employee === void 0 ? void 0 : employee.origin.title.toUpperCase(), " - ").concat(employee.job_position, ")"),
                     id: employee.id
                   };
                 }),
                 is_public: isAvailable
               });
-              _context2.next = 24;
+              _context2.next = 30;
               break;
 
-            case 20:
-              _context2.prev = 20;
+            case 26:
+              _context2.prev = 26;
               _context2.t0 = _context2["catch"](1);
               console.log(_context2.t0);
               console.log('error');
 
-            case 24:
+            case 30:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 20]]);
+      }, _callee2, null, [[1, 26]]);
     }))();
   }
 });
@@ -35833,6 +35905,11 @@ var render = function () {
           [
             _c("VSelect", {
               attrs: { options: _vm.rooms },
+              on: {
+                input: function () {
+                  return _vm.getBookedSchedules()
+                },
+              },
               model: {
                 value: _vm.form.room_id,
                 callback: function ($$v) {
@@ -35846,6 +35923,34 @@ var render = function () {
           ],
           1
         ),
+        _vm._v(" "),
+        _vm.form.room_id
+          ? _c(
+              "FormGroup",
+              { attrs: { labelText: "Booking pada" } },
+              [
+                _c("DateRangeInput", {
+                  attrs: {
+                    attributes: _vm.booked,
+                    disabled: _vm.disabledDatePicker,
+                    placeholders: ["Mulai kapan?", "Sampai kapan?"],
+                  },
+                  model: {
+                    value: _vm.form.date,
+                    callback: function ($$v) {
+                      _vm.$set(_vm.form, "date", $$v)
+                    },
+                    expression: "form.date",
+                  },
+                }),
+                _vm._v(" "),
+                _c("TextError", { attrs: { message: _vm.errors.started_at } }),
+                _vm._v(" "),
+                _c("TextError", { attrs: { message: _vm.errors.ended_at } }),
+              ],
+              1
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "FormGroup",
@@ -35893,32 +35998,6 @@ var render = function () {
             }),
             _vm._v(" "),
             _c("TextError", { attrs: { message: _vm.errors.desc } }),
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "FormGroup",
-          { attrs: { labelText: "Booking pada" } },
-          [
-            _c("DateRangeInput", {
-              attrs: {
-                attributes: _vm.booked,
-                disabled: _vm.disabledDatePicker,
-                placeholders: ["Mulai kapan?", "Sampai kapan?"],
-              },
-              model: {
-                value: _vm.form.date,
-                callback: function ($$v) {
-                  _vm.$set(_vm.form, "date", $$v)
-                },
-                expression: "form.date",
-              },
-            }),
-            _vm._v(" "),
-            _c("TextError", { attrs: { message: _vm.errors.started_at } }),
-            _vm._v(" "),
-            _c("TextError", { attrs: { message: _vm.errors.ended_at } }),
           ],
           1
         ),
@@ -35971,23 +36050,68 @@ var render = function () {
         _vm._v(" "),
         _c(
           "FormGroup",
-          { attrs: { labelText: "Undang beberapa ASN" } },
+          { attrs: { labelText: "Undang beberapa OPD" } },
           [
             _c("VSelect", {
-              attrs: { multiple: "", options: _vm.availableEmployees },
+              attrs: { multiple: "", options: _vm.availableOrigins },
               model: {
-                value: _vm.form.employees,
+                value: _vm.form.origins,
                 callback: function ($$v) {
-                  _vm.$set(_vm.form, "employees", $$v)
+                  _vm.$set(_vm.form, "origins", $$v)
                 },
-                expression: "form.employees",
+                expression: "form.origins",
               },
             }),
             _vm._v(" "),
-            _c("TextError", { attrs: { message: _vm.errors.employees } }),
+            _c("TextError", { attrs: { message: _vm.errors.origins } }),
           ],
           1
         ),
+        _vm._v(" "),
+        _c(
+          "FormGroup",
+          { attrs: { labelText: "Perlu menggundang ASN lainnya?" } },
+          [
+            _c("VSelect", {
+              attrs: {
+                options: [
+                  { label: "Ya", id: 1 },
+                  { label: "Tidak", id: 0 },
+                ],
+              },
+              model: {
+                value: _vm.form.asn_available,
+                callback: function ($$v) {
+                  _vm.$set(_vm.form, "asn_available", $$v)
+                },
+                expression: "form.asn_available",
+              },
+            }),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm.isASNAvailable
+          ? _c(
+              "FormGroup",
+              { attrs: { labelText: "Undang beberapa ASN lainnya" } },
+              [
+                _c("VSelect", {
+                  attrs: { multiple: "", options: _vm.availableEmployees },
+                  model: {
+                    value: _vm.form.employees,
+                    callback: function ($$v) {
+                      _vm.$set(_vm.form, "employees", $$v)
+                    },
+                    expression: "form.employees",
+                  },
+                }),
+                _vm._v(" "),
+                _c("TextError", { attrs: { message: _vm.errors.employees } }),
+              ],
+              1
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "FormGroup",

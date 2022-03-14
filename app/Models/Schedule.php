@@ -93,4 +93,14 @@ class Schedule extends Model
         'model_has_attachments',
       );
   }
+
+  public function origins()
+  {
+    return $this->belongsToMany(
+      Origin::class,
+      'schedule_has_origins',
+      'schedule_id',
+      'origin_id'
+    );
+  }
 }

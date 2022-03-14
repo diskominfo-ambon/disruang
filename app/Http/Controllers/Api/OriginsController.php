@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use App\Models\Employee;
+use App\Models\Origin;
 
-class EmployeesController extends Controller
+class OriginsController extends Controller
 {
     public function index()
     {
-        $employees = Employee::with('origin')->get();
+        $origins = Origin::has('employees')->orHas('users')->get();
 
-        return Response::payload($employees);
+        return Response::payload($origins);
     }
 }

@@ -2,7 +2,27 @@
   <div>
     <form method="post" @submit.prevent="onSubmitted">
       <Divider labelText="2. Informasi kegiatan"/>
-      <FormGroup labelText="Undang beberapa ASN">
+
+       <FormGroup labelText="Undang beberapa OPD">
+        <VSelect
+          multiple
+          v-model="form.origins"
+          :options="availableOrigins"
+        />
+        <TextError :message="errors.origins" />
+      </FormGroup>
+
+      <FormGroup labelText="Perlu menggundang ASN lainnya?">
+        <VSelect
+          v-model="form.asn_available"
+          :options="[
+            {label: 'Ya', id: 1},
+            {label: 'Tidak', id: 0}
+          ]"
+        />
+      </FormGroup>
+
+      <FormGroup labelText="Undang beberapa ASN lainnya" v-if="isASNAvailable">
         <VSelect
           multiple
           v-model="form.employees"
@@ -11,7 +31,7 @@
         <TextError :message="errors.employees" />
       </FormGroup>
 
-      <FormGroup labelText="Apa kegiatan bersifat umum?">
+       <FormGroup labelText="Apa kegiatan bersifat umum?">
         <VSelect
           v-model="form.is_public"
           :options="[
@@ -19,6 +39,8 @@
             {label: 'Tidak, hanya untuk ASN', id: 0}
           ]"
         />
+
+      
        
       </FormGroup>
 
@@ -62,6 +84,11 @@ export default {
     FileUploader,
     TextError
   },
+  computed: {
+    isASNAvailable() {
+      return this.form.asn_available.id;
+    }
+  }, 
   data() {
     return {
       availableOptions: [
@@ -69,12 +96,15 @@ export default {
         {label: 'Tidak, hanya untuk ASN', id: 0}
       ],
       availableEmployees: [],
+      availableOrigins: [],
       errors: [],
       form: {
         is_public: {label: 'Ya, tersedia untuk ASN dan umum', id: 1},
+        asn_available: {label: 'Tidak', id: 0},
         attachments: [],
         employees: [],
         files: [],
+        origins: [],
       }
     }
   },
@@ -84,13 +114,20 @@ export default {
       try {
         this.errors = [];
         const attachments = this.$refs.uploader.$refs.pond.getFiles().map( file => file.serverId);
-        
+        const employees = this.form.asn_available.id
+          ? this.form.employees.map(employee => employee.id)
+          : [];
+
         const body = {
           ...this.form,
           attachments,
-          employees: this.form.employees.map(employee => employee.id),
+          employees,
+          origins: this.form.origins.map(origin => origin.id),
           is_public: this.form.is_public.id,
+          asn_available: this.form.asn_available.id,
         };
+
+    
 
         await window.axios.put(this.baseEndpoint + '/' + this.id + '/review', body);
         
@@ -127,15 +164,26 @@ export default {
 
       const schedule = data.payload;
       console.log(schedule)
+
       const isAvailable = this.availableOptions.filter(item => item.id === schedule.is_public)[0];
       
       const { data: res } = await  useFetch('/api/employees');
       const employees = res.payload;
 
+      const { data: result } = await useFetch('/api/origins');
+      const origins = result.payload;
+
       this.availableEmployees = employees.map(employee => {
         return {
-          label: `${employee.name} - ${employee.nip}`,
+          label: `${employee.name} - ${employee.nip} ( ${employee?.origin.title.toUpperCase()} - ${employee.job_position})`,
           id: employee.id 
+        }
+      });
+
+      this.availableOrigins = origins.map(origin => {
+        return {
+          label: origin.title.toUpperCase(),
+          id: origin.id
         }
       });
 
@@ -158,8 +206,12 @@ export default {
       this.form = {
         ...this.form,
         ...schedule,
+        asn_available: schedule.origins.length > 0 ? { label: 'Ya', id: 1 } : {label: 'Tidak', id: 0 },
+        origins: schedule.origins.map(origin => {
+          return {label: origin.title.toUpperCase(), id: origin.id};
+        }),
         employees: schedule.employees.map(employee => {
-          return {label: `${employee.name} - ${employee.nip}`, id: employee.id};
+          return {label: `${employee.name} - ${employee.nip} ( ${employee?.origin.title.toUpperCase()} - ${employee.job_position})`, id: employee.id};
         }),
         is_public: isAvailable
       };

@@ -86,6 +86,7 @@ $currentItr = null;
                   </div>
               </div>
               <div class="tranx-col">
+                
                 @if (in_array($order, [Schedule::$PENDING, Schedule::$REJECT]))
                 <form action="{{ route('user.schedules.destroy', $schedule) }}" method="post">
                     @csrf
@@ -122,6 +123,7 @@ $currentItr = null;
                     @endif
                   </div>
                   <div class="tranx-data">
+                      
                       <div class="tranx-label">{{ str($schedule->title)->limit(70) }}</div>
 
                       <div class="tranx-date">{{ str($schedule->room->name)->upper() }} •
@@ -143,12 +145,22 @@ $currentItr = null;
               </div>
           </div>
 
-          @if (in_array($order, [Schedule::$PENDING, Schedule::$REJECT]))
           <div class="tranx-col">
+            @if (in_array($order, [Schedule::$CONFIRM, Schedule::$REVIEW]))
+              <a href="{{ route('user.schedules.show', $schedule) }}}" class="btn btn-sm btn-secondary text-white mb-1">
+                <em class="icon ni ni-eye mr-1"></em> Lihat
+              </a>
+              <a href="{{ route('user.schedules.review', $schedule) }}" class="btn btn-sm btn-secondary text-white mb-1">
+                <em class="icon ni ni-edit mr-1"></em> Tinjau
+              </a>
+            @endif
+          @if (in_array($order, [Schedule::$PENDING, Schedule::$REJECT]))
+             
             @if ($order === Schedule::$PENDING)
               <a href="{{ route('user.schedules.edit', $schedule) }}" class="btn btn-sm btn-secondary text-white mb-1">
                 <em class="icon ni ni-edit mr-1"></em> Ubah
               </a>
+              
             @endif
 
             <form action="{{ route('user.schedules.destroy', $schedule) }}" method="POST">
@@ -159,8 +171,8 @@ $currentItr = null;
                 <em class="icon ni ni-trash-alt mr-1"></em> Hapus
               </button>
             </form>
+            @endif
           </div>
-          @endif
 
         </div>
         <!-- .nk-tranx-item -->

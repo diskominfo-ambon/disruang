@@ -9,14 +9,26 @@ class ScheduleInvitationController extends Controller
 {
     public function __invoke($schedule, $id)
     {
-    
-        $employee = $schedule->employees()
-            ->where('employees.id', $id)
-            ->first();
+        $origins = $schedule->origins;
+        $employees = collect([]);
 
-       
+        foreach ($origins as $origin) {
+            $employees->push(...$origin->employees);    
+        }
+
+        if ($employees->count() > 0) {
+            $employee = $employees->filter(fn ($employee) => $employee->id == $id)->first();
+        } else {
+
+            $employee = $schedule->employees()
+                ->where('employees.id', $id)
+                ->first();
+          
+        }
+
         abort_if(
-            is_null($schedule) || is_null($employee),
+            is_null($schedule)
+            || is_null($employee),
             404
         );
 

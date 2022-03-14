@@ -34,7 +34,7 @@
                             <div class="user-account-info between-center">
                                 <div class="user-account-main">
                                     <h6 class="overline-title-alt">Selamat datang kembali</h6>
-                                    <div class="user-balance">{{ str(auth()->user()->name)->title()->limit(20) }}</div>
+                                    <div class="user-balance">{{ str(auth()->user()->name)->title()->limit(100) }}</div>
                                     <div class="user-balance-alt">
                                       {{ str(auth()->user()->getRoleNames()->first())->upper() }}
                                     </div>

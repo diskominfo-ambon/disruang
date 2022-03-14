@@ -6,20 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Origin;
 
 class RegisteredUserController extends Controller
 {
+
+  public function index()
+  {
+    $origins = Origin::all();
+
+    return view('auth::register', compact('origins'));
+  }
+
+  
   public function store(Request $request)
   {
     $request->validate([
       'name' => 'required',
-      'email' => 'required',
+      'email' => 'required|unique:users,email',
       'username' => 'required|unique:users,username',
       'phone_number' => 'required|numeric',
       'password' => 'required|confirmed'
     ], [], [
       'name' => 'Nama',
-      'phone_number' => 'Nomor telepon'
+      'phone_number' => 'Nomor telepon',
     ]);
 
     $body = $request->merge([

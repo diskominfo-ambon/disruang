@@ -30,4 +30,14 @@ class Participant extends Model
     return $this->belongsTo(Schedule::class);
   }
 
+  public function getIsEmployeeAttribute()
+  {
+    return !is_null($this->employee);
+  }
+
+  public function employee()
+  {
+    return $this->belongsTo(Employee::class, 'employee_id');
+  }
+
 }

@@ -14,29 +14,41 @@ class ScheduleReviewController extends Controller
     public function update(ScheduleReviewRequest $request, Schedule $schedule)
     {
 
-        $schedule->employees()->sync($request->employees);
+        $employeesId = $request->employees;
+        $originsId = $request->origins;
+        $body = $request->all();       
+        $employees = collect([]);
         
+        $schedule->origins()->sync($originsId);
+        $schedule->employees()->sync($employeesId);
+        
+        $schedule->update($body);
+        
+        $origins = $schedule->origins;
+        $origins->load('employees');
+        
+        foreach($origins as $origin) {
+            $employees->push(
+                ...$origin->employees
+            );
+        }
+
+        if ($request->post('asn_available')) {
+            $employees = $employees->merge($schedule->employees);
+        }
+
+   
+        SendBulkEmailInvitation::dispatch($schedule, $employees);
+
         if ($request->filled('attachments')) {
-            
+
             $schedule->attachments()->sync($request->attachments);
         }
-        
-        if ($schedule->isReview) {
-            $request->merge([
-                'status' => Schedule::$CONFIRM
-            ]);
-
-        }
-
-        SendBulkEmailInvitation::dispatch($schedule);
-        
-        $schedule->update(
-            $request->all()
-        );
 
         return Response::success(
             message: 'Berhasil menijau kegiatan "'. $schedule->title . '"'
         );
+
     }
 
     public function index(Schedule $schedule)

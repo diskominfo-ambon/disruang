@@ -17,7 +17,7 @@
   .form-box {
     padding: 3rem 1.3rem 1rem 1.3rem;
     border-radius: 6px;
-    width: 25rem;
+    width: 30rem;
     background-color: white;
 
   }
@@ -66,74 +66,97 @@
     }
   }
 
+  .form-group-label {
+    font-size: .9rem;
+    margin: 1.2rem 0;
+  }
+
+  .form-group-text {
+    margin-top: .6rem;
+    display: block;
+    font-size: .8rem;
+  }
+
+  .form-group-text::before {
+    content: '* ';
+    display: inline-block;
+    color: red;
+  }
+  .link-navigation li {
+    flex: 1;
+    text-align: center;
+    padding: .8rem 0;
+    border-bottom: 3px solid gray;
+    
+  }
+
+  .link-navigation li.active {
+    border-bottom: 3px solid dodgerblue;
+  }
+
+  .link-navigation li.active a {
+    color: dodgerblue;
+  }
+
+  .link-navigation li a {
+    color: gray;
+    text-decoration: none;
+  }
+  .link-navigation {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  .logo img {
+    width: 60px;
+  }
+  .logo {
+    text-align: center;
+    margin-bottom: .6rem;
+  }
 </style>
 @endsection
 
 @section('content')
-<div class="form-box shadow-sm">
-  <h3 class="text-primary m-0 text-center fw-bold">disruang</h3>
-  <p class="subtitle">Mendaftar untuk mendapatkan kegiatan favoritmu.</p>
 
-  <div class="meta">
-    <p>Sudah memiliki akun? <a href="{{ route('auth.login') }}" class="is-link">Login disini.</a></p>
+<div>
+  <div class="form-box shadow-sm">
+  @if (session('message'))
+  <div class="alert alert-info my-4 alert-sm">{{ session('message') }}</div>
+  @endif
+    <div class="logo">
+      <img src="{{ asset('images/logo-pemkot.png') }}" alt="">
+    </div>
+    <h3 class="text-primary m-0 text-center fw-bold">disruang</h3>
+    <p class="subtitle">Mendaftar untuk mendapatkan kegiatan favoritmu.</p>
+
+    <div class="meta">
+      <p>Sudah memiliki akun? <a href="{{ route('auth.login') }}" class="is-link">Login disini.</a></p>
+    </div>
+    <ul class="link-navigation">
+      <li class="{{ request()->get('in') != 'employee' ? 'active' : '' }}">
+        <a href="{{ route('auth.register') }}">Daftar untuk Tamu</a>
+      </li>
+      <li class="{{ request()->get('in') == 'employee' ? 'active' : ''}}">
+        <a href="?in=employee">Daftar untuk OPD</a>
+      </li>
+    </ul>
+    @if (request()->get('in') == 'employee')
+      @include('web/auth/register/employee')
+    @else
+      @include('web/auth/register/user')
+    @endif
+
+    {{-- <div class="form-media-social">
+      <p class="divider-text">Atau</p>
+      <a class="btn btn-secondary btn-media-social" href="#">
+        <img src="{{ asset('images/google.webp') }}"/>
+        <span>
+          Lanjutkan dengan Google
+        </span>
+      </a>
+    </div> --}}
   </div>
-  <form method="post" action="{{ route('auth.register.store') }}">
-    @csrf
-    <div class="form-group">
-      <label class="form-label" for="name">Nama lengkap</label>
-      <input type="text" autocomplete="off" placeholder="Nama lengkap Anda" value="{{ old("name") }}" autofocus class="form-control form-control-underline" name="name" id="name"/>
-      @error('name')
-      <span class="error-text">{{ $message }}</span>
-      @enderror
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="username">Username</label>
-      <input type="text" autocomplete="off" placeholder="Username Anda" value="{{ old("username") }}" autofocus class="form-control form-control-underline" name="username" id="username"/>
-      @error('username')
-      <span class="error-text">{{ $message }}</span>
-      @enderror
-    </div>
-    <div class="form-group">
-        <label class="form-label" for="phone_number">Nomor telepon</label>
-        <input type="text" autocomplete="off" placeholder="Nomor telepon Anda" value="{{ old("phone_number") }}" autofocus class="form-control form-control-underline" name="phone_number" id="phone_number"/>
-        @error('phone_number')
-        <span class="error-text">{{ $message }}</span>
-        @enderror
-      </div>
-    <div class="form-group">
-      <label class="form-label" for="email">Alamat email</label>
-      <input type="email" autocomplete="off" placeholder="Alamat email Anda" value="{{ old("email") }}" autofocus class="form-control form-control-underline" name="email" id="email"/>
-      @error('email')
-      <span class="error-text">{{ $message }}</span>
-      @enderror
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="password">Kata sandi</label>
-      <input type="password" autocomplete="off" placeholder="Kata sandi"  autofocus class="form-control form-control-underline" name="password" id="password"/>
-      @error('password')
-      <span class="error-text">{{ $message }}</span>
-      @enderror
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="password_confirmation">Konfirmasi kata sandi</label>
-      <input type="password" autocomplete="off" placeholder="Konfirmasi kata sandi"  autofocus class="form-control form-control-underline" name="password_confirmation" id="password_confirmation"/>
-      @error('password_confirmation')
-      <span class="error-text">{{ $message }}</span>
-      @enderror
-    </div>
-    <div class="form-group d-flex align-items-center mt-3">
-      <button class="btn btn-primary text-white">Buat akun pengguna</button>
-    </div>
-  </form>
-
-  {{-- <div class="form-media-social">
-    <p class="divider-text">Atau</p>
-    <a class="btn btn-secondary btn-media-social" href="#">
-      <img src="{{ asset('images/google.webp') }}"/>
-      <span>
-        Lanjutkan dengan Google
-      </span>
-    </a>
-  </div> --}}
 </div>
 @endsection

@@ -39,7 +39,7 @@ class SchedulesController extends Controller
 
   public function show(Schedule $schedule)
   {
-    $schedule->load(['employees', 'attachments']);
+    $schedule->load(['employees.origin', 'attachments', 'origins']);
     
     return Response::payload($schedule);
   }
