@@ -185,6 +185,9 @@ fieldset .filter p {
   border-radius: 50%;
   margin-right: 1rem;
 }
+.content.content_selected li .content__circle {
+  background-color: #1BA0E2;
+}
 .content .content-desc__header {
   display: flex;
   margin-bottom: .5rem;
@@ -266,9 +269,19 @@ fieldset .filter p {
             <img src="{{ asset('images/logo-pemkot.png') }}" alt="logo-pemkot">
             <h2>Pemesanan ruangan jauh lebih menyenangkan bersama <span>disruang</span></h1>
         </div>
-
         <div class="form__wrapper">
-          <form>
+          @if (session('message'))
+          <div class="alert alert-primary mt-3 w-100">
+            {{ session('message') }}
+          </div>
+          @endif
+          @if ($errors->any())
+          <div class="alert alert-danger mt-3 w-100">
+            Terjadi kesalahan, silahkan lengkapi informasi formulir
+          </div>
+          @endif
+          <form method="POST" action="{{ route('async.participants.new') }}">
+            @csrf
             <section class="active">
                 <fieldset>
                     <legend>1. Data informasi kegiatan</legend>
@@ -304,6 +317,7 @@ fieldset .filter p {
                         </div> --}}
                     </div>
                     <div class="content__container">
+                      <input type="hidden" id="input-schedule" name="schedule" readonly required>
                       <div class="content__placeholder d-hide">
                         <img src="{{ asset('images/loading.gif') }}" alt="">
                         <p>Tunggu sebentar...</p>
@@ -315,22 +329,52 @@ fieldset .filter p {
             <section>
                 <fieldset>
                   <legend>2. Data pengguna</legend>
+
+                  <ul class="content content_selected" id="schedule-selected"></ul>
+                  <hr/>
                   <div>
                       <div class="form-group">
                           <label for="">Nama lengkap</label>
-                          <input type="text" class="form-control" name="name" required>
+                          <input type="text" value="{{ old('name') }}" class="form-control" name="name" required>
+                          @error('name')
+                          <span class="text-danger d-block">{{ $message }}</span>
+                          @enderror
+                      </div>
+                      <div class="form-group">
+                          <label for="">Alamat email</label>
+                          <input type="email" value="{{ old('email') }}" class="form-control" name="email" required>
+                          @error('email')
+                          <span class="text-danger d-block">{{ $message }}</span>
+                          @enderror
                       </div>
                       <div class="form-group">
                         <label for="">Nomor telepon</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">+62</span>
-                            <input type="text" class="form-control" required aria-label="phone" aria-describedby="basic-addon1">
+                            <input name="phone" type="number" value="{{ old('phone') }}" class="form-control" required aria-label="phone" aria-describedby="basic-addon1">
                         </div>
+                        @error('phone')
+                          <span class="text-danger d-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">Jenis kelamin</label>
+                        <select name="gender" class="form-select">
+                          <option value="L">Laki-laki</option>
+                          <option value="P">Perempuan</option>
+                        </select>
+                        @error('gender')
+                          <span class="text-danger d-block">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Nama tokoh (Opsional)</label>
-                        <input type="text" class="form-control" required name="origin" placeholder="Contoh: Ketua pemuda UMKM Maluku">
+                        <input type="text" value="{{ old('origin') }}" class="form-control" name="origin" placeholder="Contoh: Ketua pemuda UMKM Maluku">
+                        @error('origin')
+                          <span class="text-danger d-block">{{ $message }}</span>
+                        @enderror
                     </div>
+
                   </div>
                 </fieldset>
             </section>
@@ -340,7 +384,7 @@ fieldset .filter p {
                 </span>
                 <div>
                     <button class="btn btn-secondary text-white d-hide btn-previous">Kembali</button>
-                    <button class="btn btn-primary btn-submitted">Lanjutkan</button>
+                    <button class="btn btn-primary btn-submitted d-hide">Daftar</button>
                 </div>
             </div>
           </form>
@@ -373,6 +417,8 @@ fieldset .filter p {
         const dropdowns = document.querySelectorAll('.dropdown');
         const content = document.querySelector('.content');
         const contentPlaceholder = document.querySelector('.content__placeholder');
+        const form = document.querySelector('form');
+        const inputSchedule = document.getElementById('input-schedule');
 
         dropdowns.forEach(dropdown => {
 
@@ -401,6 +447,7 @@ fieldset .filter p {
             });
           });
         });
+
 
         onFetch(filter);
 
@@ -446,7 +493,7 @@ fieldset .filter p {
                 };
 
                 const listItem = `
-                    <li>
+                    <li data-value="${item.id}">
                         <div class="content__circle"></div>
                         <div classs="content__desc">
                             <div class="content-desc__header">
@@ -465,9 +512,20 @@ fieldset .filter p {
                 const doc = new DOMParser().parseFromString(listItem, "text/html");
                 content.appendChild(doc.documentElement);
             });
+
+            const contentItems = content.querySelectorAll('li');
+            
+            contentItems.forEach(contentItem => {
+              contentItem.addEventListener('click', () => {
+                inputSchedule.value = contentItem.dataset.value;
+                const contentSelected = document.getElementById('schedule-selected');
+                contentSelected.innerHTML = '';
+                contentSelected.append(contentItem);
+                onNext();
+              })
+            });
         }
 
-        btnSubmitted.addEventListener('click', onSubmitted);
 
         btnPrevious.addEventListener('click', onPrevious)
 
@@ -486,26 +544,27 @@ fieldset .filter p {
         }
 
         function onPrevious(e) {
-            e.preventDefault();
+            e?.preventDefault();
 
             this.classList.add('d-hide');
+            btnSubmitted.classList.add('d-hide');
             btnSubmitted.textContent = 'Lanjutkan';
             currentSection--;
 
             setSectionActivated( currentSection - 1);
         }
 
-        function onSubmitted(e) {
-            e.preventDefault();
+        function onNext() {
+            
 
             if (currentSection >= sections.length) {
-              alert('submit');
+              form.submit();
               return;
             }
 
             currentSection++;
-            this.textContent = 'Daftar kegiatan';
             btnPrevious.classList.remove('d-hide');
+            btnSubmitted.classList.remove('d-hide');
             setSectionActivated( currentSection - 1);
         }
 

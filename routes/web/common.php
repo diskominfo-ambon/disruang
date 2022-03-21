@@ -5,6 +5,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\Web\Exports\RegisteredScheduleController;
 use App\Http\Controllers\Web\User\ScheduleInvitationController;
+use App\Http\Controllers\Web\User\ScheduleParticipantInvitationController;
 
 
 
@@ -21,3 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/undangan/{schedule:slug}/{id}', ScheduleInvitationController::class)
   ->name('schedule-invitation');
+
+
+Route::get('/undangan-tamu/{schedule:slug}/{id}', ScheduleParticipantInvitationController::class)
+  ->name('schedule-participant-invitation');
