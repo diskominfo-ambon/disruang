@@ -26,7 +26,6 @@ class SchedulesController extends Controller
   {
     $rooms = Room::all();
     $schedules = Schedule::confirm()
-
       ->where(function (Builder $builder) use ($request) {
         if ($request->filled('date')) {
           $date = carbon($request->get('date')); // parse date in carbon instance.
@@ -41,6 +40,7 @@ class SchedulesController extends Controller
           $builder->where('title', 'like', "%{$request->get('keyword')}%");
         }
       })
+      ->latest()
       ->paginate(20);
 
     $schedules->append(['keyword', 'room', 'date']);

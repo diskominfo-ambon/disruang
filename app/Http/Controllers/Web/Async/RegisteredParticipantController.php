@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\ParticipantRequest;
 use App\Models\Participant;
-use App\Models\Schedule;  
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Redirect;
 use App\Jobs\SendEmailInvitation;
 
@@ -34,14 +34,14 @@ class RegisteredParticipantController extends Controller
       'origin' => $request->origin,
       'phone_number' => $request->phone
     ]);
- 
+
     $participant = Participant::where('email', $request->email)
       ->where('schedule_id', $request->schedule);
-      
+
     if ($participant->count() > 0) {
       return Redirect::back()
         ->withInput()
-        ->with('message', 'Alamat email sudah digunakan untuk kegiatan ini'); 
+        ->with('message', 'Alamat email sudah digunakan untuk kegiatan ini');
     }
     $schedule = Schedule::withoutGlobalScopes()->findOrFail($request->schedule);
     $currentParticipant = Participant::create($request->all());
