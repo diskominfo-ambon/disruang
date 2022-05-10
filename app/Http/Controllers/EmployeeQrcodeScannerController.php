@@ -22,7 +22,6 @@ class EmployeeQrcodeScannerController extends Controller
                     ->findOrFail($employee->origin->id)
             && Participant::where('employee_id', $employee->id)
                 ?->first()
-                ->isNotPresent
         ) {
 
             Participant::insert([

@@ -15,17 +15,17 @@ class QrcodeScannerController extends Controller
         $participant = Participant::findOrFail($id);
 
         if (
-            $participant->isNotPresent
-            && $participant->schedule_id == $schedule->id
+            $participant->schedule_id == $schedule->id
         ) {
             $participant->update([
                 'is_present' => true,
             ]);
 
 
-            return view('web.qrcode.success', compact('schedule'));
+        }else {
+            return abort(404);
         }
 
-        return abort(404);
+        return view('web.qrcode.success', compact('schedule'));
     }
 }
