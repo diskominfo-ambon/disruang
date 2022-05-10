@@ -9,10 +9,8 @@ use Illuminate\Http\Request;
 
 class QrcodeScannerController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, $schedule, $id)
     {
-        $schedule = $request->schedule;
-        $id = $request->id;
 
         $participant = Participant::findOrFail($id);
 
