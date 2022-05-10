@@ -124,7 +124,7 @@
                                                                     <td class="py-5">
                                                                       <p>Scan QRCODE untuk mendaftar kegiatan</p>
                                                                       {!! QrCode::size(130)->format('svg')->style('round')->generate(
-                                                                            route('qrcode.employee.scanner', $schedule, $employee->id)
+                                                                            route('qrcode.employee.scanner', $schedule->id, $employee->id)
                                                                           )
                                                                       ); !!}
                                                                     </td>
