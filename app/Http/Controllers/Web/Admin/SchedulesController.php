@@ -110,7 +110,11 @@ class SchedulesController extends Controller
 
   public function show(Request $request, Schedule $schedule)
   {
-    $participants = $schedule->participants()->paginate(20);
+    $participants = $schedule
+        ->participants()
+        ->present()
+        ->with('employee')
+        ->paginate(20);
 
     // keyword search by participant name.
     $keyword = $request->get('keyword', '');

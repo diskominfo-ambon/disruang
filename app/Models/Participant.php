@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Concerns\MustVerifySignature;
 use App\Models\Concerns\HasEmployee;
 
@@ -38,6 +38,15 @@ class Participant extends Model
   public function employee()
   {
     return $this->belongsTo(Employee::class, 'employee_id');
+  }
+
+  public function scopePresent(Builder $builder): Builder {
+    return $builder->where('is_present', true);
+  }
+
+  public function getIsNotPresentAttribute(): bool
+  {
+    return $this->is_present === 0;
   }
 
 }

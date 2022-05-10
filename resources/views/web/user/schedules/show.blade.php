@@ -28,7 +28,7 @@
         <p class="text-center">Tidak ada berkas materi</p>
         @endforelse
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -94,65 +94,69 @@
                       <div class="nk-tb-col tb-col-lg"><span>Status jabatan</span></div>
                   </div>
                   @foreach ($participants as $participant)
-                   
-                    @if ($participant->isEmployee)
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            {{ $loop->iteration }}
-                        </div>
-                        <div class="nk-tb-col">
-                            <div class="user-card">
-                                <div class="user-avatar bg-primary">
-                                    <em class="icon ni ni-user-fill"></em>
-                                </div>
-                                <div class="user-info">
-                                    <span class="tb-lead">{{ $participant->employee->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
-                                    <span>{{ str($participant->employee->email) }} - {{ $participant->employee->nip }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-mb">
-                            <span class="tb-lead-sub">-</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-status text-success fw-bold">ASN</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-lg">
-                          <span class="tb-lead-sub">{{ $participant->employee->job_position }}</span>
-                        </div>
-                    </div>
-                    @else
-                    
-                    <!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            {{ $loop->iteration }}
-                        </div>
-                        <div class="nk-tb-col">
-                            <div class="user-card">
-                                <div class="user-avatar bg-primary">
-                                  <em class="icon ni ni-user-fill"></em>
-                                </div>
-                                <div class="user-info">
-                                    <span class="tb-lead">{{ str($participant->name)->limit(20) }} <span class="dot dot-success d-md-none ml-1"></span></span>
-                                    <span>{{ str($participant->email) }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-mb">
-                            <span class="tb-lead-sub">{{ $participant->phone_number }}</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                          <span class="tb-status text-info fw-bold">Umum</span>
-                          
-                        </div>
-                        <div class="nk-tb-col tb-col-lg">
-                          <span class="tb-lead-sub">{{ $participant->origin ?? ''}} {{ $participant->origin_job_title ?? '' }}</span>
-                        </div>
 
-                    </div>
-                    <!-- .nk-tb-item -->
-                    @endif
+                  @if ($participant->isEmployee)
+                  <div class="nk-tb-item">
+                      <div class="nk-tb-col nk-tb-col-check">
+                          {{ $loop->iteration }}
+
+                      </div>
+                      <div class="nk-tb-col">
+                          <div class="user-card">
+                              <div class="user-avatar bg-primary">
+                                  <em class="icon ni ni-user-fill"></em>
+                              </div>
+                              <div class="user-info">
+                                  <span class="tb-lead">{{ $participant->employee->name }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                  <span>{{ str($participant->employee->email) }} - {{ $participant->employee->nip }}</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="nk-tb-col tb-col-mb">
+                          <span class="tb-lead-sub">-</span>
+                      </div>
+                      <div class="nk-tb-col tb-col-md">
+                          <span class="tb-status text-success fw-bold">ASN</span>
+                      </div>
+                      <div class="nk-tb-col tb-col-lg">
+                        <span class="tb-lead-sub">{{ $participant->employee?->job_position ?? '-' }}</span>
+                      </div>
+                  </div>
+                  @else
+
+                  <!-- .nk-tb-item -->
+                  <div class="nk-tb-item">
+                      <div class="nk-tb-col nk-tb-col-check">
+                          {{ $loop->iteration }}
+                      </div>
+                      <div class="nk-tb-col">
+                          <div class="user-card">
+                              <div class="user-avatar bg-primary">
+                                <em class="icon ni ni-user-fill"></em>
+                              </div>
+                              <div class="user-info">
+                                  <span class="tb-lead">{{ str($participant->name)->limit(20) }} <span class="dot dot-success d-md-none ml-1"></span></span>
+                                  <span>{{ str($participant->email) }}</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="nk-tb-col tb-col-mb">
+                          <span class="tb-lead-sub">{{ $participant->phone_number }}</span>
+                      </div>
+                      <div class="nk-tb-col tb-col-md">
+                        <span class="tb-status text-info fw-bold">Umum</span>
+
+                      </div>
+                      <div class="nk-tb-col tb-col-lg">
+                        <span class="tb-lead-sub">{{ $participant->origin ?? ''}} {{ $participant->origin_job_title ?? '' }}</span>
+                      </div>
+                      <div class="nk-tb-col tb-col-lg">
+                        <span class="tb-lead-sub">-</span>
+                      </div>
+
+                  </div>
+                  <!-- .nk-tb-item -->
+                  @endif
                   @endforeach
               </div>
           </div><!-- .card-inner -->

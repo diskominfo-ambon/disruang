@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use App\Models\Schedule;
-use App\Http\Requests\ScheduleReviewRequest;
+use Illuminate\Http\Request;
 use App\Jobs\SendEmailInvitation;
+use App\Http\Controllers\Controller;
+use App\Jobs\SendBulkEmailInvitation;
+use Illuminate\Support\Facades\Response;
+use App\Http\Requests\ScheduleReviewRequest;
 
 class ScheduleReviewController extends Controller
 {
@@ -16,17 +17,17 @@ class ScheduleReviewController extends Controller
 
         $employeesId = $request->employees;
         $originsId = $request->origins;
-        $body = $request->all();       
+        $body = $request->all();
         $employees = collect([]);
-        
+
         $schedule->origins()->sync($originsId);
         $schedule->employees()->sync($employeesId);
-        
+
         $schedule->update($body);
-        
+
         $origins = $schedule->origins;
         $origins->load('employees');
-        
+
         foreach($origins as $origin) {
             $employees->push(
                 ...$origin->employees
@@ -37,7 +38,7 @@ class ScheduleReviewController extends Controller
             $employees = $employees->merge($schedule->employees);
         }
 
-   
+
         SendBulkEmailInvitation::dispatch($schedule, $employees);
 
         if ($request->filled('attachments')) {

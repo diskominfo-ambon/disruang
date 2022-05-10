@@ -57,6 +57,9 @@ class Schedule extends Model
   }
 
 
+
+
+
   /**
    * Relationship: Schedules can has many Participant.
    *
@@ -85,10 +88,11 @@ class Schedule extends Model
     return $this->belongsToMany(Employee::class, 'schedule_has_employees');
   }
 
+
   public function attachments()
   {
       return $this->morphToMany(
-        Attachment::class, 
+        Attachment::class,
         'record',
         'model_has_attachments',
       );

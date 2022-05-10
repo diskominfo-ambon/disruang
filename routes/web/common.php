@@ -6,7 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Web\Exports\RegisteredScheduleController;
 use App\Http\Controllers\Web\User\ScheduleInvitationController;
 use App\Http\Controllers\Web\User\ScheduleParticipantInvitationController;
-
+use App\Http\Controllers\QrcodeScannerController;
+use App\Http\Controllers\EmployeeQrcodeScannerController;
 
 
 Route::view('/', 'web.welcome')
@@ -26,3 +27,9 @@ Route::get('/undangan/{schedule:slug}/{id}', ScheduleInvitationController::class
 
 Route::get('/undangan-tamu/{schedule:slug}/{id}', ScheduleParticipantInvitationController::class)
   ->name('schedule-participant-invitation');
+
+Route::get('/qrcode/{schedule}/{id}', QrcodeScannerController::class)
+    ->name('qrcode.scanner');
+
+Route::get('/qrcode/asn/{schedule}/{id}', EmployeeQrcodeScannerController::class)
+    ->name('qrcode.employee.scanner');

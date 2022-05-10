@@ -44,7 +44,7 @@
                 <div class="nk-content ">
                     <div class="container wide-xl">
                         <div class="nk-content-inner">
-                           
+
                             <div class="nk-content-body">
                                 <div class="nk-content-wrap">
                                     <div class="nk-block-head">
@@ -59,7 +59,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div><!-- .nk-block-head -->
                                     <div class="nk-block">
@@ -102,32 +102,38 @@
                                                                     <td>
                                                                       {{ $schedule->desc }}
                                                                     </td>
+                                                                    @if ($schedule->user?->origin()->count() > 0)
                                                                     <td>{{ strtoupper($schedule->user->origin->title) }}</td>
+                                                                    @else
+
+                                                                    <td>{{ strtoupper($schedule->user->name) }}</td>
+                                                                    @endif
                                                                     <td>
                                                                       {{ $schedule->started_at->isoFormat('LLL') }} <b>-</b> {{ $schedule->ended_at->isoFormat('LLL') }}
-                                                        
+
                                                                     </td>
-                                                                   
+
                                                                 </tr>
-                                                             
+
                                                             </tbody>
                                                             <tfoot>
                                                                 <tr>
-                                                                    
+
                                                                     <td class="py-5" colspan="3"> </td>
-                                                                    
+
                                                                     <td class="py-5">
                                                                       <p>Scan QRCODE untuk mendaftar kegiatan</p>
                                                                       {!! QrCode::size(130)->format('svg')->style('round')->generate(
-                                                                          json_encode(['employee' => $employee->id, 'schedule' => $schedule->id ])
+                                                                            route('qrcode.employee.scanner', $schedule, $employee->id)
+                                                                          )
                                                                       ); !!}
                                                                     </td>
                                                                 </tr>
                                                             </tfoot>
                                                         </table>
                                                         <div class="nk-notes ff-italic fs-12px text-soft"> Catatan: Undangan dapat dicetak untuk Absesni pada saat mengikuti kegiatan </div>
-                                                    
-                                                       
+
+
                                                     </div>
                                                 </div><!-- .invoice-bills -->
                                             </div><!-- .invoice-wrap -->
@@ -149,7 +155,7 @@
                                     </div><!-- .nk-block -->
                                 </div>
                                 <!-- footer @s -->
-                                
+
                                 <!-- footer @e -->
                             </div>
                         </div>
