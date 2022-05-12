@@ -59,6 +59,7 @@ class SchedulesController extends Controller
     );
 
     $participants = $schedule->participants()
+      ->present()
       ->paginate(12)
       ->appends('keyword');
     // keyword search by participant name.
@@ -70,6 +71,7 @@ class SchedulesController extends Controller
     ) {
 
       $participants = $schedule->participants()
+        ->present()
         ->where('name', 'like', "%{$keyword}%")
         ->paginate(12)
         ->appends('keyword');
