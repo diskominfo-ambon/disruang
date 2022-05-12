@@ -31,7 +31,7 @@
         <p>
             Terima kasih Anda telah melakukan absensi pada kegiatan
             <br>
-            <u>{{ $schedule->title }}</u> pada ruangan {{ strtoupper($schedule->room->name) }} oleh {{ $schedule->user->origin()->count() > 0 ? strtoupper($schedule->origin->name) : $schedule->user->name  }}
+            <u>{{ $schedule->title }}</u> pada ruangan {{ strtoupper($schedule->room?->name) }} oleh {{ $schedule->user->origin ? strtoupper($schedule->origin->name) : $schedule->user->name  }}
 
         </p>
     </div>
